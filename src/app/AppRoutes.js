@@ -93,6 +93,10 @@ const TransactionDetails = lazy(() =>
 	)
 );
 
+const SignUp = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/Register")
+);
+
 class AppRoutes extends Component {
 	render() {
 		return (
@@ -134,6 +138,7 @@ class AppRoutes extends Component {
 						path="/admin/WithdrawalDetails"
 						component={WithdrawalDetails}
 					/>
+					<Route path="/admin/Registration" component={SignUp} />
 					<Route path="/admin/AdminVoid" component={AdminVoid} />
 					<Route path="/admin/AdminRefund" component={AdminRefund} />
 					<Route path="/admin/update-profile" component={AdminProfile} />

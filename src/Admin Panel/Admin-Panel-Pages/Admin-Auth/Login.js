@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./login.css";
 import { Redirect } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import axios from "axios";
@@ -79,7 +79,7 @@ function AdminLogin() {
 										onChange={(event) => handleChange(event)}
 										value={email}
 										size="lg"
-										className="h-auto"
+										className="h-auto inputNadim"
 									/>
 								</Form.Group>
 								<Form.Group className="d-flex search-field">
@@ -121,6 +121,19 @@ function AdminLogin() {
 										className="auth-link text-black">
 										Forgot password?
 									</a>
+								</div>
+								{/* <div className="">
+								</div> */}
+								<div className="text-left ">
+									<label className="text-muted">
+										Dont have an Account?{" "}
+										<a
+											href="/admin/Registration"
+											// onClick={(event) => event.preventDefault()}
+											className="auth-link text-primary">
+											Signup here
+										</a>
+									</label>
 								</div>
 							</Form>
 						</div>
