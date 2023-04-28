@@ -60,7 +60,7 @@ const GetUserProfile = lazy(() =>
 );
 const GetMerchantProfile = lazy(() =>
 	import(
-		"../Admin Panel/Admin-Panel-Pages/Get Merchant Profile /GetMerchantProfile"
+		"../Admin Panel/Admin-Panel-Pages/Get Merchant Profile/GetMerchantProfile"
 	)
 );
 const AdminChangePassword = lazy(() =>
