@@ -64,9 +64,7 @@ const GetMerchantProfile = lazy(() =>
 	)
 );
 const AdminChangePassword = lazy(() =>
-	import(
-		"../Admin Panel/Admin-Panel-Pages/Admin-Reset-Password/AdminChangePassword"
-	)
+	import("../Admin Panel/Admin-Panel-Pages/Admin-Reset-Password/resetPassword")
 );
 const ForgotPassword = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Forgot Password/ForgotPassword")
@@ -91,6 +89,9 @@ const TransactionDetails = lazy(() =>
 	import(
 		"../Admin Panel/Admin-Panel-Pages/Admin-Payment_Transaction/TransactionDetails"
 	)
+);
+const CustomerList = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Customer List/CustomerList")
 );
 
 const SignUp = lazy(() =>
@@ -139,6 +140,7 @@ class AppRoutes extends Component {
 						component={WithdrawalDetails}
 					/>
 					<Route path="/admin/Registration" component={SignUp} />
+					<Route path="/admin/CustomerList" component={CustomerList} />
 					<Route path="/admin/AdminVoid" component={AdminVoid} />
 					<Route path="/admin/AdminRefund" component={AdminRefund} />
 					<Route path="/admin/update-profile" component={AdminProfile} />
