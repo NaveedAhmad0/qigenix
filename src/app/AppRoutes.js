@@ -2,6 +2,7 @@ import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Spinner from "../app/shared/Spinner";
+// import AdminSignup from "../Admin Panel/Admin-Panel-Pages/Admin-Auth/Signup";
 require("dotenv").config();
 
 // const HomePage = lazy(() => import("../Homepage/HomePage"));
@@ -30,6 +31,10 @@ const AdminDashboard = lazy(() =>
 const AdminLogin = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/LoginProcess")
 );
+const AdminSignup = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/SignupProcess")
+);
+
 const AdminTransaction = lazy(() =>
 	import(
 		"../Admin Panel/Admin-Panel-Pages/Admin-Payment_Transaction/AdminPaymentTransaction"
@@ -119,6 +124,7 @@ class AppRoutes extends Component {
 
 					{/*------------------------- ADMIN PANEL ROUTES -------------------------- */}
 					<Route exact path="/admin/login" component={AdminLogin} />
+					<Route exact path="/admin/signup" component={AdminSignup} />
 
 					<Route exact path="/admin/dashboard" component={AdminDashboard} />
 

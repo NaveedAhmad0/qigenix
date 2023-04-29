@@ -189,7 +189,7 @@ function AdminLogin(formik) {
 							</Form>
 							<div class="col-md-12">
                     <p class="small">
-                      Already Have An Account ? <a href ="/admin/dashboard"> Sign up here </a></p>
+                      Already Have An Account ? <a href ="/admin/signup"> Sign up here </a></p>
 					  </div>
 						</div>
 					</div>
