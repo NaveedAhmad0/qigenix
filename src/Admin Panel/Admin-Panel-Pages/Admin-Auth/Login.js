@@ -217,7 +217,7 @@ function AdminLogin() {
 					<div className="text-center mt-5">
 						<h4 className="loginTittle">Login</h4>
 					</div>
-					<div className="col-lg-4 mx-auto">
+					<div className="col-lg-5 mx-auto">
 						<div className="auth-form-light loginForm text-left py-5 px-4 px-sm-5">
 							<Form className="pt-3">
 								<Form.Group className="mb-4" controlId="formBasicEmail">

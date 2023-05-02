@@ -13,7 +13,7 @@ $teal:              #58d8a3;
 $cyan:              #57c7d4;
 $black:             #000;
 $white:             #ffffff;
-$white-smoke:       #f2f7f8;
+$white-smoke:       #F1F5F9;
 $violet:            #41478a;
 $darkslategray :    #2e383e;
 $dodger-blue :      #3498db; 
@@ -33,7 +33,7 @@ $colors: (
   white:            $white,
   gray:             #434a54,
   gray-light:       #aab2bd,
-  gray-lighter:     #e8eff4,
+  gray-lighter:     #F1F5F9,
   gray-lightest:    #e6e9ed,
   gray-dark:        #0f1531,
   black:            #000000
@@ -66,7 +66,7 @@ $theme-gradient-colors: (
 ////////// COLOR SYSTEM //////////
 
 ////////// COLOR VARIABLES //////////
-$content-bg: #f3f3f3;
+$content-bg: #F1F5F9;
 $footer-bg: $content-bg;
 $footer-color: color(dark);
 $border-color: #dee2e6;

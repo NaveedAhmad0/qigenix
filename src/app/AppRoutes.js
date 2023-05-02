@@ -183,7 +183,7 @@ class AppRoutes extends Component {
 
 					<Route path="/admin/error-pages/error-404" component={Error404} />
 					<Route path="/admin/error-pages/error-500" component={Error500} />
-
+					{/* <Route path="*" component={<Redirect to="/admin/login" />} /> */}
 					<Redirect to="/admin/login" />
 				</Switch>
 			</Suspense>
