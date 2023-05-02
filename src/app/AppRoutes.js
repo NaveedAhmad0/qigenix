@@ -94,6 +94,7 @@ const CustomerList = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Customer List/CustomerList")
 );
 
+
 const SignUp = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/Register")
 );
@@ -141,6 +142,7 @@ class AppRoutes extends Component {
 					/>
 					<Route path="/admin/Registration" component={SignUp} />
 					<Route path="/admin/CustomerList" component={CustomerList} />
+				
 					<Route path="/admin/AdminVoid" component={AdminVoid} />
 					<Route path="/admin/AdminRefund" component={AdminRefund} />
 					<Route path="/admin/update-profile" component={AdminProfile} />
