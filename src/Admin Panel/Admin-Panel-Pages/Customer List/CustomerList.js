@@ -262,7 +262,7 @@ function CustomerList() {
               <div className="row">
                 <div className="col-md-12 grid-margin">
                   <div className="row page-title-header">
-                    <div className="col-6">
+                    <div className="col-12">
                       <button className="btn btn-primary mr-2">
 					  <i class="fa-solid fa-plus"></i>  New Customer
                       </button>
@@ -337,7 +337,7 @@ function CustomerList() {
                           <div
                             class="btn-group btn-group-toggle"
                             data-toggle="buttons"
-							style={{marginLeft:"65px"}}
+							
 							
                           >
                             <label
