@@ -1,0 +1,97 @@
+.top_stats_wrapper {
+    padding: 12px 22px 20px 22px;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 1px 7px 1px rgb(90 90 90 / 5%);
+    border: 1px solid #dce1ef;
+}
+
+
+.panel-body {
+    box-sizing: border-box;
+    /* position: absolute; */
+    /* width: 767px; */
+    /* height: 505px; */
+    /* left: 246px;
+    top: 196px; */
+    background: #FFFFFF;
+    border: 0.5px solid #EDEDED;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+/* .home-summary {
+    margin-right: -15px;
+    margin-left: -15px;
+} */
+
+
+.breakLine {
+    /* width: 767px; */
+    height: 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #EAEDF1;
+    margin-left: -13px;
+}
+
+
+.invoice-card {
+box-sizing: border-box;
+/* width: 227px; */
+/* height: 57px; */
+background: #FFFFFF;
+border: 1px solid #E4E4EC;
+border-radius: 5px;
+padding: 10px 15px 5px;
+}
+
+
+.invoice-card p {    
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 15px;
+color: #CC8A34;
+}
+
+.invoice-card h4 {
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 800;
+font-size: 24px;
+line-height: 15px;
+color: #2F6FED;
+}
+
+
+
+.widget-todo {
+box-sizing: border-box;
+/* position: absolute; */
+/* width: 365px; */
+background: #FFFFFF;
+border: 0.5px solid #EDEDED;
+border-radius: 4px;
+}
+
+
+@media (min-width:1024px) {
+  .finance-summary {
+    padding: 10px;
+  }  
+}
+
+@media (min-width: 768px) {
+ .card-section {
+    margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 425px) {
+    .card-section {
+       margin-bottom: 10px;
+       }
+   }
