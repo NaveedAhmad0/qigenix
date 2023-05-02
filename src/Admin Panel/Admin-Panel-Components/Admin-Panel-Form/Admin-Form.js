@@ -7,7 +7,7 @@ const AdminForm = () => {
 				<div className="card-body">
 					<form className="form-sample">
 						<div className="row">
-							<div className="col-sm-2">
+							<div className="col-sm-6">
 								<div className="form-check">
 									<label className="form-check-label text-muted">
 										<input type="checkbox" className="form-check-input" />
@@ -16,7 +16,7 @@ const AdminForm = () => {
 									</label>
 								</div>
 							</div>
-							<div className="col-sm-2">
+							<div className="col-sm-6">
 								<div className="form-check">
 									<label className="form-check-label text-muted">
 										<input type="checkbox" className="form-check-input" />
