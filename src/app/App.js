@@ -10,6 +10,7 @@ import SettingsPanel from "./shared/SettingsPanel";
 import Footer from "./shared/Footer";
 import { withTranslation } from "react-i18next";
 import Spinner from "./shared/Spinner";
+
 require("dotenv").config();
 
 function App(props) {
