@@ -23,9 +23,6 @@ function CustomerList() {
   const [Filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
-  
- 
   const fetchData = async () => {
     try {
       var config = {
@@ -37,8 +34,8 @@ function CustomerList() {
       };
       axios(config)
         .then(function (response) {
-          setTableRowsData(response.data)
-         console.log(response.data)
+          setTableRowsData(response.data);
+          setFiltered(response.data);
         })
         .catch(function (error) {
           console.log(error.response.data);
@@ -48,32 +45,37 @@ function CustomerList() {
     }
   };
   useEffect(() => {
-       fetchData();
-     },[])
-  
+    fetchData();
+  }, []);
 
- 
+  useEffect(() => {}, [tableRowsData]);
+
+  useEffect(() => {
+    const result = tableRowsData?.filter((tables) => {
+      return tables.company.toLowerCase().match(search.toLowerCase());
+    });
+    setFiltered(result);
+  }, [search]);
+
   const customStyles = {
     headCells: {
-        style: {
-			borderRight:'0.1rem solid #D9D9D9 !important',
-      fontFamily: "Roboto",
-      fontStyle: "normal",
-      fontWeight: "400",
-      fontSize: "12px",
-      lineHeight: "18px",
-        },
+      style: {
+        borderRight: "0.1rem solid #D9D9D9 !important",
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "400",
+        fontSize: "12px",
+        lineHeight: "18px",
+      },
     },
-    row:{
+    row: {
       fontFamily: "Roboto",
       fontStyle: "normal",
       fontWeight: "400",
       fontSize: "12px",
       lineHeight: "18px",
-
-    }
-   
-};
+    },
+  };
 
   const headerResponsive = [
     {
@@ -83,7 +85,6 @@ function CustomerList() {
       style: {
         color: "#4E7AED",
       },
-     
     },
     {
       name: "Company",
@@ -92,7 +93,6 @@ function CustomerList() {
       style: {
         color: "#4E7AED",
       },
-    
     },
     {
       name: "Primary Contact",
@@ -122,17 +122,12 @@ function CustomerList() {
       name: "active",
       cell: (d) => [
         <div class="form-check form-switch text-center">
-          
           <input
             class="form-check-input"
             type="checkbox"
             role="switch"
             id="flexSwitchCheckChecked"
-            checked={
-             d.status === "1"
-                ? false
-                : true
-            }
+            checked={d.status === "1" ? false : true}
           ></input>
         </div>,
       ],
@@ -156,17 +151,14 @@ function CustomerList() {
     },
     {
       name: "Date Created",
-     
+
       sortable: false,
-      cell: d => {
-        return moment(d.createdAt)
-          .local()
-          .format("DD-MM-YYYY hh:mm:ss ")
-      }
+      cell: (d) => {
+        return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
+      },
     },
   ];
 
-  useEffect(() => {}, [tableRowsData]);
   return (
     <div>
       {/* <MerchantForm /> */}
@@ -185,13 +177,13 @@ function CustomerList() {
                   <div className="row page-title-header">
                     <div className="col-12">
                       <button className="btn btn-primary mr-2">
-					  <i class="fa-solid fa-plus"></i>  New Customer
+                        <i class="fa-solid fa-plus"></i> New Customer
                       </button>
                       <button className="btn btn-primary mr-2">
-					  <i class="fa-solid fa-upload"></i>  Import Customers
+                        <i class="fa-solid fa-upload"></i> Import Customers
                       </button>
                       <button className="btn btn-outline-secondary mr-2">
-					  <i class="fa-regular fa-user"></i>  Contacts
+                        <i class="fa-regular fa-user"></i> Contacts
                       </button>
                     </div>
                   </div>
@@ -199,8 +191,10 @@ function CustomerList() {
                     <div className="card-body">
                       <div className="row page-title-header">
                         <div className="col-6">
-						
-                          <h4><i class="fa-regular fa-file-lines me-2"></i> Customers summary</h4>
+                          <h4>
+                            <i class="fa-regular fa-file-lines me-2"></i>{" "}
+                            Customers summary
+                          </h4>
                         </div>
                       </div>
                       <div className="row page-title-header">
@@ -242,9 +236,9 @@ function CustomerList() {
                           </p>
                         </div>
                       </div>
-                      <hr style={{border:'1px #EAEDF1'}}></hr>
+                      <hr style={{ border: "1px #EAEDF1" }}></hr>
                       <div className="row page-title-header">
-                        <div className="col-6">
+                        <div className="col-12">
                           <div className="form-check">
                             <label className="form-check-label text-muted">
                               <input
@@ -258,8 +252,6 @@ function CustomerList() {
                           <div
                             class="btn-group btn-group-toggle"
                             data-toggle="buttons"
-							
-							
                           >
                             <label
                               class="btn active"
@@ -284,7 +276,7 @@ function CustomerList() {
                             </label>
                             <label
                               class="btn"
-							  style={{
+                              style={{
                                 borderRight: "1px solid #D9D9D9",
                                 color: "#475569",
                                 fontFamily: "Roboto",
@@ -323,18 +315,99 @@ function CustomerList() {
                               <i class="fa-solid fa-rotate"></i>
                             </label>
                           </div>
+
+                          <div
+                            class="btn-group btn-group-toggle me-4"
+                            data-toggle="buttons"
+                            style={{ float:"right"}}
+                          >
+                            <label
+                              class="btn active"
+                              style={{
+                                borderRight: "1px solid #D9D9D9",
+                               
+                                color: "#475569",
+                                fontSize: "12px",
+                                lineHeight: "14px",
+                              }}
+                            >
+                              <i class="fa-solid fa-magnifying-glass"></i>
+                            </label>
+
+                            <input
+                              type="text"
+                              style={{
+                                borderRight: "1px solid #D9D9D9",
+                                color: "#475569",
+                                fontFamily: "Roboto",
+                                fontStyle: "normal",
+                                fontWeight: "500",
+                                fontSize: "12px",
+                                lineHeight: "14px",
+                                border: "none",
+                                width: "100%",
+                                textAlign: "center",
+                              }}
+                              placeholder="Search..."
+                              value={search}
+                              onChange={(e) => {
+                                setSearch(e.target.value);
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
 
                       <DataTable
                         columns={headerResponsive}
-                        data={tableRowsData}
+                        data={Filtered}
                         pagination={20}
                         selectableRows
                         highlightOnHover
                         subHeader
-						customStyles={customStyles}
-						paginationComponentOptions={{rowsPerPageText: 'Showing 1 to 6 of 12 entries:'}}
+                        customStyles={customStyles}
+                        paginationComponentOptions={{
+                          rowsPerPageText: "Showing 1 to 6 of 12 entries:",
+                        }}
+                        // subHeaderComponent={
+                        //   <div
+                        //     class="btn-group btn-group-toggle me-4"
+                        //     data-toggle="buttons"
+                        //   >
+                        //     <label
+                        //       class="btn active"
+                        //       style={{
+                        //         borderRight: "1px solid #D9D9D9",
+                        //         color: "#475569",
+                        //         fontSize: "12px",
+                        //         lineHeight: "14px",
+                        //       }}
+                        //     >
+                        //       <i class="fa-solid fa-magnifying-glass"></i>
+                        //     </label>
+
+                        //     <input
+                        //       type="text"
+                        //       style={{
+                        //         borderRight: "1px solid #D9D9D9",
+                        //         color: "#475569",
+                        //         fontFamily: "Roboto",
+                        //         fontStyle: "normal",
+                        //         fontWeight: "500",
+                        //         fontSize: "12px",
+                        //         lineHeight: "14px",
+                        //         border: "none",
+                        //         width: "100%",
+                        //         textAlign: "center",
+                        //       }}
+                        //       placeholder="Search..."
+                        //       value={search}
+                        //       onChange={(e) => {
+                        //         setSearch(e.target.value);
+                        //       }}
+                        //     />
+                        //   </div>
+                        // }
                       />
                     </div>
                   </div>
