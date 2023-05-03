@@ -10,7 +10,7 @@ import ToolkitProvider, {
 } from "react-bootstrap-table2-toolkit";
 import ClipLoader from "react-spinners/ClipLoader";
 import DataTable from "react-data-table-component";
-import data from "./data";
+import moment from "moment";
 
 import { useHistory } from "react-router-dom";
 import API from "../../../backend";
@@ -18,120 +18,60 @@ import "./List.css";
 
 function CustomerList() {
   const { ExportCSVButton } = CSVExport;
-  const [tableRowsData, setTableRowsData] = useState(data);
-
-  const history = useHistory();
+  const [tableRowsData, setTableRowsData] = useState();
+  const [search, setSearch] = useState("");
+  const [Filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [ittems, setItems] = useState([]);
-  // const [invoiceRefId, setInvoiceRefId] = useState("");
 
-  console.log("items is", ittems);
 
-  // useEffect(() => {
-  // 	const getUserDetails = async () => {
-  // 		try {
-  // 			await axios
-  // 				.get(`${API}/admin/sandBox-transactionList`)
-  // 				.then((response) => {
-  // 					// if (response == 200) {
-  // 					console.log(response.data);
-  // 					const sample = [];
-  // 					for (let i = 0; i < response.data.length; i += 1) {
-  // 						sample.push({
-  // 							id: response.data[i].id,
-  // 							transactionType: response.data[i].transactionType,
-  // 							payeeProxyId: response.data[i].payeeProxyId,
-  // 							payeeProxyType: response.data[i].payeeProxyType,
-  // 							payeeAccountNumber: response.data[i].payeeAccountNumber,
-  // 							payeeName: response.data[i].payeeName,
-  // 							payerAccountNumber: response.data[i].payerAccountNumber,
-  // 							payerName: response.data[i].payerName,
-  // 							amount: response.data[i].amount,
-  // 							transactionId: response.data[i].transactionId,
-  // 							billPaymentRef1: response.data[i].billPaymentRef1,
-  // 							billPaymentRef2: response.data[i].billPaymentRef2,
-  // 							billPaymentRef3: response.data[i].billPaymentRef3,
-  // 						});
-  // 						// setInvoiceRefId(response.data[i].t_id);
-  // 					}
-  // 					// console.log("babla", response.data.data.length);
-  // 					setItems(sample);
-  // 					setLoading(false);
-  // 					setTimeout(() => {
-  // 						setLoading(false);
-  // 					}, 3000);
-  // 					// }
-  // 					// const listItems = response.json();
-  // 				});
-  // 		} catch (error) {
-  // 			console.log(error);
-  // 		}
-  // 	};
-  // 	(async () => await getUserDetails())();
-  // }, []);
-
-  const products = [];
-  // list.map((list)=>{})
-  products.push(
-    {
-      id: 1212,
-      code: "ssfsd",
-      purchasedate: "Jul. 8, 2022",
-      status: (
-        <input
-          type="radio"
-          id="customRadioInline1"
-          name="customRadioInline1"
-          className="custom-control-input"
-        />
-      ),
-      branchredeem: "Glorietta - GLO101",
-      redemptiondate: "Jul. 10, 2022 at 4:30pm",
-    },
-
-    {
-      id: 1004,
-      code: "5Q2H-MWXF-36HE",
-      purchasedate: "Jul. 8, 2022",
-      status: "used",
-      branchredeem: "Glorietta - GLO101",
-      redemptiondate: "Jul. 10, 2022 at 4:30pm",
-    },
-    {
-      id: 1005,
-      code: "5Q2H-MWXF-36HE",
-      purchasedate: "Jul. 8, 2022",
-      status: "used",
-      branchredeem: "Glorietta - GLO101",
-      redemptiondate: "Jul. 10, 2022 at 4:30pm",
-    },
-    {
-      id: 1006,
-      code: "5Q2H-MWXF-36HE",
-      purchasedate: "Jul. 8, 2022",
-      status: "used",
-      branchredeem: "Glorietta - GLO101",
-      redemptiondate: "Jul. 10, 2022 at 4:30pm",
-    },
-    {
-      id: 1007,
-      code: "5Q2H-MWXF-36HE",
-      purchasedate: "Jul. 8, 2022",
-      status: "used",
-      branchredeem: "Glorietta - GLO101",
-      redemptiondate: "Jul. 10, 2022 at 4:30pm",
+  
+ 
+  const fetchData = async () => {
+    try {
+      var config = {
+        method: "get",
+        url: `https://qigenix.ixiono.com/apis/admin/getAllCustomer`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      axios(config)
+        .then(function (response) {
+          setTableRowsData(response.data)
+         console.log(response.data)
+        })
+        .catch(function (error) {
+          console.log(error.response.data);
+        });
+    } catch (error) {
+      console.log(error.response.data);
     }
-  );
+  };
+  useEffect(() => {
+       fetchData();
+     },[])
+  
 
-  console.log("list of item", ittems);
-
-  // list.map((list)=>{})
+ 
   const customStyles = {
     headCells: {
         style: {
-			borderRight:'0.1rem solid #D9D9D9 !important'
+			borderRight:'0.1rem solid #D9D9D9 !important',
+      fontFamily: "Roboto",
+      fontStyle: "normal",
+      fontWeight: "400",
+      fontSize: "12px",
+      lineHeight: "18px",
         },
     },
+    row:{
+      fontFamily: "Roboto",
+      fontStyle: "normal",
+      fontWeight: "400",
+      fontSize: "12px",
+      lineHeight: "18px",
+
+    }
    
 };
 
@@ -141,62 +81,40 @@ function CustomerList() {
       selector: "id",
       sortable: false,
       style: {
-        fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "400",
-        fontSize: "12px",
-        lineHeight: "18px",
+        color: "#4E7AED",
       },
+     
     },
     {
       name: "Company",
-      selector: "runtime",
+      selector: "company",
       sortable: true,
       style: {
-        fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "400",
-        fontSize: "12px",
-        lineHeight: "18px",
         color: "#4E7AED",
       },
+    
     },
     {
       name: "Primary Contact",
-      selector: "director",
+      selector: "mobile",
       sortable: false,
       style: {
-        fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "400",
-        fontSize: "12px",
-        lineHeight: "18px",
         color: "#4E7AED",
       },
     },
     {
       name: "Primary Email",
-      selector: "year",
+      selector: "website",
       sortable: false,
       style: {
-        fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "400",
-        fontSize: "12px",
-        lineHeight: "18px",
         color: "#4E7AED",
       },
     },
     {
       name: "Phone",
-      selector: "year",
+      selector: "mobile",
       sortable: false,
       style: {
-        fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "400",
-        fontSize: "12px",
-        lineHeight: "18px",
         color: "#4E7AED",
       },
     },
@@ -204,12 +122,17 @@ function CustomerList() {
       name: "active",
       cell: (d) => [
         <div class="form-check form-switch text-center">
+          
           <input
             class="form-check-input"
             type="checkbox"
             role="switch"
             id="flexSwitchCheckChecked"
-            checked
+            checked={
+             d.status === "1"
+                ? false
+                : true
+            }
           ></input>
         </div>,
       ],
@@ -217,31 +140,29 @@ function CustomerList() {
     },
     {
       name: "Groups",
-      selector: "year",
       cell: (d) => [
         <button
           className="btn"
           style={{
             background: "#FFFFFF",
             border: "1px solid #EFEFEF",
-            borderRadius: "5px",
-            fontFamily: "Roboto",
-            fontStyle: "normal",
-            fontWeight: "400",
-            fontSize: "11px",
-            lineHeight: "18px",
             color: "#515151",
           }}
         >
-          {d.year}
+          {d.groups}
         </button>,
       ],
       sortable: false,
     },
     {
       name: "Date Created",
-      selector: "year",
+     
       sortable: false,
+      cell: d => {
+        return moment(d.createdAt)
+          .local()
+          .format("DD-MM-YYYY hh:mm:ss ")
+      }
     },
   ];
 
