@@ -10,18 +10,18 @@ function ForgotPassword() {
 		localStorage.clear();
 		// console.log(API);
 	}, []);
-	const [email, setEmail] = useState("");
-	const [newPassword, setNewPassword] = useState("");
+	const [email, setId] = useState("");
+	const [password, setpassword] = useState("");
 	const [success, setSuccess] = useState(false);
 
 	async function onSubmit(event) {
 		event.preventDefault();
-		console.log(email, newPassword);
+		console.log("sdkjfshfkshdfkj", email, password);
 
 		try {
 			const response = await axios.patch(
 				`https://backend.klivepay.com/api/admin/forget-password?email=${email}`,
-				JSON.stringify({ newPassword }),
+				JSON.stringify({ password }),
 				{
 					headers: { "Content-Type": "application/json" },
 					// withCredentials: true,
@@ -34,8 +34,8 @@ function ForgotPassword() {
 
 			// const accessToken = response?.data?.accessToken;
 			// localStorage.setItem("token", response?.data?.accessToken);
-			setEmail("");
-			setNewPassword("");
+			setId("");
+			setpassword("");
 			setSuccess(true);
 		} catch (err) {
 			console.log(err);
@@ -55,15 +55,15 @@ function ForgotPassword() {
 					<div className="text-center">
 						{/* <img src={logo} alt="" className="PForgotPasswordLogo" /> */}
 						<img
-                src={logo}
-                className="img-responsive"
-                alt="ixiono pte. ltd"
-                style={{ height: "70px", width: "200px" }}
-              />
+							src={logo}
+							className="img-responsive"
+							alt="ixiono pte. ltd"
+							style={{ height: "70px", width: "200px" }}
+						/>
 						<br />
 					</div>
 					<div className="text-center mt-5">
-						<h4 className="ptext-primary">Forgot Password</h4>
+						<h4 className="ptext-primary">Get Forgot Password Link</h4>
 						<br />
 					</div>
 					<div className="col-lg-4 mx-auto">
@@ -75,20 +75,20 @@ function ForgotPassword() {
 										type="email"
 										className="form-control Pinput form-control-lg"
 										id="exampleInputEmail1"
-										onChange={(e) => setEmail(e.target.value)}
+										onChange={(e) => setId(e.target.value)}
 										value={email}
 										placeholder="Email Address"
 									/>
 								</div>
 								<div className="form-group">
-									{/* <input
+									<input
 										type="password"
 										className="form-control form-control-lg"
 										id="password"
 										placeholder="New Password"
-										onChange={(e) => setNewPassword(e.target.value)}
-										value={newPassword}
-									/> */}
+										onChange={(e) => setpassword(e.target.value)}
+										value={password}
+									/>
 								</div>
 								{/* <div className="form-group">
 									<Link to="/admin/login">
@@ -97,19 +97,17 @@ function ForgotPassword() {
 								</div> */}
 
 								<div className="mt-3">
-								<button
+									<button
 										type="button"
 										// href="/admin/dashboard"
 										onClick={(event) => {
-											  history.push("/admin/ResetPassword");
+											onSubmit(event);
 										}}
 										className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
 										submit
 									</button>
-									<div className="mt-3">
-									
+									<div className="mt-3"></div>
 								</div>
-								</div> 
 							</form>
 						</div>
 					</div>
@@ -117,7 +115,6 @@ function ForgotPassword() {
 			</div>
 		</div>
 	);
-};
-
+}
 
 export default ForgotPassword;

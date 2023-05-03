@@ -11,10 +11,10 @@ import ToolkitProvider, {
 import ClipLoader from "react-spinners/ClipLoader";
 import DataTable from "react-data-table-component";
 import data from "./data";
-
 import { useHistory } from "react-router-dom";
 import API from "../../../backend";
 import "./List.css";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function CustomerList() {
 	const { ExportCSVButton } = CSVExport;
@@ -260,9 +260,11 @@ function CustomerList() {
 								<div className="col-md-12 grid-margin">
 									<div className="row page-title-header">
 										<div className="col-6">
-											<button className="btn btn-primary mr-2">
-												<i class="fa-solid fa-plus"></i> New Customer
-											</button>
+											<Link to="/admin/addCustomer">
+												<button className="btn btn-primary mr-2">
+													<i class="fa-solid fa-plus"></i> New Customer
+												</button>
+											</Link>
 											<button className="btn btn-primary mr-2">
 												<i class="fa-solid fa-upload"></i> Import Customers
 											</button>

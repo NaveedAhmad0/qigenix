@@ -110,7 +110,7 @@ function AdminDashboard() {
 	const [ittems, setItems] = useState([]);
 	// const [invoiceRefId, setInvoiceRefId] = useState("");
 
-	console.log("items is", ittems);
+	console.log("items is", localStorage.getItem("token"));
 
 	// useEffect(() => {
 	// 	const getUserDetails = async () => {

@@ -214,7 +214,19 @@ function Sidebar() {
 					<Link className="nav-link" to="/admin/accoutnManagement">
 						<i className="mdi mdi-television menu-icon"></i>
 						<span className="menu-title">
-							<Trans>Account Management</Trans>
+							<Trans>Licensing Management</Trans>
+						</span>
+					</Link>
+				</li>
+
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link" to="/admin/accoutnManagement">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Access History</Trans>
 						</span>
 					</Link>
 				</li>
@@ -226,7 +238,73 @@ function Sidebar() {
 					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
 						<i className="mdi mdi-television menu-icon"></i>
 						<span className="menu-title">
-							<Trans>Licensing Management</Trans>
+							<Trans>Account Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Transaction Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Notification Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Email Template Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Support</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Setting</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Setup</Trans>
 						</span>
 					</Link>
 				</li>

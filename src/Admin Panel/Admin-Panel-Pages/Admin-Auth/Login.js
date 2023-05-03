@@ -150,9 +150,9 @@ import "./login.css";
 import { Redirect } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import axios from "axios";
-import API from "../../../backend";
 import logo from "../../../assets/images/logo.png";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import API from "../../../backend";
 function AdminLogin() {
 	const history = useHistory();
 	useEffect(() => {
@@ -186,10 +186,10 @@ function AdminLogin() {
 				}
 			);
 
-			console.log(JSON.stringify(response?.data));
+			console.log(response?.data);
 
 			// const accessToken = response?.data?.accessToken;
-			localStorage.setItem("token", response?.data?.accessToken);
+			localStorage.setItem("token", response?.data?.token);
 			localStorage.setItem("email", email);
 			setEmail("");
 			setPassword("");
@@ -205,7 +205,7 @@ function AdminLogin() {
 			}
 			console.log(err);
 		}
-		console.log(success);
+		// console.log(success);
 	}
 	return (
 		<div>
@@ -219,6 +219,7 @@ function AdminLogin() {
 					</div>
 					<div className="col-lg-5 mx-auto">
 						<div className="auth-form-light loginForm text-left py-5 px-4 px-sm-5">
+							<h5 className="text-danger">{errMsg}</h5>
 							<Form className="pt-3">
 								<Form.Group className="mb-4" controlId="formBasicEmail">
 									<Form.Label className="loginFormLabel mb-3">
@@ -261,23 +262,23 @@ function AdminLogin() {
 								</div>
 
 								<div className="mt-3">
-									<button
-										type="button"
-										// href="/admin/dashboard"
-										onClick={(event) => {
-											history.push("/admin/dashboard");
-										}}
-										className="btn btn-block rounded-lg loginbtn btn-lg font-weight-medium auth-form-btn">
-										Login
-									</button>
-									{/* {!success ? (
+									{!success ? (
+										<button
+											type="button"
+											// href="/admin/dashboard"
+											onClick={(event) => {
+												onSubmit(event);
+											}}
+											className="btn btn-block rounded-lg loginbtn btn-lg font-weight-medium auth-form-btn">
+											Login
+										</button>
 									) : (
 										<Redirect to="/admin/dashboard" />
-									)} */}
+									)}
 								</div>
 								<div className="my-2 d-flex justify-content-between align-items-center">
 									<a
-										href="/admin/forgotPassword"
+										href="/admin/get_forgotPassword_link"
 										// onClick={(event) => event.preventDefault()}
 										className="auth-link loginTxt1">
 										Forgot password?

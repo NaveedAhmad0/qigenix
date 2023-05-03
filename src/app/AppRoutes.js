@@ -66,6 +66,9 @@ const GetMerchantProfile = lazy(() =>
 const AdminChangePassword = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Admin-Reset-Password/resetPassword")
 );
+const ForgotPasswordLink = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Forgot Password/ForgotPasswordLink")
+);
 const ForgotPassword = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Forgot Password/ForgotPassword")
 );
@@ -92,6 +95,11 @@ const TransactionDetails = lazy(() =>
 );
 const CustomerList = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Customer List/CustomerList")
+);
+const AddCustomer = lazy(() =>
+	import(
+		"../Admin Panel/Admin-Panel-Pages/Customer List/Add Customer/AddCustomer"
+	)
 );
 const CustomerDetails = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Customer details/CustomerDetails")
@@ -144,6 +152,7 @@ class AppRoutes extends Component {
 					/>
 					<Route path="/admin/Registration" component={SignUp} />
 					<Route path="/admin/CustomerList" component={CustomerList} />
+					<Route path="/admin/addCustomer" component={AddCustomer} />
 					<Route path="/admin/CustomerDetails" component={CustomerDetails} />
 
 					<Route path="/admin/AdminVoid" component={AdminVoid} />
@@ -164,6 +173,11 @@ class AppRoutes extends Component {
 					<Route
 						path="/admin/TransactionDetails"
 						component={TransactionDetails}
+					/>
+					<Route
+						exact
+						path="/admin/get_forgotPassword_link"
+						component={ForgotPasswordLink}
 					/>
 					<Route
 						exact

@@ -17,6 +17,7 @@ import {
 	faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import API from "../../../backend";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -27,11 +28,11 @@ function UserRegistration() {
 	const userRef = useRef();
 	const errRef = useRef();
 
-	const [name, setName] = useState("");
+	const [username, setUserName] = useState("");
 	const [validName, setValidName] = useState(false);
 	const [userFocus, setUserFocus] = useState(false);
 
-	const [mobile, setMobile] = useState({});
+	const [mobile, setMobile] = useState("");
 	const [validMobile, setValidMobile] = useState(false);
 	const [mobileFocus, setMobileFocus] = useState(false);
 
@@ -61,11 +62,11 @@ function UserRegistration() {
 	}, []);
 
 	useEffect(() => {
-		const result = USER_REGEX.test(name);
+		const result = USER_REGEX.test(username);
 		console.log(result);
-		console.log(name);
+		console.log(username);
 		setValidName(result);
-	}, [name]);
+	}, [username]);
 
 	useEffect(() => {
 		const result = EMAIL_REGEX.test(email);
@@ -92,12 +93,12 @@ function UserRegistration() {
 
 	useEffect(() => {
 		setErrMsg("");
-	}, [password, name, matchPwd]);
+	}, [password, username, matchPwd]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// if button enabled with JS hack
-		const v1 = USER_REGEX.test(name);
+		const v1 = USER_REGEX.test(username);
 		const v2 = PWD_REGEX.test(password);
 		if (!v1 || !v2) {
 			setErrMsg("Invalid Entry");
@@ -106,13 +107,12 @@ function UserRegistration() {
 		try {
 			const response = await axios
 				.post(
-					"https://backend.klivepay.com/api/user/register",
+					`${API}/admin/register`,
 					JSON.stringify({
-						name,
-						mobile,
+						username,
+						mobile: mobile.toString(),
 						email,
 						password,
-						typeOfStreem: "web",
 					}),
 					{
 						headers: { "Content-Type": "application/json" },
@@ -120,17 +120,17 @@ function UserRegistration() {
 					}
 				)
 				.then((res) => {
-					if (res.status === 201) {
+					if (res.status === 200) {
 						alert(res.data.message);
+						setSuccess(true);
 					}
 				});
 			console.log(response?.data);
 			// console.log(response?.accessToken);
 			console.log(JSON.stringify(response));
-			setSuccess(true);
 			//clear state and controlled inputs
 			//need value attrib on inputs for this
-			setName("");
+			setUserName("");
 			setEmail("");
 			setPassword("");
 			setMatchPwd("");
@@ -250,8 +250,8 @@ function UserRegistration() {
 														id="username"
 														ref={userRef}
 														autoComplete="off"
-														onChange={(e) => setName(e.target.value)}
-														value={name}
+														onChange={(e) => setUserName(e.target.value)}
+														value={username}
 														required
 														aria-invalid={validName ? "false" : "true"}
 														aria-describedby="uidnote"
@@ -264,7 +264,7 @@ function UserRegistration() {
 														<p
 															id="uidnote"
 															className={
-																userFocus && name && !validName
+																userFocus && username && !validName
 																	? "instructions"
 																	: "offscreen"
 															}>
@@ -391,7 +391,7 @@ function UserRegistration() {
 													<p
 														id="uidnote"
 														className={
-															userFocus && name && !validPwd
+															userFocus && username && !validPwd
 																? "instructions"
 																: "offscreen"
 														}>
