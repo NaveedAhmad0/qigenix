@@ -166,7 +166,7 @@ class AppRoutes extends Component {
 						component={GetMerchantProfile}
 					/>
 					<Route path="/admin/resetPassword" component={AdminChangePassword} />
-				
+
 					<Route
 						exact
 						path="/admin/get_forgotPassword_link"
