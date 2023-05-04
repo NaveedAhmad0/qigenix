@@ -12,7 +12,7 @@ const ResetPassword = () => {
 
 		try {
 			const response = await axios.patch(
-				`https://backend.klivepay.com/api/admin/forget-password?email=${email}`,
+				`https://qigenix.ixiono.com/apis/admin/reset-Password/${email}`,
 				JSON.stringify({ newPassword }),
 				{
 					headers: { "Content-Type": "application/json" },

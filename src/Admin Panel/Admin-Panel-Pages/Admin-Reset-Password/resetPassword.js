@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./resetPassword.css";
 import logo from "../../../assets/images/logo.png";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // function ForgotPassword() {
 // 	const history = useHistory();
@@ -10,20 +11,20 @@ import logo from "../../../assets/images/logo.png";
 // 		localStorage.clear();
 // 		// console.log(API);
 // 	}, []);
-
 const ResetPassword = () => {
-	const [email, setEmail] = useState("");
+	const history = useHistory();
 	const [newPassword, setNewPassword] = useState("");
 	const [success, setSuccess] = useState(false);
-
+	const email = localStorage.getItem("email");
+	console.log(email, "kjsdf");
 	async function onSubmit(event) {
 		event.preventDefault();
 		console.log(email, newPassword);
 
 		try {
 			const response = await axios.patch(
-				`https://backend.klivepay.com/api/admin/forget-password?email=${email}`,
-				JSON.stringify({ newPassword }),
+				`https://qigenix.ixiono.com/apis/admin/reset-Password/${email}`,
+				JSON.stringify({ password: newPassword }),
 				{
 					headers: { "Content-Type": "application/json" },
 					// withCredentials: true,
@@ -33,10 +34,8 @@ const ResetPassword = () => {
 			console.log("mail", email);
 
 			console.log(JSON.stringify(response?.data));
-
 			// const accessToken = response?.data?.accessToken;
 			// localStorage.setItem("token", response?.data?.accessToken);
-			setEmail("");
 			setNewPassword("");
 			setSuccess(true);
 		} catch (err) {
@@ -48,6 +47,7 @@ const ResetPassword = () => {
 	useEffect(() => {
 		if (success) {
 			alert("You have registered Succesfully!");
+			history.pushState("/admin/login");
 		}
 	}, [success]);
 	return (
@@ -57,11 +57,11 @@ const ResetPassword = () => {
 					<div className="text-center">
 						{/* <img src={logo} alt="" className="PForgotPasswordLogo" /> */}
 						<img
-                src={logo}
-                className="img-responsive"
-                alt="ixiono pte. ltd"
-                style={{ height: "70px", width: "200px"  }}
-              />
+							src={logo}
+							className="img-responsive"
+							alt="ixiono pte. ltd"
+							style={{ height: "70px", width: "200px" }}
+						/>
 						<br />
 					</div>
 					<div className="text-center mt-5">
@@ -77,19 +77,19 @@ const ResetPassword = () => {
 										type="New Password"
 										className="form-control Pinput form-control-lg"
 										id="exampleInputEmail1"
-										onChange={(e) => setEmail(e.target.value)}
-										value={email}
+										onChange={(e) => setNewPassword(e.target.value)}
+										value={newPassword}
 										placeholder="New Password"
 									/>
 								</div>
-                                <div className="form-group">
+								<div className="form-group">
 									<label>Confirm Password</label>
 									<input
 										type="Confirm Password"
 										className="form-control Pinput form-control-lg"
 										id="exampleInputEmail1"
-										onChange={(e) => setEmail(e.target.value)}
-										value={email}
+										onChange={(e) => setNewPassword(e.target.value)}
+										value={newPassword}
 										placeholder="Confirm Address"
 									/>
 								</div>
@@ -110,19 +110,18 @@ const ResetPassword = () => {
 								</div> */}
 
 								<div className="mt-3">
-								<button
+									<button
 										type="button"
 										// href="/admin/dashboard"
 										onClick={(event) => {
 											//   history.push("/admin/Admin-ResetPassword");
+											onSubmit(event);
 										}}
 										className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
 										submit
 									</button>
-									<div className="mt-3">
-									
+									<div className="mt-3"></div>
 								</div>
-								</div> 
 							</form>
 						</div>
 					</div>
@@ -131,6 +130,5 @@ const ResetPassword = () => {
 		</div>
 	);
 };
-
 
 export default ResetPassword;
