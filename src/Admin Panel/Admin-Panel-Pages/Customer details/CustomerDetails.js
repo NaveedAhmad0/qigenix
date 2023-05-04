@@ -11,10 +11,11 @@ import ToolkitProvider, {
 } from "react-bootstrap-table2-toolkit";
 import ClipLoader from "react-spinners/ClipLoader";
 
-import { useHistory } from "react-router-dom";
+import { useHistory,useLocation } from "react-router-dom";
 import API from "../../../backend";
 import CustomerForm from "./CustomerDetailsForm";
 import AdminForm from "../../Admin-Panel-Components/Admin-Panel-Form/Admin-Form";
+import BillingForm from "./Billing Form/BillingForm";
 
 function CustomerDetails() {
 	const { ExportCSVButton } = CSVExport;
@@ -25,62 +26,12 @@ function CustomerDetails() {
 	// const [invoiceRefId, setInvoiceRefId] = useState("");
 
 	console.log("items is", ittems);
-
+	const location = useLocation();
+	const details = location.state.details;
 	const ProfileSection = () => {
 		return (
 			<div>
 				<div className="page-title-header">Profile</div>
-				<div className="card" id="#list-home-list">
-					<div className="card-body">
-						<ul className="nav nav-tabs" id="myTab" role="tablist">
-							<li className="nav-item">
-								<a
-									className="nav-link active"
-									id="home-tab"
-									data-toggle="tab"
-									href="#home"
-									role="tab"
-									aria-controls="home"
-									aria-selected="true">
-									Customer Details
-								</a>
-							</li>
-							<li className="nav-item">
-								<a
-									className="nav-link"
-									id="profile-tab"
-									data-toggle="tab"
-									href="#profile"
-									role="tab"
-									aria-controls="profile"
-									aria-selected="false">
-									Billing & Shipping
-								</a>
-							</li>
-						</ul>
-
-						<div className="row mt-2">
-							<div className="col-12">
-								<div className="form-check">
-									<label className="form-check-label text-muted">
-										<input type="checkbox" className="form-check-input" />
-										<i className="input-helper"></i>
-										Show primary contact full name on Invoices, Estimates,
-										Payments, Credit Notes
-									</label>
-								</div>
-							</div>
-						</div>
-						<CustomerForm />
-					</div>
-				</div>
-			</div>
-		);
-	};
-	const ProfileSection2 = () => {
-		return (
-			<div>
-				<div className="page-title-header">blabla</div>
 				<div className="card" id="#list-home-list">
 					<div className="card-body">
 						<ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -145,7 +96,7 @@ function CustomerDetails() {
 						<div className="col-md-12">
 							<div className="row">
 								<div className="col-md-4 grid-margin">
-									<div className="page-title-header">#2 Bednar and Sons</div>
+									<div className="page-title-header" style={{fontWeight:"500",fontSize:"17px"}}>#{details.company}</div>
 									<div className="card">
 										<div
 											className="list-group list-group-flush"
@@ -182,28 +133,46 @@ function CustomerDetails() {
 										</div>
 									</div>
 								</div>
-								<div className="col-md-8 grid-margin">
-									<div className="tab-content" id="nav-tabContent">
-										<div
-											className="tab-pane fade show active"
-											id="list-home"
-											role="tabpanel"
-											aria-labelledby="list-home-list">
-											<ProfileSection />
-										</div>
-										<div
-											className="tab-pane fade"
-											id="list-profile"
-											role="tabpanel"
-											aria-labelledby="list-profile-list">
-											<ProfileSection2 />
-										</div>
-										<div
-											className="tab-pane fade"
-											id="list-messages"
-											role="tabpanel"
-											aria-labelledby="list-messages-list">
-											...
+								<div className="col-md-8">
+									<div className="row m-auto">
+										<div className="col-md-12 m-auto grid-margin">
+											<div className="page-title-header" style={{fontWeight:"500",fontSize:"17px"}}>Profile</div>
+
+											<div className="card" id="#list-home-list">
+												<div className="card-body">
+													<ul className="nav nav-tabs nav-tabs-bordered pt-3 px-2">
+														<li className="nav-item">
+															<button
+																className="nav-link active"
+																data-bs-toggle="tab"
+																data-bs-target="#MyTasks">
+																Customer Details
+															</button>
+														</li>
+														<li className="nav-item">
+															<button
+																className="nav-link"
+																data-bs-toggle="tab"
+																data-bs-target="#MyProjects">
+																Billing & shipping
+															</button>
+														</li>
+													</ul>
+													<div className="tab-content pt-2">
+														<div
+															className="tab-pane fade show active MyTasks"
+															id="MyTasks">
+															<CustomerForm />
+														</div>
+
+														<div
+															className="tab-pane fade MyProjects pt-3"
+															id="MyProjects">
+															<BillingForm />
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>

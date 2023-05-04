@@ -1,214 +1,172 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import "./customerForm.css";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-const CustomerForm = () => {
-
-	const location = useLocation();
-	const details = location.state.details;
-	
-
-	const updateCustomer=()=>{
-
-
-	}
-
+import "./billingForm.css";
+const BillingForm = () => {
 	return (
-		<div className="col-12 grid-margin">
-			<div className="row mt-2">
-							<div className="col-12">
-								<div className="form-check">
-									<label className="form-check-label text-muted">
-										<input type="checkbox" className="form-check-input" />
-										<i className="input-helper"></i>
-										Show primary contact full name on Invoices, Estimates,
-										Payments, Credit Notes
-									</label>
-								</div>
-							</div>
-						</div>
+		// <div className="card ">
+		// 	<div className="card-body">
+
+		// 	</div>
+		// </div>
+		<div className="col-md-12 grid-margin">
 			<form className="form-sample">
 				{/* <p className="card-description"> Personal info </p> */}
 				<div className="row">
-					<div className="col-md-8">
+					<div className="col-md-12 mt-4">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">
 									<span className="text-danger">*</span> Company
 								</Form.Label>
 								<Form.Control
-									className="customerInputN"
+									className="addcustomerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.company}
-									
 								/>
 							</div>
 						</Form.Group>
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">VAT Number</Form.Label>
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.vat_number}
-								/>
+								<select className="form-control addcustomerInputN">
+									<option>Male</option>
+									<option>Female</option>
+								</select>
 							</div>
 						</Form.Group>
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">Phone</Form.Label>
 								<Form.Control
-									className="customerInputN"
+									className="addcustomerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.mobile}
 								/>
 							</div>
 						</Form.Group>
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">Website</Form.Label>
 
 								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.website}
-								/>
+									className="addcustomerInputN"
+									type="date"></Form.Control>
 							</div>
 						</Form.Group>
 					</div>
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">Groups</Form.Label>
 
 								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.groups}
-								/>
+									className="addcustomerInputN"
+									type="date"></Form.Control>
 							</div>
 						</Form.Group>
 					</div>
 				</div>
+
 				<div className="row">
-					<div className="col-md-4">
+					<div className="col-md-6">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">Currency</Form.Label>
 
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.currency}
-								/>
+								<select className="form-control addcustomerInputN">
+									<option>Category1</option>
+									<option>Category2</option>
+									<option>Category3</option>
+									<option>Category4</option>
+								</select>
 							</div>
 						</Form.Group>
 					</div>
-					<div className="col-md-4">
+					<div className="col-md-6">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">Default Language</Form.Label>
 
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.language}
-								/>
+								<select className="form-control addcustomerInputN">
+									<option>Category1</option>
+									<option>Category2</option>
+									<option>Category3</option>
+									<option>Category4</option>
+								</select>
 							</div>
 						</Form.Group>
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<div className="form-group">
 							<label for="exampleFormControlTextarea1">Address</label>
 							<textarea
 								className="form-control"
 								id="exampleFormControlTextarea1"
-								rows="3"
-								value={details.address}
-								></textarea>
+								rows="3"></textarea>
 						</div>
 					</div>
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">City</Form.Label>
 
 								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.city}
-								/>
+									className="addcustomerInputN"
+									type="date"></Form.Control>
 							</div>
 						</Form.Group>
 					</div>
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">State</Form.Label>
 
 								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.state}
-								/>
+									className="addcustomerInputN"
+									type="date"></Form.Control>
 							</div>
 						</Form.Group>
 					</div>
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">Zip Code</Form.Label>
 
 								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.zipcode}
-								/>
+									className="addcustomerInputN"
+									type="date"></Form.Control>
 							</div>
 						</Form.Group>
 					</div>
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">Country</Form.Label>
 
 								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.country}
-								/>
+									className="addcustomerInputN"
+									type="date"></Form.Control>
 							</div>
 						</Form.Group>
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-md-8 text-right">
-						<button className="btn btnCustomerProfileN btn-primary" onClick={updateCustomer}>
+					<div className="col-md-12 text-right">
+						<button className="btn btnCustomerProfileN btn-primary">
 							Save
 						</button>
 					</div>
@@ -223,4 +181,4 @@ const CustomerForm = () => {
 	);
 };
 
-export default CustomerForm;
+export default BillingForm;

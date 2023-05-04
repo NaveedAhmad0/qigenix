@@ -23,6 +23,8 @@ function CustomerList() {
 	const [search, setSearch] = useState("");
 	const [Filtered, setFiltered] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const token=localStorage.getItem("token")
+  const history=useHistory()
 
 	const fetchData = async () => {
 		try {
@@ -30,7 +32,9 @@ function CustomerList() {
 				method: "get",
 				url: `https://qigenix.ixiono.com/apis/admin/getAllCustomer`,
 				headers: {
+					
 					"Content-Type": "application/json",
+					Authorization: `${token}`,
 				},
 			};
 			axios(config)
@@ -87,13 +91,33 @@ function CustomerList() {
 				color: "#4E7AED",
 			},
 		},
+    {
+      name:"Action",
+      style:{
+        fontSize:"18px",
+
+      },
+      cell:(row)=>[
+        <i class="fa-solid fa-circle-info text-primary mx-2" style={{cursor:"pointer"}} onClick={() => {
+          // eslint-disable-next-line no-restricted-globals
+          history.push({
+            pathname: "/admin/CustomerDetails",
+            state: { details: row },
+          });
+        }}></i>,
+        <i class="fa-solid fa-trash text-danger mx-2"  style={{cursor:"pointer"}}
+       >
+        </i>
+      ]
+    },
 		{
 			name: "Company",
-			selector: "company",
+			 selector: "company",
 			sortable: true,
 			style: {
 				color: "#4E7AED",
 			},
+     
 		},
 		{
 			name: "Primary Contact",
@@ -105,7 +129,7 @@ function CustomerList() {
 		},
 		{
 			name: "Primary Email",
-			selector: "website",
+			selector: "email",
 			sortable: false,
 			style: {
 				color: "#4E7AED",
