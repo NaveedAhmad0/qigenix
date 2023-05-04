@@ -211,6 +211,17 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
+					<Link className="nav-link" to="/admin/DeviceList">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Devices</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
 					<Link className="nav-link" to="/admin/accoutnManagement">
 						<i className="mdi mdi-television menu-icon"></i>
 						<span className="menu-title">

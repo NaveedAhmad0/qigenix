@@ -89,6 +89,9 @@ const AssignMerchToUser = lazy(() =>
 	)
 );
 
+const DeviceList = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Device List/DeviceList")
+);
 const CustomerList = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Customer List/CustomerList")
 );
@@ -97,8 +100,14 @@ const AddCustomer = lazy(() =>
 		"../Admin Panel/Admin-Panel-Pages/Customer List/Add Customer/AddCustomer"
 	)
 );
+const AddDevice = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Device List/Add Device/AddDevice")
+);
 const CustomerDetails = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Customer details/CustomerDetails")
+);
+const DeviceDetails = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Device Details/DeviceDetails")
 );
 
 const SignUp = lazy(() =>
@@ -150,6 +159,10 @@ class AppRoutes extends Component {
 					<Route path="/admin/CustomerList" component={CustomerList} />
 					<Route path="/admin/addCustomer" component={AddCustomer} />
 					<Route path="/admin/CustomerDetails" component={CustomerDetails} />
+
+					<Route path="/admin/DeviceList" component={DeviceList} />
+					<Route path="/admin/device-details" component={DeviceDetails} />
+					<Route path="/admin/add-device" component={AddDevice} />
 
 					<Route path="/admin/AdminVoid" component={AdminVoid} />
 					<Route path="/admin/AdminRefund" component={AdminRefund} />

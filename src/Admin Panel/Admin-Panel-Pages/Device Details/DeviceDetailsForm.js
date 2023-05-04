@@ -1,8 +1,8 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import "./customerForm.css";
+import "./deviceForm.css";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-const CustomerForm = () => {
+const DeviceForm = () => {
 	const location = useLocation();
 	const details = location.state.details;
 
@@ -218,4 +218,4 @@ const CustomerForm = () => {
 	);
 };
 
-export default CustomerForm;
+export default DeviceForm;

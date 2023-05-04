@@ -1,23 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import BootstrapTable from "react-bootstrap-table-next";
-import { Form } from "react-bootstrap";
-import paginationFactory from "react-bootstrap-table2-paginator";
 
-import ToolkitProvider, {
-	Search,
-	CSVExport,
-} from "react-bootstrap-table2-toolkit";
+import { CSVExport } from "react-bootstrap-table2-toolkit";
 import ClipLoader from "react-spinners/ClipLoader";
 
 import { useHistory, useLocation } from "react-router-dom";
 import API from "../../../backend";
-import CustomerForm from "./CustomerDetailsForm";
-import AdminForm from "../../Admin-Panel-Components/Admin-Panel-Form/Admin-Form";
-import BillingForm from "./Billing Form/BillingForm";
+import DeviceForm from "./DeviceDetailsForm";
+// import BillingForm from "./Billing Form/BillingForm";
 
-function CustomerDetails() {
+function DeviceDetails() {
 	const { ExportCSVButton } = CSVExport;
 
 	const history = useHistory();
@@ -28,57 +21,6 @@ function CustomerDetails() {
 	console.log("items is", ittems);
 	const location = useLocation();
 	const details = location.state.details;
-	const ProfileSection = () => {
-		return (
-			<div>
-				<div className="page-title-header">Profile</div>
-				<div className="card" id="#list-home-list">
-					<div className="card-body">
-						<ul className="nav nav-tabs" id="myTab" role="tablist">
-							<li className="nav-item">
-								<a
-									className="nav-link active"
-									id="home-tab"
-									data-toggle="tab"
-									href="#home"
-									role="tab"
-									aria-controls="home"
-									aria-selected="true">
-									Customer Details
-								</a>
-							</li>
-							<li className="nav-item">
-								<a
-									className="nav-link"
-									id="profile-tab"
-									data-toggle="tab"
-									href="#profile"
-									role="tab"
-									aria-controls="profile"
-									aria-selected="false">
-									Billing & Shipping
-								</a>
-							</li>
-						</ul>
-
-						<div className="row mt-2">
-							<div className="col-12">
-								<div className="form-check">
-									<label className="form-check-label text-muted">
-										<input type="checkbox" className="form-check-input" />
-										<i className="input-helper"></i>
-										Show primary contact full name on Invoices, Estimates,
-										Payments, Credit Notes
-									</label>
-								</div>
-							</div>
-						</div>
-						<CustomerForm />
-					</div>
-				</div>
-			</div>
-		);
-	};
 
 	// list.map((list)=>{})
 	return (
@@ -95,7 +37,7 @@ function CustomerDetails() {
 					<div className="row">
 						<div className="col-md-12">
 							<div className="row">
-								<div className="col-md-3 grid-margin">
+								<div className="col-md-4 grid-margin">
 									<div
 										className="page-title-header"
 										style={{ fontWeight: "500", fontSize: "17px" }}>
@@ -137,7 +79,7 @@ function CustomerDetails() {
 										</div>
 									</div>
 								</div>
-								<div className="col-md-9">
+								<div className="col-md-8">
 									<div className="row m-auto">
 										<div className="col-md-12 m-auto grid-margin">
 											<div
@@ -154,15 +96,7 @@ function CustomerDetails() {
 																className="nav-link active"
 																data-bs-toggle="tab"
 																data-bs-target="#MyTasks">
-																Customer Details
-															</button>
-														</li>
-														<li className="nav-item">
-															<button
-																className="nav-link"
-																data-bs-toggle="tab"
-																data-bs-target="#MyProjects">
-																Billing & shipping
+																Device Details
 															</button>
 														</li>
 													</ul>
@@ -170,13 +104,7 @@ function CustomerDetails() {
 														<div
 															className="tab-pane fade show active MyTasks"
 															id="MyTasks">
-															<CustomerForm />
-														</div>
-
-														<div
-															className="tab-pane fade MyProjects pt-3"
-															id="MyProjects">
-															<BillingForm />
+															<DeviceForm />
 														</div>
 													</div>
 												</div>
@@ -195,4 +123,4 @@ function CustomerDetails() {
 		</div>
 	);
 }
-export default CustomerDetails;
+export default DeviceDetails;
