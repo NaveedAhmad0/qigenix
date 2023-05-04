@@ -9,10 +9,10 @@ class Footer extends Component {
 					<div className="d-sm-flex justify-content-center justify-content-sm-between py-2 w-100">
 						<span className="text-muted text-center text-sm-left d-block d-sm-inline-block">
 							Copyright ©{" "}
-							<a href="https://klivepay.com/" rel="KlivePay">
-								KlivePay.com{" "}
+							<a href="https://qigenix.com/" rel="KlivePay">
+								Qigenix.com{" "}
 							</a>
-							2022
+							2023
 						</span>
 					</div>
 				</div>

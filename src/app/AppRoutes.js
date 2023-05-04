@@ -2,6 +2,7 @@ import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Spinner from "../app/shared/Spinner";
+// import AddLaserDeviceList from "../Admin Panel/Admin-Panel-Pages/Admin-AddDevice/AddLaserDeviceList";
 // import AdminSignup from "../Admin Panel/Admin-Panel-Pages/Admin-Auth/Signup";
 require("dotenv").config();
 
@@ -31,8 +32,11 @@ const AdminDashboard = lazy(() =>
 const AdminLogin = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/LoginProcess")
 );
-const AdminSignup = lazy(() =>
-	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/SignupProcess")
+// const AdminSignup = lazy(() =>
+// 	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/SignupProcess")
+// );
+const AddLaserDeviceList = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Admin-AddDevice/AddLaserDeviceList")
 );
 
 const AdminTransaction = lazy(() =>
@@ -69,9 +73,7 @@ const GetMerchantProfile = lazy(() =>
 	)
 );
 const AdminChangePassword = lazy(() =>
-	import(
-		"../Admin Panel/Admin-Panel-Pages/Admin-Reset-Password/AdminChangePassword"
-	)
+	import("../Admin Panel/Admin-Panel-Pages/Admin-Reset-Password/resetPassword")
 );
 const ForgotPassword = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Forgot Password/ForgotPassword")
@@ -96,6 +98,13 @@ const TransactionDetails = lazy(() =>
 	import(
 		"../Admin Panel/Admin-Panel-Pages/Admin-Payment_Transaction/TransactionDetails"
 	)
+);
+const CustomerList = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Customer List/CustomerList")
+);
+
+const SignUp = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/Register")
 );
 
 class AppRoutes extends Component {
@@ -124,9 +133,10 @@ class AppRoutes extends Component {
 
 					{/*------------------------- ADMIN PANEL ROUTES -------------------------- */}
 					<Route exact path="/admin/login" component={AdminLogin} />
-					<Route exact path="/admin/signup" component={AdminSignup} />
+					{/* <Route exact path="/admin/signup" component={AdminSignup} /> */}
 
 					<Route exact path="/admin/dashboard" component={AdminDashboard} />
+					<Route exact path="/admin/addDevice" component={AddLaserDeviceList} />
 
 					<Route
 						path="/admin/AdminPaymentTransaction"
@@ -140,6 +150,8 @@ class AppRoutes extends Component {
 						path="/admin/WithdrawalDetails"
 						component={WithdrawalDetails}
 					/>
+					<Route path="/admin/Registration" component={SignUp} />
+					<Route path="/admin/CustomerList" component={CustomerList} />
 					<Route path="/admin/AdminVoid" component={AdminVoid} />
 					<Route path="/admin/AdminRefund" component={AdminRefund} />
 					<Route path="/admin/update-profile" component={AdminProfile} />

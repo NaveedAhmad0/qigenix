@@ -84,6 +84,7 @@ function App(props) {
 
 				<div className="container-fluid page-body-wrapper">
 					{location.pathname.includes("login") ||
+					location.pathname.includes("Registration") ||
 					location.pathname.includes("forgotPassword") ||
 					location.pathname == "/admin"
 						? // location.pathname.includes("user")
@@ -94,7 +95,8 @@ function App(props) {
 						className={
 							!location.pathname.includes("forgotPassword") &&
 							location.pathname.includes("admin") &&
-							!location.pathname.includes("login")
+							!location.pathname.includes("login") &&
+							!location.pathname.includes("Registration")
 								? "main-panel"
 								: "main-2"
 						}>

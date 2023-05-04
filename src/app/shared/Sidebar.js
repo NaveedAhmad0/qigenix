@@ -200,6 +200,17 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
+					<Link className="nav-link" to="/admin/CustomerList">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Customers</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
 					<Link className="nav-link" to="/admin/accoutnManagement">
 						<i className="mdi mdi-television menu-icon"></i>
 						<span className="menu-title">
@@ -208,17 +219,6 @@ function Sidebar() {
 					</Link>
 				</li>
 
-				<li
-					className={
-						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
-					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
-							<Trans>Customers</Trans>
-						</span>
-					</Link>
-				</li>
 				<li
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
@@ -342,6 +342,19 @@ function Sidebar() {
 						</span>
 					</Link>
 				</li>
+				<li
+					className={
+						isPathActive("/admin/addDevice") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link" to="/admin/AddDevice">
+						<i className="mdi mdi-television menu-icon"></i>
+						<span className="menu-title">
+							<Trans>Add Device List</Trans>
+						</span>
+					</Link>
+				</li>
+
+
 
 				<li
 					className={

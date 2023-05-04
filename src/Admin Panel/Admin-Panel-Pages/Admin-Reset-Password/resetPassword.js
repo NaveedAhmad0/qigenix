@@ -1,15 +1,17 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./forgotPassword.css";
+import "./resetPassword.css";
 import logo from "../../../assets/images/logo.png";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-function ForgotPassword() {
-	const history = useHistory();
-	useEffect(() => {
-		localStorage.clear();
-		// console.log(API);
-	}, []);
+// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// function ForgotPassword() {
+// 	const history = useHistory();
+// 	useEffect(() => {
+// 		localStorage.clear();
+// 		// console.log(API);
+// 	}, []);
+
+const ResetPassword = () => {
 	const [email, setEmail] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [success, setSuccess] = useState(false);
@@ -58,26 +60,37 @@ function ForgotPassword() {
                 src={logo}
                 className="img-responsive"
                 alt="ixiono pte. ltd"
-                style={{ height: "70px", width: "200px" }}
+                style={{ height: "70px", width: "200px"  }}
               />
 						<br />
 					</div>
 					<div className="text-center mt-5">
-						<h4 className="ptext-primary">Forgot Password</h4>
+						<h4 className="ptext-primary">Reset Password</h4>
 						<br />
 					</div>
-					<div className="col-lg-4 mx-auto">
+					<div className="col-lg-5 mx-auto">
 						<div className="auth-form-light cardForgot text-left py-10 px-4 px-sm-17">
 							<form className="pt-1">
 								<div className="form-group">
-									<label>Email Address</label>
+									<label>New Password</label>
 									<input
-										type="email"
+										type="New Password"
 										className="form-control Pinput form-control-lg"
 										id="exampleInputEmail1"
 										onChange={(e) => setEmail(e.target.value)}
 										value={email}
-										placeholder="Email Address"
+										placeholder="New Password"
+									/>
+								</div>
+                                <div className="form-group">
+									<label>Confirm Password</label>
+									<input
+										type="Confirm Password"
+										className="form-control Pinput form-control-lg"
+										id="exampleInputEmail1"
+										onChange={(e) => setEmail(e.target.value)}
+										value={email}
+										placeholder="Confirm Address"
 									/>
 								</div>
 								<div className="form-group">
@@ -101,7 +114,7 @@ function ForgotPassword() {
 										type="button"
 										// href="/admin/dashboard"
 										onClick={(event) => {
-											  history.push("/admin/ResetPassword");
+											//   history.push("/admin/Admin-ResetPassword");
 										}}
 										className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
 										submit
@@ -120,4 +133,4 @@ function ForgotPassword() {
 };
 
 
-export default ForgotPassword;
+export default ResetPassword;

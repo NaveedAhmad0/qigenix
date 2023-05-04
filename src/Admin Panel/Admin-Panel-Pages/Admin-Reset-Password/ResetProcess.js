@@ -1,7 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./resetPassword";
 
 const validationSchema = Yup.object({
 	email: Yup.string().email().required("Please enter valid email"),
@@ -17,16 +17,16 @@ const validationSchema = Yup.object({
 		.required("Password is required"),
 });
 
-const ForgotProcess = () => {
+const ResetProcess = () => {
 	return (
 		<Formik
 			validationSchema={validationSchema}
 			initialValues={{
 				email: "",
 			}}>
-			{(formik) => <ForgotPassword {...formik} />}
+			{(formik) => <ResetPassword {...formik} />}
 		</Formik>
 	);
 };
 
-export default ForgotProcess;
+export default ResetProcess;

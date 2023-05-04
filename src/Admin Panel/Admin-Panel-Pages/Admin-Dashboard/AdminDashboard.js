@@ -298,8 +298,8 @@ function AdminDashboard() {
 				</div>
 			</div>
 
-			<div className="row">
-				<div className="col-md-12">
+			<div className="row d-flex">
+				<div className="col-md-8">
 					<div className="row">
 						<div className="col-md-12 grid-margin">
 							<div className="card">
@@ -335,8 +335,43 @@ function AdminDashboard() {
 					</div>
 				</div>
 				<div className="col-md-4">
-					<div className="row"></div>
+					<div className="row">
+						<div className="col-md-12 grid-margin">
+							<div className="card">
+								<div className="card-body">
+									<div className="table-responsive">
+										<ToolkitProvider
+											keyField="id"
+											data={ittems}
+											columns={columns}
+											search>
+											{(props) => (
+												<div>
+													<h3>Search:</h3>
+													<SearchBar
+														{...props.searchProps}
+														className="custome-search-field"
+														style={{ color: "white" }}
+														delay={500}
+														placeholder="Search..."
+													/>
+													<hr />
+													<BootstrapTable
+														{...props.baseProps}
+														pagination={paginationFactory(options)}
+													/>
+												</div>
+											)}
+										</ToolkitProvider>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+				{/* <div className="col-md-4">
+					<div className="row"></div>
+				</div> */}
 			</div>
 		</div>
 	);

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
 
+import React, { useEffect, useState } from "react";
+import "./login.css";
 import { Redirect } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import API from "../../../backend";
-import logoimg from "../../../assets/images/logo.png";
-import "./login.css";
+import logo from "../../../assets/images/logo.png";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function AdminLogin(formik) {
 	const history = useHistory();
@@ -18,6 +18,7 @@ function AdminLogin(formik) {
 	const [success, setSuccess] = useState(false);
 	const [errMsg, setErrMsg] = useState("");
 	const { values, touched, dirty, isValid, errors } = formik;
+
 	// const logindetails = { email, password };
 
 	// const navigate = Redirect();
@@ -66,89 +67,81 @@ function AdminLogin(formik) {
 		<div>
 			<div className="d-flex align-items-center auth px-0">
 				<div className="row w-100 mx-0">
-					<div className="logodivM ">
-						<img className="logoM" src={logoimg} />
+					<div className="text-center">
+						<img src={logo} alt="" className="loginLogo" />
 					</div>
-					<div className="heading1M">Login</div>
+					<div className="text-center mt-5">
+						<h4 className="loginTittle">Login</h4>
+					</div>
 					<div className="col-lg-6 mx-auto">
+						<div className="auth-form-light loginForm text-left py-5 px-4 px-sm-5">
+							<Form className="pt-3">
+								<Form.Group className="mb-4" controlId="formBasicEmail">
+									<Form.Label className="loginFormLabel mb-3 ">
+										<p>Email Address</p>
+									</Form.Label>
+									<Form.Control
+										type="email"
+										placeholder="Username"
+										id="email"
+										name="email"
+										// onChange={(event) => handleChange(event)}
+										value={values.email}
+										onChange={formik.handleChange}
+                                      onBlur={formik.handleBlur}
 
-						<div className="auth-form-light text-left py-4 px-5 px-sm-5">
-							<div className="brand-logo">
-								<h3 className={!errMsg ? "errMsg" : "text-danger"}>{errMsg}</h3>
-							</div>
-							{/* <h4 className="text-primary">Admin Login</h4> */}
-
-							<Form className="pt-0">
-								<Form.Group className="sm-3" controlId="formBasicEmail">
-									<Form.Label className="">Email address</Form.Label>
-									<Form.Control 
-									type="email"
-									autoFocus="true"
-									placeholder="Username"
-									name="email"
-									id="email"
-									// onChange={(event) => handleChange(event)}
-									value={values.email}
-                                   onChange={formik.handleChange}
-                                   onBlur={formik.handleBlur}
-									size="lg"
-									className="h-auto" 
+										size="lg"
+										className="h-auto rounded-lg border-primary"
 									/>
 									{errors.email && touched.email && (
                               <div style={{ color: "red" }}>{errors.email}</div>
                             )}
-
 								</Form.Group>
-
 								<Form.Group className="mb-3" controlId="formBasicPassword">
-									<Form.Label>Password</Form.Label>
-									<Form.Control 
-									type="password"
-									placeholder="Password"
-									// onChange={(event) => handleChangeone(event)}
-									name="password"
-									id="password"
-									value={values.password}
-									onChange={formik.handleChange}
+									<Form.Label className="loginFormLabel mb-3">
+										<p>Password</p>
+									</Form.Label>
+									<Form.Control
+										type="password"
+										placeholder="Password"
+										id="password"
+										name="password"
+										// onChange={(event) => handleChangeone(event)}
+										value={values.password}
+										onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
-									size="lg"
-									className="h-auto"
+										size="lg"
+										className="h-auto rounded-lg border-primary"
 									/>
 									{errors.password && touched.password && (
                               <div style={{ color: "red" }}>{errors.password}</div>
                             )}
+
+
 								</Form.Group>
 
-								{/* <Form.Group className="d-flex search-field">
-									<label htmlFor="password">Email</label>
-									<Form.Control
-										type="email"
-										placeholder="Username"
-										onChange={(event) => handleChange(event)}
-										value={email}
-										size="lg"
-										className="h-auto"
-									/>
-								</Form.Group>
-								<Form.Group className="d-flex search-field">
-									<Form.Control
-										type="password"
-										placeholder="Password"
-										onChange={(event) => handleChangeone(event)}
-										value={password}
-										size="lg"
-										className="h-auto"
-									/>
-								</Form.Group> */}
+								<div className="my-2 d-flex justify-content-between align-items-center">
+									<div className="form-check">
+										<label className="form-check-label text-muted">
+											<input
+												type="checkbox"
+												className="form-check-input loginRemember"
+											/>
+											<i className="input-helper"></i>
+											Remember me
+										</label>
+									</div>
+								</div>
+
 								<div className="mt-3">
 									<button
-										type="submit"
+										type="submitn"
 										// href="/admin/dashboard"
 										disabled={!formik.isValid}
 										onClick={(event) => {
 											history.push("/admin/dashboard");
 										}}
-										className="loginbtnM btn btn-block btn-lg font-weight-medium auth-form-btn">
+										className="btn btn-block rounded-lg loginbtn btn-lg font-weight-medium auth-form-btn">
 										Login
 									</button>
 									{/* {!success ? (
@@ -156,41 +149,28 @@ function AdminLogin(formik) {
 										<Redirect to="/admin/dashboard" />
 									)} */}
 								</div>
-								{/* <div class="col-md-12">
-                    <p class="small ">
-                      Already Have An Account ? <a href ="/admin/signup"> Sign up here </a></p>
-					  </div> */}
-								{/* <div className="mt-3">
-								<button
-										type="submit"
-										// href="/admin/dashboard"
-										onClick={(event) => {
-											history.push("/admin/signup");
-										}}
-										className="signuupbtnM btn btn-block btn-lg font-weight-medium">
-										SIGN IN
-									</button>
-								</div> */}
 								<div className="my-2 d-flex justify-content-between align-items-center">
-									<div className="form-check">
-										<label className="form-check-label text-muted">
-											<input type="checkbox" className="form-check-input" />
-											<i className="input-helper"></i>
-											Keep me signed in
-										</label>
-									</div>
 									<a
 										href="/admin/forgotPassword"
 										// onClick={(event) => event.preventDefault()}
-										className="auth-link text-black">
+										className="auth-link loginTxt1">
 										Forgot password?
 									</a>
 								</div>
+								{/* <div className="">
+								</div> */}
+								<div className="text-left ">
+									<label className="text-muted">
+										Don't have an Account?{" "}
+										<a
+											href="/admin/Registration"
+											// onClick={(event) => event.preventDefault()}
+											className="auth-link text-primary">
+											Signup here
+										</a>
+									</label>
+								</div>
 							</Form>
-							<div class="col-md-12">
-                    <p class="small">
-                      Already Have An Account ? <a href ="/admin/signup"> Sign up here </a></p>
-					  </div>
 						</div>
 					</div>
 				</div>
