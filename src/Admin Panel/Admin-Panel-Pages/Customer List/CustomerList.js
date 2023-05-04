@@ -152,7 +152,7 @@ function CustomerList() {
 						type="checkbox"
 						role="switch"
 						id="flexSwitchCheckChecked"
-						checked={d.status === "1" ? false : true}></input>
+						checked={d.status === "1" ? true : false}></input>
 				</div>,
 			],
 			sortable: false,

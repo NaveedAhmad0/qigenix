@@ -15,18 +15,6 @@ const CustomerForm = () => {
 
 	return (
 		<div className="col-12 grid-margin">
-			<div className="row mt-2">
-							<div className="col-12">
-								<div className="form-check">
-									<label className="form-check-label text-muted">
-										<input type="checkbox" className="form-check-input" />
-										<i className="input-helper"></i>
-										Show primary contact full name on Invoices, Estimates,
-										Payments, Credit Notes
-									</label>
-								</div>
-							</div>
-						</div>
 			<form className="form-sample">
 				{/* <p className="card-description"> Personal info </p> */}
 				<div className="row">
@@ -41,7 +29,6 @@ const CustomerForm = () => {
 									type="text"
 									placeholder="Keywords"
 									value={details.company}
-									
 								/>
 							</div>
 						</Form.Group>
