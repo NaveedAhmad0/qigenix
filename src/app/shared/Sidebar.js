@@ -223,7 +223,7 @@ function Sidebar() {
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
 					<Link className="nav-link ps-3" to="/admin/Assigned-devices">
-					<i class="fa-solid fa-mobile-button"></i>
+						<i class="fa-solid fa-mobile-button"></i>
 						<span className="menu-title ms-3">
 							<Trans>Assigned Devices</Trans>
 						</span>
@@ -234,13 +234,12 @@ function Sidebar() {
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
 					<Link className="nav-link ps-3" to="/admin/ListOfInvoices">
-					<i class="fa-solid fa-receipt"></i>
+						<i class="fa-solid fa-receipt"></i>
 						<span className="menu-title ms-3">
 							<Trans>Invoices</Trans>
 						</span>
 					</Link>
 				</li>
-			
 
 				{/* <li
 					className={
@@ -254,7 +253,6 @@ function Sidebar() {
 					</Link>
 				</li> */}
 
-			
 				<li
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
@@ -282,7 +280,7 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+					<Link className="nav-link ps-3" to="/admin/email-template">
 						<i class="fa-solid fa-envelope"></i>
 						<span className="menu-title ms-3">
 							<Trans>Email Template Management</Trans>
@@ -300,7 +298,7 @@ function Sidebar() {
 						</span>
 					</Link>
 				</li>
-			
+
 				<li
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
