@@ -103,6 +103,11 @@ const AssignMerchToUser = () => {
 														<select
 															name="userId"
 															className="input"
+															style={{
+																border: "1px solid rgb(234, 237, 241)",
+																padding: "5px",
+																borderRadius: "5px",
+															}}
 															onChange={(event) =>
 																handleFormChange2(index2, event)
 															}>
@@ -123,10 +128,14 @@ const AssignMerchToUser = () => {
 												<Form.Group className="row">
 													<div className="col-sm-12 ">
 														<label htmlFor="">Select Device</label>
-
 														<select
 															name="deviceId"
 															className="input"
+															style={{
+																border: "1px solid rgb(234, 237, 241)",
+																padding: "5px",
+																borderRadius: "5px",
+															}}
 															onChange={(event) =>
 																handleFormChange2(index2, event)
 															}>

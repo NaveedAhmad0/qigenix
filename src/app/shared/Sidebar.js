@@ -188,9 +188,9 @@ function Sidebar() {
 							? "nav-item active mt-4"
 							: "nav-item mt-4"
 					}>
-					<Link className="nav-link" to="/admin/dashboard">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/dashboard">
+						<i class="fa-solid fa-house"></i>
+						<span className="menu-title ms-3">
 							<Trans>Dashboard</Trans>
 						</span>
 					</Link>
@@ -200,9 +200,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/CustomerList">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/CustomerList">
+						<i class="fa-regular fa-user"></i>
+						<span className="menu-title ms-3">
 							<Trans>Customers</Trans>
 						</span>
 					</Link>
@@ -211,9 +211,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/DeviceList">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/DeviceList">
+						<i class="fa-solid fa-mobile-screen-button"></i>
+						<span className="menu-title ms-3">
 							<Trans>Devices</Trans>
 						</span>
 					</Link>
@@ -222,9 +222,31 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/accoutnManagement">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/Assigned-devices">
+						<i class="fa-solid fa-mobile-screen-button"></i>
+						<span className="menu-title ms-3">
+							<Trans>Assigned Devices</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/ListOfInvoices">
+						<i class="fa-solid fa-mobile-screen-button"></i>
+						<span className="menu-title ms-3">
+							<Trans>Invoices</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/accoutnManagement">
+						<i class="fa-regular fa-id-card"></i>
+						<span className="menu-title ms-3">
 							<Trans>Licensing Management</Trans>
 						</span>
 					</Link>
@@ -234,9 +256,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/accoutnManagement">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/accoutnManagement">
+						<i class="fa-solid fa-book"></i>
+						<span className="menu-title ms-3">
 							<Trans>Access History</Trans>
 						</span>
 					</Link>
@@ -246,9 +268,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-solid fa-file-invoice"></i>
+						<span className="menu-title ms-3">
 							<Trans>Account Management</Trans>
 						</span>
 					</Link>
@@ -257,9 +279,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-solid fa-money-bill-transfer"></i>
+						<span className="menu-title ms-3">
 							<Trans>Transaction Management</Trans>
 						</span>
 					</Link>
@@ -268,9 +290,10 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-regular fa-bell"></i>
+
+						<span className="menu-title ms-3">
 							<Trans>Notification Management</Trans>
 						</span>
 					</Link>
@@ -279,9 +302,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-solid fa-envelope"></i>
+						<span className="menu-title ms-3">
 							<Trans>Email Template Management</Trans>
 						</span>
 					</Link>
@@ -290,9 +313,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-regular fa-life-ring"></i>
+						<span className="menu-title ms-3">
 							<Trans>Support</Trans>
 						</span>
 					</Link>
@@ -301,9 +324,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-solid fa-gear"></i>
+						<span className="menu-title ms-3">
 							<Trans>Setting</Trans>
 						</span>
 					</Link>
@@ -312,14 +335,14 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-solid fa-screwdriver-wrench"></i>
+						<span className="menu-title ms-3">
 							<Trans>Setup</Trans>
 						</span>
 					</Link>
 				</li>
-				<li
+				{/* <li
 					className={
 						isPathActive("/basic-ui") ? "nav-item active" : "nav-item"
 					}>
@@ -363,7 +386,7 @@ function Sidebar() {
 							</li>
 						</ul>
 					</Collapse>
-				</li>
+				</li> */}
 				{/* <li
 					className={
 						isPathActive("/basic-ui") ? "nav-item active" : "nav-item"
@@ -420,7 +443,7 @@ function Sidebar() {
 						</span>
 					</Link>
 				</li> */}
-				<li
+				{/* <li
 					className={
 						isPathActive("/admin/dashboard") ? "nav-item active" : "nav-item"
 					}>
@@ -430,9 +453,9 @@ function Sidebar() {
 							<Trans>Assign Merchant to User</Trans>
 						</span>
 					</Link>
-				</li>
+				</li> */}
 
-				<li
+				{/* <li
 					className={
 						isPathActive("/basic-ui") ? "nav-item active" : "nav-item"
 					}>
@@ -476,7 +499,7 @@ function Sidebar() {
 							</li>
 						</ul>
 					</Collapse>
-				</li>
+				</li> */}
 			</ul>
 		</nav>
 	);

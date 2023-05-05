@@ -240,9 +240,6 @@ function ListOfInvoice() {
 															<i className="input-helper"></i>
 															Exclude Inactive Devices
 														</label>
-														<button className="btn btn-primary btn-small">
-															Assign Device
-														</button>
 													</div>
 													<div
 														class="btn-group btn-group-toggle"
