@@ -27,6 +27,34 @@ const CustomerForm = () => {
 				<div className="row">
 					<div className="col-md-8">
 						<Form.Group className="row">
+							<div className="col-sm-6">
+								<Form.Label className=" mb-3">
+									<span className="text-danger">*</span> First Name
+								</Form.Label>
+								<Form.Control
+									className="customerInputN"
+									type="text"
+									placeholder="Keywords"
+									value={details.firstName}
+								/>
+							</div>
+							<div className="col-sm-6">
+								<Form.Label className=" mb-3">
+									<span className="text-danger">*</span> Last Name
+								</Form.Label>
+								<Form.Control
+									className="customerInputN"
+									type="text"
+									placeholder="Keywords"
+									value={details.lastName}
+								/>
+							</div>
+						</Form.Group>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-md-8">
+						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">
 									<span className="text-danger">*</span> Company
@@ -74,7 +102,7 @@ const CustomerForm = () => {
 				<div className="row">
 					<div className="col-md-8">
 						<Form.Group className="row">
-							<div className="col-sm-12">
+							<div className="col-sm-6">
 								<Form.Label className=" mb-3">Website</Form.Label>
 
 								<Form.Control
@@ -82,6 +110,16 @@ const CustomerForm = () => {
 									type="text"
 									placeholder="Keywords"
 									value={details.website}
+								/>
+							</div>
+							<div className="col-sm-6">
+								<Form.Label className=" mb-3">Email</Form.Label>
+
+								<Form.Control
+									className="customerInputN"
+									type="text"
+									placeholder="Keywords"
+									value={details.email}
 								/>
 							</div>
 						</Form.Group>

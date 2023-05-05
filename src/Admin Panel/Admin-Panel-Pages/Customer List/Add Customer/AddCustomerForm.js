@@ -1,9 +1,11 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import "./addCustomer.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import { useState } from "react";
 const AddCustomerForm = () => {
+	const history=useHistory()
 	const token=localStorage.getItem("token")
 	const [inputFields, setInputFields] = useState([
 		{ firstName:"",lastName:"",email:"",company:"",vatNumber:"",phone:"",website:"",currency:"",zipCode:"",address:"",language:"",city:"",state:"",country:"",groups:"" }
@@ -67,7 +69,8 @@ const AddCustomerForm = () => {
 		axios(config)
 		  .then(function (response) {
 		    console.log(JSON.stringify(response.data));
-		    alert("Customer");
+			alert('Customer Added Successfully')
+		   history.push('/admin/CustomerList')
 		   
 		  })
 		  .catch(function (error) {

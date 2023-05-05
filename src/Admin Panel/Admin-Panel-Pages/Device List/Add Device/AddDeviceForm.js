@@ -1,176 +1,104 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import "./addDevice.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
+import { useState } from "react";
 const AddDeviceForm = () => {
+	const history=useHistory()
+	const token=localStorage.getItem("token")
+	const [inputFields, setInputFields] = useState([
+		{ deviceName:"",deviceBrand:""}
+	  ]);
+	  const handleFormChange = (index, event) => {
+		let data = [...inputFields];
+		data[index][event.target.name] = event.target.value;
+		setInputFields(data);
+	  };
+	  const handleSubmit = (e) => {
+		e.preventDefault();
+		const device_name=inputFields[0].deviceName;
+		const device_brand=inputFields[0].deviceBrand;
+		const status='true'
+		 const data = JSON.stringify({
+		 	device_name: device_name,
+		 	device_brand:device_brand ,	 
+		 	status: status
+		 });
+		  console.log(data);
+	
+		var config = {
+		  method: "post",
+		  url: `https://qigenix.ixiono.com/apis/admin/add-devices`,
+		  headers: {
+		    "Content-Type": "application/json",
+			Authorization: `${token}`,
+		  },
+		  data: data,
+		};
+		axios(config)
+		  .then(function (response) {
+		    console.log(JSON.stringify(response.data));
+			alert('Device Added Successfully')
+		    history.push("/admin/DeviceList")
+		   
+		  })
+		  .catch(function (error) {
+		    console.log(error.response.data);
+			alert(error.response.data)
+		  });
+	  };
+
+
 	return (
-		// <div className="card ">
-		// 	<div className="card-body">
-
-		// 	</div>
-		// </div>
+		
 		<div className="col-md-12 grid-margin">
-			<form className="form-sample">
-				{/* <p className="card-description"> Personal info </p> */}
-				<div className="row">
-					<div className="col-md-12 mt-4">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">
-									<span className="text-danger">*</span> Company
-								</Form.Label>
-								<Form.Control
-									className="addcustomerInputN"
-									type="text"
-									placeholder="Keywords"
-								/>
-							</div>
-						</Form.Group>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">VAT Number</Form.Label>
-								<select className="form-control addcustomerInputN">
-									<option>Male</option>
-									<option>Female</option>
-								</select>
-							</div>
-						</Form.Group>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Phone</Form.Label>
-								<Form.Control
-									className="addcustomerInputN"
-									type="text"
-									placeholder="Keywords"
-								/>
-							</div>
-						</Form.Group>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Website</Form.Label>
-
-								<Form.Control
-									className="addcustomerInputN"
-									type="date"></Form.Control>
-							</div>
-						</Form.Group>
-					</div>
-					<div className="col-md-12">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Groups</Form.Label>
-
-								<Form.Control
-									className="addcustomerInputN"
-									type="date"></Form.Control>
-							</div>
-						</Form.Group>
-					</div>
-				</div>
-
+			<form className="form-sample mt-4">
+			{inputFields.map((input, index) => {
+				return(
+			<div key={index}>
 				<div className="row">
 					<div className="col-md-6">
 						<Form.Group className="row">
 							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Currency</Form.Label>
+								<Form.Label className=" mb-3">Device Name</Form.Label>
 
-								<select className="form-control addcustomerInputN">
-									<option>Category1</option>
-									<option>Category2</option>
-									<option>Category3</option>
-									<option>Category4</option>
-								</select>
+								<Form.Control
+									className="addcustomerInputN"
+									 onChange={(event) => handleFormChange(index, event)}
+									type="text"
+									name="deviceName"
+									placeholder="Keywords"
+								/>
 							</div>
 						</Form.Group>
 					</div>
 					<div className="col-md-6">
 						<Form.Group className="row">
 							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Default Language</Form.Label>
+								<Form.Label className=" mb-3">Device Brand</Form.Label>
 
-								<select className="form-control addcustomerInputN">
-									<option>Category1</option>
-									<option>Category2</option>
-									<option>Category3</option>
-									<option>Category4</option>
-								</select>
+								<Form.Control
+									className="addcustomerInputN"
+									 onChange={(event) => handleFormChange(index, event)}
+									type="text"
+									name="deviceBrand"
+									placeholder="Keywords"
+								/>
 							</div>
 						</Form.Group>
 					</div>
 				</div>
-				<div className="row">
-					<div className="col-md-12">
-						<div className="form-group">
-							<label for="exampleFormControlTextarea1">Address</label>
-							<textarea
-								className="form-control"
-								id="exampleFormControlTextarea1"
-								rows="3"></textarea>
-						</div>
-					</div>
-					<div className="col-md-12">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">City</Form.Label>
-
-								<Form.Control
-									className="addcustomerInputN"
-									type="date"></Form.Control>
-							</div>
-						</Form.Group>
-					</div>
-					<div className="col-md-12">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">State</Form.Label>
-
-								<Form.Control
-									className="addcustomerInputN"
-									type="date"></Form.Control>
-							</div>
-						</Form.Group>
-					</div>
-					<div className="col-md-12">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Zip Code</Form.Label>
-
-								<Form.Control
-									className="addcustomerInputN"
-									type="date"></Form.Control>
-							</div>
-						</Form.Group>
-					</div>
-					<div className="col-md-12">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Country</Form.Label>
-
-								<Form.Control
-									className="addcustomerInputN"
-									type="date"></Form.Control>
-							</div>
-						</Form.Group>
-					</div>
-				</div>
+				
 				<div className="row">
 					<div className="col-md-12 text-right">
-						<button className="btn btnCustomerProfileN btn-primary">
+						<button className="btn btnCustomerProfileN btn-primary" onClick={handleSubmit}>
 							Save
 						</button>
 					</div>
 				</div>
+				</div>
+				);
+            })}
 			</form>
 			{/* <div className="card">
 				<div className="card-body">
