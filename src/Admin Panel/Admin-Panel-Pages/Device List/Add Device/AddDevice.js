@@ -51,17 +51,10 @@ function AddDevice() {
 														className="nav-link active"
 														data-bs-toggle="tab"
 														data-bs-target="#MyTasks">
-														Customer Details
+														Add Device
 													</button>
 												</li>
-												<li className="nav-item">
-													<button
-														className="nav-link"
-														data-bs-toggle="tab"
-														data-bs-target="#MyProjects">
-														Billing & shipping
-													</button>
-												</li>
+												
 											</ul>
 											<div className="tab-content pt-2">
 												<div

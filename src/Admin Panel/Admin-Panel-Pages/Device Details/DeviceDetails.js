@@ -41,7 +41,7 @@ function DeviceDetails() {
 									<div
 										className="page-title-header"
 										style={{ fontWeight: "500", fontSize: "17px" }}>
-										#{details.company}
+										#{details.device_id}
 									</div>
 									<div className="card">
 										<div
@@ -85,7 +85,7 @@ function DeviceDetails() {
 											<div
 												className="page-title-header"
 												style={{ fontWeight: "500", fontSize: "17px" }}>
-												Profile
+												Device Details
 											</div>
 
 											<div className="card" id="#list-home-list">

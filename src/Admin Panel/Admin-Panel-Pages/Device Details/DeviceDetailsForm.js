@@ -13,12 +13,12 @@ const DeviceForm = () => {
 			<div className="row mt-2">
 				<div className="col-12">
 					<div className="form-check">
-						<label className="form-check-label text-muted">
+						{/* <label className="form-check-label text-muted">
 							<input type="checkbox" className="form-check-input" />
 							<i className="input-helper"></i>
 							Show primary contact full name on Invoices, Estimates, Payments,
 							Credit Notes
-						</label>
+						</label> */}
 					</div>
 				</div>
 			</div>
@@ -29,13 +29,13 @@ const DeviceForm = () => {
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">
-									<span className="text-danger">*</span> Company
+									<span className="text-danger">*</span> Device Id
 								</Form.Label>
 								<Form.Control
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.company}
+									value={details.device_id}
 								/>
 							</div>
 						</Form.Group>
@@ -45,12 +45,12 @@ const DeviceForm = () => {
 					<div className="col-md-8">
 						<Form.Group className="row">
 							<div className="col-sm-12">
-								<Form.Label className=" mb-3">VAT Number</Form.Label>
+								<Form.Label className=" mb-3">Device Name</Form.Label>
 								<Form.Control
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.vat_number}
+									value={details.device_name}
 								/>
 							</div>
 						</Form.Group>
@@ -60,12 +60,12 @@ const DeviceForm = () => {
 					<div className="col-md-8">
 						<Form.Group className="row">
 							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Phone</Form.Label>
+								<Form.Label className=" mb-3">device Brand</Form.Label>
 								<Form.Control
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.mobile}
+									value={details.device_brand}
 								/>
 							</div>
 						</Form.Group>
@@ -75,57 +75,12 @@ const DeviceForm = () => {
 					<div className="col-md-8">
 						<Form.Group className="row">
 							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Website</Form.Label>
-
+								<Form.Label className=" mb-3">Device License Key</Form.Label>
 								<Form.Control
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.website}
-								/>
-							</div>
-						</Form.Group>
-					</div>
-					<div className="col-md-8">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Groups</Form.Label>
-
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.groups}
-								/>
-							</div>
-						</Form.Group>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-4">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Currency</Form.Label>
-
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.currency}
-								/>
-							</div>
-						</Form.Group>
-					</div>
-					<div className="col-md-4">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Default Language</Form.Label>
-
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.language}
+									value={details.device_license_key}
 								/>
 							</div>
 						</Form.Group>
@@ -133,25 +88,15 @@ const DeviceForm = () => {
 				</div>
 				<div className="row">
 					<div className="col-md-8">
-						<div className="form-group">
-							<label for="exampleFormControlTextarea1">Address</label>
-							<textarea
-								className="form-control"
-								id="exampleFormControlTextarea1"
-								rows="3"
-								value={details.address}></textarea>
-						</div>
-					</div>
-					<div className="col-md-8">
 						<Form.Group className="row">
 							<div className="col-sm-12">
-								<Form.Label className=" mb-3">City</Form.Label>
+								<Form.Label className=" mb-3">Created At</Form.Label>
 
 								<Form.Control
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.city}
+									value={details.createdAt}
 								/>
 							</div>
 						</Form.Group>
@@ -159,46 +104,21 @@ const DeviceForm = () => {
 					<div className="col-md-8">
 						<Form.Group className="row">
 							<div className="col-sm-12">
-								<Form.Label className=" mb-3">State</Form.Label>
+								<Form.Label className=" mb-3">Updated At</Form.Label>
 
 								<Form.Control
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.state}
+									value={details.updatedAt}
 								/>
 							</div>
 						</Form.Group>
 					</div>
-					<div className="col-md-8">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Zip Code</Form.Label>
-
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.zipcode}
-								/>
-							</div>
-						</Form.Group>
-					</div>
-					<div className="col-md-8">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Country</Form.Label>
-
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.country}
-								/>
-							</div>
-						</Form.Group>
-					</div>
+				
 				</div>
+			
+				
 				<div className="row">
 					<div className="col-md-8 text-right">
 						<button

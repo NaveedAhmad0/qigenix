@@ -57,7 +57,7 @@ function CustomerList() {
 
 	useEffect(() => {
 		const result = tableRowsData?.filter((tables) => {
-			return tables.company.toLowerCase().match(search.toLowerCase());
+			return tables.customer_id.toLowerCase().match(search.toLowerCase());
 		});
 		setFiltered(result);
 	}, [search]);
@@ -85,8 +85,8 @@ function CustomerList() {
 	const headerResponsive = [
 		{
 			name: "#",
-			selector: "id",
-			sortable: false,
+			selector: "customer_id",
+			sortable: true,
 			style: {
 				color: "#4E7AED",
 			},
@@ -110,6 +110,21 @@ function CustomerList() {
         </i>
       ]
     },
+	{
+		name: "Name",
+		sortable: false,
+		style: {
+			color: "#4E7AED",
+		},
+		cell:(row)=>[
+			<div>
+<span>{row.firstName }</span> <br></br>
+			 <span >{row.lastName}</span>
+			</div>
+			
+			
+		]
+	},
 		{
 			name: "Company",
 			 selector: "company",
