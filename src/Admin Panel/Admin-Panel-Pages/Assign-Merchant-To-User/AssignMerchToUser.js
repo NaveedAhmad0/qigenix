@@ -4,98 +4,86 @@ import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import API from "../../../backend";
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const AssignMerchToUser = () => {
-	const [merchList, setMerchList] = useState([]);
+	const history = useHistory();
+	const token = localStorage.getItem("token");
+	const [deviceList, setDeviceList] = useState([]);
 	const [userList, setUserList] = useState([]);
-	const [userEmail, setUserEmail] = useState("");
-	const [merchantEmail, setmerchantEmail] = useState([]);
+
 	useEffect(() => {
-		axios
-			.get(`https://backend.klivepay.com/api/admin/get-merchant-list`)
-			.then((res) => {
-				const sample = [];
-				for (let i = 0; i < res.data.length; i++) {
-					sample.push(res.data[i].email);
-				}
-				setMerchList(sample);
-				console.log("sample");
-			});
+		var config = {
+			method: "get",
+			url: `https://qigenix.ixiono.com/apis/admin/getAllCustomer`,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `${token}`,
+			},
+		};
+		axios(config).then((res) => {
+			setUserList(res.data);
+		});
 	}, []);
 	useEffect(() => {
-		axios
-			.get(`https://backend.klivepay.com/api/admin/get-user-list`)
-			.then((res) => {
-				const sampleUser = [];
-				for (let i = 0; i < res.data.length; i++) {
-					sampleUser.push(res.data[i].email);
-				}
-				setUserList(sampleUser);
-				console.log("sampleUser");
-			});
+		var config = {
+			method: "get",
+			url: `https://qigenix.ixiono.com/apis/admin/list-devices`,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `${token}`,
+			},
+		};
+		axios(config).then((res) => {
+			setDeviceList(res.data);
+		});
 	}, []);
 
-	console.log(merchList);
-
-	// let options = e.target.value;
-	// let value = [];
-	// for (let i = 0; i < options.length; i++) {
-	// 	if (options[i].selected) {
-	// 		await value.push(options[i].value);
-	// 	}
-	// 	console.log(options[i].selected);
-	const handleChange = (value, i) => {
-		// let newFormValues = [...value];
-		// newFormValues[i][e.target.name] = e.target.value;
-
-		// const select = [value];
-		// select.push(value);
-		console.log(value);
-		setmerchantEmail(value);
+	const [inputFields2, setInputFields2] = useState([
+		{ userId: "", deviceId: "" },
+	]);
+	const handleFormChange2 = (index2, event) => {
+		let data = [...inputFields2];
+		data[index2][event.target.name] = event.target.value;
+		setInputFields2(data);
 	};
-	const handleChangeUser = (value, i) => {
-		// let newFormValues = [...value];
-		// newFormValues[i][e.target.name] = e.target.value;
-
-		// const select = [value];
-		// select.push(value);
-		console.log(value);
-		setUserEmail(value);
-	};
-	// }
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		const userId = inputFields2[0].userId;
+		const deviceId = inputFields2[0].deviceId;
+
+		const data = JSON.stringify({
+			customer_id: userId,
+			device_id: deviceId,
+		});
 
 		try {
-			axios
-				.patch(
-					`https://backend.klivepay.com/api/admin/assign-merchnat-to-user`,
-					JSON.stringify({ merchantEmail, userEmail }),
-
-					{
-						headers: { "Content-Type": "application/json" },
-						// withCredentials: true,
-					}
-				)
-				.then((res) => {
-					console.log("res", res.data);
-					if (res.data.code === 200) {
-						alert("Asssigned sucessfully!");
-					} else {
-						alert(res.data.message);
-					}
-					setUserEmail("");
-					setmerchantEmail("");
-				});
+			var config = {
+				method: "post",
+				url: `https://qigenix.ixiono.com/apis/admin/assign-device`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+				data: data,
+			};
+			axios(config).then((res) => {
+				console.log("res", res.data);
+				if (res.data.code === 200) {
+					alert("Asssigned sucessfully!");
+					// history.push('/admin/DeviceList')
+					history.push("/admin/CustomerList");
+				} else {
+					alert(res.data.message);
+					history.push("/admin/CustomerList");
+				}
+			});
 		} catch (error) {
 			if (error) {
 				alert("something went wrong!");
 			}
-			console.log(error);
+			console.log(error.res.data);
 		}
-		console.log("merchantEmail", merchantEmail);
-		console.log("merch", merchList);
 	};
 
 	return (
@@ -104,68 +92,61 @@ const AssignMerchToUser = () => {
 				<div className="card">
 					<div className="card-body">
 						<form className="form-sample">
-							{/* <p className="card-description"> Personal info </p> */}
-							<div className="row">
-								<div className="col-md-6">
-									<Form.Group className="row">
-										<div className="col-sm-12">
-											<label>Select User :</label> <br />
-											{/* <Form.Control
-												type="text"
-												placeholder="Users Email"
-												onChange={(e) => setUserEmail(e.target.value)}
-												value={userEmail}
-											/> */}
-											<Select
-												// isMulti={true}
-												// className="basic-multi-select"
-												isClearable={true}
-												// defaultValue={userList}
-												value={[userEmail]}
-												onChange={(value) => handleChangeUser(value)}
-												options={userList}
-												getOptionLabel={(option) => option}
-												getOptionValue={(option) => option}
-											/>
-										</div>
-									</Form.Group>
-								</div>
+							{inputFields2.map((input, index2) => {
+								return (
+									<div key={index2}>
+										<div className="row">
+											<div className="col-md-6">
+												<Form.Group className="row">
+													<div className="col-sm-12">
+														<label>Select User</label> <br />
+														<select
+															name="userId"
+															className="input"
+															onChange={(event) =>
+																handleFormChange2(index2, event)
+															}>
+															<option>Select User</option>
+															{userList.map((x) => {
+																return (
+																	<option value={x.customer_id}>
+																		{x.firstName}
+																	</option>
+																);
+															})}
+														</select>
+													</div>
+												</Form.Group>
+											</div>
 
-								<div className="col-md-6">
-									<Form.Group className="row">
-										<div className="col-sm-12 ">
-											<label htmlFor="">Select Merchant :</label>
-											{/* <select
-												multiple
-												aria-multiselectable
-												multiselect-serach="true"
-												value={merchantEmail}
-												onChange={(value) => handleChange(value)}
-												className="form-control "
-												data-live-search="true">
-												<option>Select Merchant</option>
-												{merchList.length
-													? merchList.map((item) => (
-															<option value={item}>{item}</option>
-													  ))
-													: ""}
-											</select> */}
-											<Select
-												isMulti={true}
-												className="basic-multi-select"
-												isClearable={true}
-												// defaultValue={merchList}
-												value={merchantEmail}
-												onChange={(value) => handleChange(value)}
-												options={merchList}
-												getOptionLabel={(option) => option}
-												getOptionValue={(option) => option}
-											/>
+											<div className="col-md-6">
+												<Form.Group className="row">
+													<div className="col-sm-12 ">
+														<label htmlFor="">Select Device</label>
+
+														<select
+															name="deviceId"
+															className="input"
+															onChange={(event) =>
+																handleFormChange2(index2, event)
+															}>
+															<option>Select Device</option>
+															{deviceList.map((x) => {
+																return (
+																	<option value={x.device_id}>
+																		{x.device_name}
+																	</option>
+																);
+															})}
+														</select>
+													</div>
+													{/* <DropdownMultiselect options={merchList} /> */}
+												</Form.Group>
+											</div>
 										</div>
-										{/* <DropdownMultiselect options={merchList} /> */}
-									</Form.Group>
-								</div>
-							</div>
+									</div>
+								);
+							})}
 
 							<div className="row">
 								<div className="col-md-6 mx-auto">
