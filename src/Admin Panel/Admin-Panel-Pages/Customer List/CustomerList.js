@@ -25,6 +25,42 @@ function CustomerList() {
 	const [loading, setLoading] = useState(false);
 	const token=localStorage.getItem("token")
   const history=useHistory()
+ 
+const [toggle,setToggle]=useState(true)
+
+  const disableUser = async (id) => {
+
+	try {
+		var config = {
+			method: "put",
+			url: `https://qigenix.ixiono.com/apis/admin/disable-customer/${id}`,
+			headers: {
+				
+				"Content-Type": "application/json",
+				Authorization: `${token}`,
+			},
+		};
+		axios(config)
+			.then(function (response) {
+				alert("status disabled")
+
+				setToggle(!toggle)
+				// setTableRowsData(response.data);
+			
+			})
+			.catch(function (error) {
+				console.log(error.response.data);
+			});
+	} catch (error) {
+		console.log(error.response.data);
+	}
+};
+useEffect(() => {
+	disableUser();
+}, []);
+
+
+
 
 	const fetchData = async () => {
 		try {
@@ -52,6 +88,9 @@ function CustomerList() {
 	useEffect(() => {
 		fetchData();
 	}, []);
+	useEffect(()=>{
+		fetchData();
+	},[toggle])
 
 	useEffect(() => {}, [tableRowsData]);
 
@@ -142,14 +181,18 @@ function CustomerList() {
 		},
 		{
 			name: "active",
-			cell: (d) => [
+			cell: (row) => [
 				<div class="form-check form-switch text-center">
 					<input
 						class="form-check-input"
 						type="checkbox"
 						role="switch"
+						name="status"
 						id="flexSwitchCheckChecked"
-						checked={d.status === "1" ? true : false}></input>
+						checked={row.status === "1" ? true : false}
+						onClick={() => disableUser(row.id)}
+						
+						></input>
 				</div>,
 			],
 			sortable: false,

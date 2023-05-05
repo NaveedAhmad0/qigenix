@@ -26,6 +26,43 @@ function DeviceList() {
   const token = localStorage.getItem("token");
   const history = useHistory();
 
+
+  const [toggle,setToggle]=useState(true)
+
+  const disableDevice = async (id) => {
+    console.log(id)
+
+	try {
+		var config = {
+			method: "put",
+			url: `https://qigenix.ixiono.com/apis/admin/disable-device/${id}`,
+			headers: {
+				
+				"Content-Type": "application/json",
+				Authorization: `${token}`,
+			},
+		};
+		axios(config)
+			.then(function (response) {
+				alert("status disabled")
+
+				setToggle(!toggle)
+				// setTableRowsData(response.data);
+			
+			})
+			.catch(function (error) {
+				console.log(error.response.data);
+			});
+	} catch (error) {
+		console.log(error.response.data);
+	}
+};
+useEffect(() => {
+	disableDevice();
+}, []);
+
+
+
   const fetchData = async () => {
     try {
       var config = {
@@ -39,7 +76,6 @@ function DeviceList() {
       axios(config)
         .then(function (response) {
           setTableRowsData(response.data);
-          console.log(response.data);
           setFiltered(response.data);
         })
         .catch(function (error) {
@@ -52,8 +88,13 @@ function DeviceList() {
   useEffect(() => {
     fetchData();
   }, []);
+ 
 
   useEffect(() => {}, [tableRowsData]);
+
+  useEffect(()=>{
+    fetchData();
+  },[toggle])
 
   useEffect(() => {
     const result = tableRowsData?.filter((tables) => {
@@ -103,14 +144,15 @@ function DeviceList() {
 
     {
       name: "active",
-      cell: (d) => [
+      cell: (row) => [
         <div class="form-check form-switch text-center">
           <input
             class="form-check-input"
             type="checkbox"
             role="switch"
             id="flexSwitchCheckChecked"
-            checked={d.status === "true" ? false : true}
+            checked={row.status === "true" ? false : true}
+            onClick={() => disableDevice(row.id)}
           ></input>
         </div>,
       ],
