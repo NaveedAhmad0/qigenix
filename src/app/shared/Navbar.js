@@ -58,7 +58,7 @@ const Navbar = () => {
 
 				<ul className="navbar-nav navbar-nav-right dropdwn">
 					<li className="nav-item  nav-profile border-0 pl-4">
-						<h5 style={{ font: "Roboto" }}>Customer Area</h5>
+						<h5 style={{ font: "Roboto" }}>Admin Area</h5>
 					</li>
 					<li className=" nav-item list">
 						<a

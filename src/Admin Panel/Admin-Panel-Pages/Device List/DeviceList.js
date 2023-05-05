@@ -137,6 +137,11 @@ function DeviceList() {
 		},
 
 		{
+			name: "Device Brand",
+			selector: "device_brand",
+			sortable: false,
+		},
+		{
 			name: "active",
 			cell: (row) => [
 				<div class="form-check form-switch text-center">
@@ -152,11 +157,6 @@ function DeviceList() {
 			sortable: false,
 		},
 		{
-			name: "Device Brand",
-			selector: "device_brand",
-			sortable: false,
-		},
-		{
 			name: "Date Created",
 
 			sortable: false,
@@ -164,6 +164,7 @@ function DeviceList() {
 				return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
 			},
 		},
+
 		{
 			name: "Action",
 			style: {
