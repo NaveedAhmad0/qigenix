@@ -11,7 +11,7 @@ import ToolkitProvider, {
 import ClipLoader from "react-spinners/ClipLoader";
 import DataTable from "react-data-table-component";
 import moment from "moment";
-import AssignMerchToUser from '../Assign-Merchant-To-User/AssignMerchToUser'
+import AssignMerchToUser from "../Assign-Merchant-To-User/AssignMerchToUser";
 import { useHistory } from "react-router-dom";
 import API from "../../../backend";
 import "./List.css";
@@ -39,7 +39,7 @@ function DeviceList() {
       axios(config)
         .then(function (response) {
           setTableRowsData(response.data);
-		  console.log(response.data)
+          console.log(response.data);
           setFiltered(response.data);
         })
         .catch(function (error) {
@@ -91,6 +91,44 @@ function DeviceList() {
         color: "#4E7AED",
       },
     },
+
+    {
+      name: "Device Name",
+      selector: "device_name",
+      sortable: true,
+      style: {
+        color: "#4E7AED",
+      },
+    },
+
+    {
+      name: "active",
+      cell: (d) => [
+        <div class="form-check form-switch text-center">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckChecked"
+            checked={d.status === "true" ? false : true}
+          ></input>
+        </div>,
+      ],
+      sortable: false,
+    },
+    {
+      name: "Device Brand",
+      selector: "device_brand",
+      sortable: false,
+    },
+    {
+      name: "Date Created",
+
+      sortable: false,
+      cell: (d) => {
+        return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
+      },
+    },
     {
       name: "Action",
       style: {
@@ -113,43 +151,6 @@ function DeviceList() {
           style={{ cursor: "pointer" }}
         ></i>,
       ],
-    },
-    {
-      name: "Device Name",
-      selector: "device_name",
-      sortable: true,
-      style: {
-        color: "#4E7AED",
-      },
-    },
-  
-    {
-      name: "active",
-      cell: (d) => [
-        <div class="form-check form-switch text-center">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            role="switch"
-            id="flexSwitchCheckChecked"
-            checked={d.status === "true" ? false : true}
-          ></input>
-        </div>,
-      ],
-      sortable: false,
-    },
-    {
-      name: "Device Brand",
-     selector:'device_brand',
-      sortable: false,
-    },
-    {
-      name: "Date Created",
-
-      sortable: false,
-      cell: (d) => {
-        return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
-      },
     },
   ];
 
@@ -182,7 +183,7 @@ function DeviceList() {
                   </div>
                   <div className="card">
                     <div className="card-body">
-                      <div className="row page-title-header">
+                      {/* <div className="row page-title-header">
                         <div className="col-6">
                           <h4>
                             <i class="fa-regular fa-file-lines me-2"></i>{" "}
@@ -228,11 +229,11 @@ function DeviceList() {
                             Logged..
                           </p>
                         </div>
-                      </div>
-                      <hr style={{ border: "1px #EAEDF1" }}></hr>
+                      </div> */}
+                      {/* <hr style={{ border: "1px #EAEDF1" }}></hr> */}
                       <div className="row page-title-header">
                         <div className="col-12">
-                          <div className="form-check d-flex justify-content-between">
+                          {/* <div className="form-check d-flex justify-content-between">
                             <label className="form-check-label text-muted">
                               <input
                                 type="checkbox"
@@ -241,7 +242,7 @@ function DeviceList() {
                               <i className="input-helper"></i>
                               Exclude Inactive Devices
                             </label>
-                          </div>
+                          </div> */}
                           <div
                             class="btn-group btn-group-toggle"
                             data-toggle="buttons"
@@ -324,18 +325,26 @@ function DeviceList() {
                             tabindex="-1"
                             aria-labelledby="exampleModalLabel"
                             aria-hidden="true"
-							
                           >
                             <div class="modal-dialog">
                               <div class="modal-content">
-							  <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Assigend Device To User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="exampleModalLabel"
+                                  >
+                                    Assign Device To User
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
                                 <div class="modal-body">
-								<AssignMerchToUser></AssignMerchToUser>
-								</div>
-                               
+                                  <AssignMerchToUser></AssignMerchToUser>
+                                </div>
                               </div>
                             </div>
                           </div>

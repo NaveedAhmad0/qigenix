@@ -7,7 +7,7 @@ const AddDeviceForm = () => {
 	const history=useHistory()
 	const token=localStorage.getItem("token")
 	const [inputFields, setInputFields] = useState([
-		{ deviceName:"",deviceBrand:""}
+		{ deviceName:"",deviceBrand:"",tax:"",amount:""}
 	  ]);
 	  const handleFormChange = (index, event) => {
 		let data = [...inputFields];
@@ -82,6 +82,36 @@ const AddDeviceForm = () => {
 									 onChange={(event) => handleFormChange(index, event)}
 									type="text"
 									name="deviceBrand"
+									placeholder="Keywords"
+								/>
+							</div>
+						</Form.Group>
+					</div>
+					<div className="col-md-6">
+						<Form.Group className="row">
+							<div className="col-sm-12">
+								<Form.Label className=" mb-3">Tax</Form.Label>
+
+								<Form.Control
+									className="addcustomerInputN"
+									 onChange={(event) => handleFormChange(index, event)}
+									type="text"
+									name="tax"
+									placeholder="Keywords"
+								/>
+							</div>
+						</Form.Group>
+					</div>
+					<div className="col-md-6">
+						<Form.Group className="row">
+							<div className="col-sm-12">
+								<Form.Label className=" mb-3">Amount</Form.Label>
+
+								<Form.Control
+									className="addcustomerInputN"
+									 onChange={(event) => handleFormChange(index, event)}
+									type="text"
+									name="amount"
 									placeholder="Keywords"
 								/>
 							</div>

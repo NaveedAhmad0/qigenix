@@ -30,7 +30,7 @@ function ListOfInvoice() {
 		try {
 			var config = {
 				method: "get",
-				url: `https://qigenix.ixiono.com/apis/admin/getAllInvoices`,
+				url: `https://qigenix.ixiono.com/apis/admin/getAllAssignedDevices`,
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
@@ -38,14 +38,15 @@ function ListOfInvoice() {
 			};
 			axios(config)
 				.then(function (response) {
-					setTableRowsData(response.data);
-					setFiltered(response.data);
+					setTableRowsData(response.data.totalResponse);
+					console.log(response.data)
+					setFiltered(response.data.totalResponse);
 				})
 				.catch(function (error) {
-					console.log(error.response.data);
+					console.log(error);
 				});
 		} catch (error) {
-			console.log(error.response.data);
+			console.log(error);
 		}
 	};
 	useEffect(() => {
@@ -56,7 +57,7 @@ function ListOfInvoice() {
 
 	useEffect(() => {
 		const result = tableRowsData?.filter((tables) => {
-			return tables.company.toLowerCase().match(search.toLowerCase());
+			return tables.customer_id.toLowerCase().match(search.toLowerCase());
 		});
 		setFiltered(result);
 	}, [search]);
@@ -81,46 +82,53 @@ function ListOfInvoice() {
 		},
 	};
 
+
+
 	const headerResponsive = [
 		{
-			name: "Invoice Id",
-			selector: "invoice_id",
+			name: "Customer Id",
+			selector: "customer_id",
 			sortable: false,
 			style: {
 				color: "#4E7AED",
 			},
 		},
+		// {
+		// 	name: "Action",
+		// 	style: {
+		// 		fontSize: "18px",
+		// 	},
+		// 	cell: (row) => [
+		// 		<i
+		// 			class="fa-solid fa-circle-info text-primary mx-2"
+		// 			style={{ cursor: "pointer" }}
+		// 			onClick={() => {
+		// 				// eslint-disable-next-line no-restricted-globals
+		// 				history.push({
+		// 					pathname: "/admin/device-details",
+		// 					state: { details: row },
+		// 				});
+		// 			}}></i>,
+		// 		<i
+		// 			class="fa-solid fa-trash text-danger mx-2"
+		// 			style={{ cursor: "pointer" }}></i>,
+		// 	],
+		// },
 		{
-			name: "Action",
-			style: {
-				fontSize: "18px",
-			},
-			cell: (row) => [
-				<i
-					class="fa-solid fa-circle-info text-primary mx-2"
-					style={{ cursor: "pointer" }}
-					onClick={() => {
-						// eslint-disable-next-line no-restricted-globals
-						history.push({
-							pathname: "/admin/device-details",
-							state: { details: row },
-						});
-					}}></i>,
-				<i
-					class="fa-solid fa-trash text-danger mx-2"
-					style={{ cursor: "pointer" }}></i>,
-			],
-		},
-		{
-			name: "Name",
-			selector: "firstName",
+			name: "Customer Name",
 			sortable: true,
 			style: {
 				color: "#4E7AED",
 			},
+			cell:(row)=>[
+				<div>
+	<span>{row.firstName }</span> <br></br>
+				 <span >{row.lastName}</span>
+				</div>	
+			]
 		},
 		{
-			name: "Primary Contact",
+			name: "Contact",
 			selector: "mobile",
 			sortable: false,
 			style: {
@@ -128,7 +136,7 @@ function ListOfInvoice() {
 			},
 		},
 		{
-			name: "Primary Email",
+			name: "Email",
 			selector: "email",
 			sortable: false,
 			style: {
@@ -153,50 +161,14 @@ function ListOfInvoice() {
 			},
 		},
 		{
-			name: "device_brand",
+			name: "device_license_key",
 			selector: "device_brand",
 			sortable: false,
 			style: {
 				color: "#4E7AED",
 			},
 		},
-		{
-			name: "active",
-			cell: (d) => [
-				<div class="form-check form-switch text-center">
-					<input
-						class="form-check-input"
-						type="checkbox"
-						role="switch"
-						id="flexSwitchCheckChecked"
-						checked={d.status === "1" ? false : true}></input>
-				</div>,
-			],
-			sortable: false,
-		},
-		{
-			name: "Groups",
-			cell: (d) => [
-				<button
-					className="btn"
-					style={{
-						background: "#FFFFFF",
-						border: "1px solid #EFEFEF",
-						color: "#515151",
-					}}>
-					{d.groups}
-				</button>,
-			],
-			sortable: false,
-		},
-		{
-			name: "Date Created",
-
-			sortable: false,
-			cell: (d) => {
-				return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
-			},
-		},
+	
 	];
 
 	return (
@@ -216,22 +188,15 @@ function ListOfInvoice() {
 								<div className="col-md-12 grid-margin">
 									<div className="row page-title-header">
 										<div className="col-12">
-											<Link to="/admin/add-device">
-												<button className="btn btn-primary mr-2">
-													<i class="fa-solid fa-plus"></i> Create New Invoice
-												</button>
-											</Link>
-											<button className="btn btn-primary mr-2">
-												<i class="fa-solid fa-upload"></i> Recurring Invoices
-											</button>
+											<h4>List Of Assigned Devices</h4>
 										</div>
 									</div>
 									<div className="card">
 										<div className="card-body">
-											<hr style={{ border: "1px #EAEDF1" }}></hr>
+											
 											<div className="row page-title-header">
 												<div className="col-12">
-													<div className="form-check d-flex justify-content-between">
+													{/* <div className="form-check d-flex justify-content-between">
 														<label className="form-check-label text-muted">
 															<input
 																type="checkbox"
@@ -240,10 +205,8 @@ function ListOfInvoice() {
 															<i className="input-helper"></i>
 															Exclude Inactive Devices
 														</label>
-														<button className="btn btn-primary btn-small">
-															Assign Device
-														</button>
-													</div>
+														
+													</div> */}
 													<div
 														class="btn-group btn-group-toggle"
 														data-toggle="buttons">

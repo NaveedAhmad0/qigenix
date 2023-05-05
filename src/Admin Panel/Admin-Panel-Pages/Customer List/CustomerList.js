@@ -91,25 +91,7 @@ function CustomerList() {
 				color: "#4E7AED",
 			},
 		},
-    {
-      name:"Action",
-      style:{
-        fontSize:"18px",
-
-      },
-      cell:(row)=>[
-        <i class="fa-solid fa-circle-info text-primary mx-2" style={{cursor:"pointer"}} onClick={() => {
-          // eslint-disable-next-line no-restricted-globals
-          history.push({
-            pathname: "/admin/CustomerDetails",
-            state: { details: row },
-          });
-        }}></i>,
-        <i class="fa-solid fa-trash text-danger mx-2"  style={{cursor:"pointer"}}
-       >
-        </i>
-      ]
-    },
+  
 	{
 		name: "Name",
 		sortable: false,
@@ -195,6 +177,25 @@ function CustomerList() {
 				return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
 			},
 		},
+		{
+			name:"Action",
+			style:{
+			  fontSize:"18px",
+	  
+			},
+			cell:(row)=>[
+			  <i class="fa-solid fa-circle-info text-primary mx-2" style={{cursor:"pointer"}} onClick={() => {
+				// eslint-disable-next-line no-restricted-globals
+				history.push({
+				  pathname: "/admin/CustomerDetails",
+				  state: { details: row },
+				});
+			  }}></i>,
+			  <i class="fa-solid fa-trash text-danger mx-2"  style={{cursor:"pointer"}}
+			 >
+			  </i>
+			]
+		  },
 	];
 
 	return (
@@ -229,7 +230,7 @@ function CustomerList() {
 									</div>
 									<div className="card">
 										<div className="card-body">
-											<div className="row page-title-header">
+											{/* <div className="row page-title-header">
 												<div className="col-6">
 													<h4>
 														<i class="fa-regular fa-file-lines me-2"></i>{" "}
@@ -275,11 +276,11 @@ function CustomerList() {
 														Logged..
 													</p>
 												</div>
-											</div>
-											<hr style={{ border: "1px #EAEDF1" }}></hr>
+											</div> */}
+											{/* <hr style={{ border: "1px #EAEDF1" }}></hr> */}
 											<div className="row page-title-header">
 												<div className="col-12">
-													<div className="form-check">
+													{/* <div className="form-check">
 														<label className="form-check-label text-muted">
 															<input
 																type="checkbox"
@@ -288,7 +289,7 @@ function CustomerList() {
 															<i className="input-helper"></i>
 															Exclude Inactive Customers
 														</label>
-													</div>
+													</div> */}
 													<div
 														class="btn-group btn-group-toggle"
 														data-toggle="buttons">
