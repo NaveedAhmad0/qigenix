@@ -116,6 +116,11 @@ const SignUp = lazy(() =>
 const ListOfInvoices = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/List of invoices/ListOfInvoices")
 );
+const ListOfAssDevices = lazy(() =>
+	import(
+		"../Admin Panel/Admin-Panel-Pages/List of Assigned Devices/ListOfAssignedDevice"
+	)
+);
 
 class AppRoutes extends Component {
 	render() {
@@ -200,6 +205,7 @@ class AppRoutes extends Component {
 					<Route path="/admin/AdminManageUser" component={AdminManageUser} />
 					<Route path="/admin/AdminManageRole" component={AdminManageRole} />
 					<Route path="/admin/ListOfInvoices" component={ListOfInvoices} />
+					<Route path="/admin/Assigned-devices" component={ListOfAssDevices} />
 					<Route
 						path="/admin/assign-merchnat-to-users"
 						component={AssignMerchToUser}

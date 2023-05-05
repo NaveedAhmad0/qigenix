@@ -14,7 +14,7 @@ import moment from "moment";
 
 import { useHistory } from "react-router-dom";
 import API from "../../../backend";
-import "./ListOfInvoices.css";
+import "./ListOfassDevice.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ListOfInvoice() {
