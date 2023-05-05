@@ -87,6 +87,9 @@
      background-position: left center;
    
  }
+ .invoiceDisplay{
+    display: none;
+ }
  .eUeqdG {
       
          white-space: inherit;

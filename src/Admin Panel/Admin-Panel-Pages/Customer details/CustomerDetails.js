@@ -114,7 +114,7 @@ function CustomerDetails() {
 												href="#list-home"
 												role="tab"
 												aria-controls="home">
-												Profile
+												<i class="fa-regular fa-user me-1"></i> Profile
 											</a>
 											<a
 												className="list-group-item list-group-item-action"
@@ -123,7 +123,7 @@ function CustomerDetails() {
 												href="#list-profile"
 												role="tab"
 												aria-controls="profile">
-												Contents
+												<i class="fa-solid fa-user me-1"></i>Contents
 											</a>
 											<a
 												className="list-group-item list-group-item-action"
@@ -132,7 +132,7 @@ function CustomerDetails() {
 												href="#list-messages"
 												role="tab"
 												aria-controls="messages">
-												Notes
+												<i class="fa-thin fa-note-sticky me-1"></i> Notes
 											</a>
 										</div>
 									</div>
