@@ -110,7 +110,7 @@ try {
                   <Form.Group className="row">
                     <div className="col-sm-12">
                       <label>Select User</label> <br />
-                      <select name="userId" className="input"  onChange={(event) => handleFormChange2(index2, event)}>
+                      <select name="userId" className="input" style={{border:'1px solid rgb(234, 237, 241)',padding:'5px',borderRadius:"5px"}}  onChange={(event) => handleFormChange2(index2, event)}>
                         <option>Select User</option>
                         {userList.map((x) => {
                           return (
@@ -128,8 +128,7 @@ try {
                   <Form.Group className="row">
                     <div className="col-sm-12 ">
                       <label htmlFor="">Select Device</label>
-        
-                      <select name="deviceId" className="input"  onChange={(event) => handleFormChange2(index2, event)}>
+                      <select name="deviceId" className="input" style={{border:'1px solid rgb(234, 237, 241)',padding:'5px',borderRadius:"5px"}}  onChange={(event) => handleFormChange2(index2, event)}>
                         <option>Select Device</option>
                         {deviceList.map((x) => {
                           return (
