@@ -18,11 +18,15 @@ const AddDeviceForm = () => {
 		e.preventDefault();
 		const device_name=inputFields[0].deviceName;
 		const device_brand=inputFields[0].deviceBrand;
+		const tax_percentage=inputFields[0].tax;
+		const amount=inputFields[0].amount
 		const status='true'
 		 const data = JSON.stringify({
 		 	device_name: device_name,
 		 	device_brand:device_brand ,	 
-		 	status: status
+		 	status: status,
+			tax_percentage:tax_percentage,
+			amount:amount
 		 });
 		  console.log(data);
 	
