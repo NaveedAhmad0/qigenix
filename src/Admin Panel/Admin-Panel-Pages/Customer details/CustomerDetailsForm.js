@@ -1,12 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import "./customerForm.css";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import {
+	useHistory,
+	useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
+
 const CustomerForm = () => {
+	const history = useHistory();
 	const location = useLocation();
 	const details = location.state.details;
+	console.log(details);
 
-	const updateCustomer = () => {};
+	const [InputFields, setInputFields] = useState(details);
+	const token = localStorage.getItem("token");
+	const [success, setSuccess] = useState(false);
+
+	const updateCustomer = async (event) => {
+		event.preventDefault();
+		const obj = {
+			company: InputFields.company,
+			firstName: InputFields.firstName,
+			lastName: InputFields.lastName,
+			username: InputFields.username,
+			vat_number: InputFields.vat_number,
+			mobile: InputFields.mobile,
+			website: InputFields.website,
+			groups: InputFields.groups,
+			currency: InputFields.currency,
+			language: InputFields.language,
+			address: InputFields.address,
+			city: InputFields.city,
+			state: InputFields.state,
+			zipcode: InputFields.zipcode,
+			country: InputFields.country,
+		};
+		var config = {
+			method: "put",
+			url: `https://qigenix.ixiono.com/apis/admin/edit-customer/${details.id}`,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `${token}`,
+			},
+			data: obj,
+		};
+
+		axios(config)
+			.then(function (response) {
+				console.log(JSON.stringify(response.data));
+				alert("updated Successfully");
+				history.push("/admin/CustomerList");
+			})
+			.catch(function (error) {
+				console.log(error.response.data);
+				alert(error.response.data);
+			});
+	};
 
 	return (
 		<div className="col-12 grid-margin">
@@ -35,7 +85,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.firstName}
+									value={InputFields.firstName}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											firstName: e.target.value,
+										});
+									}}
 								/>
 							</div>
 							<div className="col-sm-6">
@@ -46,7 +102,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.lastName}
+									value={InputFields.lastName}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											lastName: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -63,10 +125,15 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.username}
+									value={InputFields.username}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											username: e.target.value,
+										});
+									}}
 								/>
 							</div>
-						
 						</Form.Group>
 					</div>
 				</div>
@@ -81,7 +148,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.company}
+									value={InputFields.company}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											company: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -96,7 +169,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.vat_number}
+									value={InputFields.vat_number}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											vat_number: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -111,7 +190,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.mobile}
+									value={InputFields.mobile}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											mobile: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -127,7 +212,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.website}
+									value={InputFields.website}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											website: e.target.value,
+										});
+									}}
 								/>
 							</div>
 							<div className="col-sm-6">
@@ -137,7 +228,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.email}
+									value={InputFields.email}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											email: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -151,7 +248,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.groups}
+									value={InputFields.groups}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											groups: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -167,7 +270,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.currency}
+									value={InputFields.currency}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											currency: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -181,7 +290,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.language}
+									value={InputFields.language}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											language: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -195,7 +310,13 @@ const CustomerForm = () => {
 								className="form-control"
 								id="exampleFormControlTextarea1"
 								rows="3"
-								value={details.address}></textarea>
+								value={InputFields.address}
+								onChange={(e) => {
+									setInputFields({
+										...InputFields,
+										address: e.target.value,
+									});
+								}}></textarea>
 						</div>
 					</div>
 					<div className="col-md-8">
@@ -207,7 +328,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.city}
+									value={InputFields.city}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											city: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -221,7 +348,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.state}
+									value={InputFields.state}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											state: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -235,7 +368,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.zipcode}
+									value={InputFields.zipcode}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											zipcode: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>
@@ -249,7 +388,13 @@ const CustomerForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.country}
+									value={InputFields.country}
+									onChange={(e) => {
+										setInputFields({
+											...InputFields,
+											country: e.target.value,
+										});
+									}}
 								/>
 							</div>
 						</Form.Group>

@@ -280,6 +280,17 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
+					<Link className="nav-link ps-3" to="/admin/notifications">
+						<i class="fa-solid fa-envelope"></i>
+						<span className="menu-title ms-3">
+							<Trans>Notifications Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
 					<Link className="nav-link ps-3" to="/admin/email-template">
 						<i class="fa-solid fa-envelope"></i>
 						<span className="menu-title ms-3">

@@ -16,6 +16,7 @@ import { useHistory } from "react-router-dom";
 import API from "../../../backend";
 import "./List.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import AddNotification from "./Add Notification/addNotification";
 
 function CustomerList() {
 	const { ExportCSVButton } = CSVExport;
@@ -23,60 +24,27 @@ function CustomerList() {
 	const [search, setSearch] = useState("");
 	const [Filtered, setFiltered] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const token=localStorage.getItem("token")
-  const history=useHistory()
- 
-const [toggle,setToggle]=useState(true)
+	const token = localStorage.getItem("token");
+	const history = useHistory();
 
-  const disableUser = async (id) => {
+	const [toggle, setToggle] = useState(true);
 
-	try {
-		var config = {
-			method: "put",
-			url: `https://qigenix.ixiono.com/apis/admin/disable-customer/${id}`,
-			headers: {
-				
-				"Content-Type": "application/json",
-				Authorization: `${token}`,
-			},
-		};
-		axios(config)
-			.then(function (response) {
-				alert("status disabled")
-
-				setToggle(!toggle)
-				// setTableRowsData(response.data);
-			
-			})
-			.catch(function (error) {
-				console.log(error.response.data);
-			});
-	} catch (error) {
-		console.log(error.response.data);
-	}
-};
-useEffect(() => {
-	disableUser();
-}, []);
-
-
-
-
-	const fetchData = async () => {
+	const disableUser = async (id) => {
 		try {
 			var config = {
-				method: "get",
-				url: `https://qigenix.ixiono.com/apis/admin/getAllCustomer`,
+				method: "put",
+				url: `https://qigenix.ixiono.com/apis/admin/disable-customer/${id}`,
 				headers: {
-					
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
 				},
 			};
 			axios(config)
 				.then(function (response) {
-					setTableRowsData(response.data);
-					setFiltered(response.data);
+					alert("status disabled");
+
+					setToggle(!toggle);
+					// setTableRowsData(response.data);
 				})
 				.catch(function (error) {
 					console.log(error.response.data);
@@ -86,11 +54,37 @@ useEffect(() => {
 		}
 	};
 	useEffect(() => {
+		disableUser();
+	}, []);
+
+	const fetchData = async () => {
+		try {
+			var config = {
+				method: "get",
+				url: `https://qigenix.ixiono.com/apis/admin/getAllNotifications`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+			};
+			axios(config)
+				.then(function (response) {
+					setTableRowsData(response.data.totalResponse);
+					setFiltered(response.data.totalResponse);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
 		fetchData();
 	}, []);
-	useEffect(()=>{
+	useEffect(() => {
 		fetchData();
-	},[toggle])
+	}, [toggle]);
 
 	useEffect(() => {}, [tableRowsData]);
 
@@ -130,115 +124,74 @@ useEffect(() => {
 				color: "#4E7AED",
 			},
 		},
-  
-	{
-		name: "Name",
-		sortable: false,
-		style: {
-			color: "#4E7AED",
-		},
-		cell:(row)=>[
-			<div>
-<span>{row.firstName }</span> <br></br>
-			 <span >{row.lastName}</span>
-			</div>
-			
-			
-		]
-	},
+
 		{
-			name: "Company",
-			 selector: "company",
+			name: "Name",
+			sortable: false,
+			style: {
+				color: "#4E7AED",
+			},
+			cell: (row) => [
+				<div>
+					<span>{row.firstName}</span> <br></br>
+					<span>{row.lastName}</span>
+				</div>,
+			],
+		},
+		{
+			name: "Email",
+			selector: "email",
 			sortable: true,
 			style: {
 				color: "#4E7AED",
 			},
-     
 		},
 		{
-			name: "Primary Contact",
-			selector: "mobile",
+			name: "Count",
+			selector: "count",
 			sortable: false,
 			style: {
 				color: "#4E7AED",
 			},
 		},
-		{
-			name: "Primary Email",
-			selector: "email",
-			sortable: false,
-			style: {
-				color: "#4E7AED",
-			},
-		},
-		{
-			name: "Phone",
-			selector: "mobile",
-			sortable: false,
-			style: {
-				color: "#4E7AED",
-			},
-		},
-		{
-			name: "active",
-			cell: (row) => [
-				<div class="form-check form-switch text-center">
-					<input
-						class="form-check-input"
-						type="checkbox"
-						role="switch"
-						name="status"
-						id="flexSwitchCheckChecked"
-						checked={row.status === "1" ? true : false}
-						onClick={() => disableUser(row.id)}
-						
-						></input>
-				</div>,
-			],
-			sortable: false,
-		},
-		{
-			name: "Groups",
-			cell: (d) => [
-				<button
-					className="btn"
-					style={{
-						background: "#FFFFFF",
-						border: "1px solid #EFEFEF",
-						color: "#515151",
-					}}>
-					{d.groups}
-				</button>,
-			],
-			sortable: false,
-		},
-		{
-			name: "Date Created",
+		// {
+		// 	name: "Primary Email",
+		// 	selector: "email",
+		// 	sortable: false,
+		// 	style: {
+		// 		color: "#4E7AED",
+		// 	},
+		// },
+		// {
+		// 	name: "Phone",
+		// 	selector: "mobile",
+		// 	sortable: false,
+		// 	style: {
+		// 		color: "#4E7AED",
+		// 	},
+		// },
 
-			sortable: false,
-			cell: (d) => {
-				return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
-			},
-		},
 		{
-			name:"Action",
-			style:{
-			  fontSize:"18px",
-	  
+			name: "Action",
+			style: {
+				fontSize: "18px",
 			},
-			cell:(row)=>[
-			  <i class="fa-solid fa-circle-info text-primary mx-2" style={{cursor:"pointer"}} onClick={() => {
-				// eslint-disable-next-line no-restricted-globals
-				history.push({
-				  pathname: "/admin/CustomerDetails",
-				  state: { details: row },
-				});
-			  }}></i>,
-			  <i class="fa-solid fa-trash text-danger mx-2"  style={{cursor:"pointer"}}
-			 >
-			  </i>
-			]
-		  },
+			cell: (row) => [
+				<i
+					class="fa-solid fa-circle-info text-primary mx-2"
+					style={{ cursor: "pointer" }}
+					onClick={() => {
+						// eslint-disable-next-line no-restricted-globals
+						history.push({
+							pathname: "/admin/CustomerDetails",
+							state: { details: row },
+						});
+					}}></i>,
+				<i
+					class="fa-solid fa-trash text-danger mx-2"
+					style={{ cursor: "pointer" }}></i>,
+			],
+		},
 	];
 
 	return (
@@ -258,17 +211,46 @@ useEffect(() => {
 								<div className="col-md-12 grid-margin">
 									<div className="row page-title-header">
 										<div className="col-12">
-											<Link to="/admin/addCustomer">
+											{/* <Link to="/admin/addCustomer">
 												<button className="btn btn-primary mr-2">
-													<i class="fa-solid fa-plus"></i> New Customer
+													<i class="fa-solid fa-plus"></i>Send New Notification
 												</button>
-											</Link>
-											<button className="btn btn-primary mr-2">
-												<i class="fa-solid fa-upload"></i> Import Customers
+											</Link> */}
+											<button
+												type="button"
+												className="btn btn-primary btn-small ms-4"
+												data-bs-toggle="modal"
+												data-bs-target="#exampleModal">
+												<i className="fa-solid fa-plus"></i>Send New
+												Notification
 											</button>
-											<button className="btn btn-outline-secondary mr-2">
-												<i class="fa-regular fa-user"></i> Contacts
-											</button>
+
+											<div
+												className="modal fade"
+												id="exampleModal"
+												tabindex="-1"
+												aria-labelledby="exampleModalLabel"
+												aria-hidden="true">
+												<div className="modal-dialog">
+													<div className="modal-content">
+														<div className="modal-header">
+															<h5
+																className="modal-title"
+																id="exampleModalLabel">
+																Send New Notification
+															</h5>
+															<button
+																type="button"
+																className="btn-close"
+																data-bs-dismiss="modal"
+																aria-label="Close"></button>
+														</div>
+														<div className="modal-body">
+															<AddNotification />
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div className="card">
@@ -356,25 +338,7 @@ useEffect(() => {
 															/>{" "}
 															Export
 														</label>
-														<label
-															class="btn"
-															style={{
-																borderRight: "1px solid #D9D9D9",
-																color: "#475569",
-																fontFamily: "Roboto",
-																fontStyle: "normal",
-																fontWeight: "500",
-																fontSize: "12px",
-																lineHeight: "14px",
-															}}>
-															<input
-																type="radio"
-																name="options"
-																id="option2"
-																autocomplete="off"
-															/>{" "}
-															Bulk Actions
-														</label>
+
 														<label
 															class="btn"
 															style={{

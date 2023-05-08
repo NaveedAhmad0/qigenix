@@ -124,6 +124,9 @@ const ListOfAssDevices = lazy(() =>
 const EmailTemplate = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Email Template/Setup")
 );
+const Notifications = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Notification/notificationList")
+);
 
 class AppRoutes extends Component {
 	render() {
@@ -210,6 +213,7 @@ class AppRoutes extends Component {
 					<Route path="/admin/ListOfInvoices" component={ListOfInvoices} />
 					<Route path="/admin/Assigned-devices" component={ListOfAssDevices} />
 					<Route path="/admin/email-template" component={EmailTemplate} />
+					<Route path="/admin/notifications" component={Notifications} />
 					<Route
 						path="/admin/assign-merchnat-to-users"
 						component={AssignMerchToUser}

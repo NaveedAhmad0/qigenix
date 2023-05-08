@@ -23,46 +23,39 @@ function CustomerList() {
 	const [search, setSearch] = useState("");
 	const [Filtered, setFiltered] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const token=localStorage.getItem("token")
-  const history=useHistory()
- 
-const [toggle,setToggle]=useState(true)
+	const token = localStorage.getItem("token");
+	const history = useHistory();
 
+	const [toggle, setToggle] = useState(true);
 
-  const disableUser = async (email,status) => {
+	const disableUser = async (email, status) => {
+		const obj = { email: email, status: status === "0" ? "1" : "0" };
 
-	const obj={email:email,status:status=== '0' ? '1' : '0'}
-
-
-	try {
-		var config = {
-			method: "post",
-			url: `https://qigenix.ixiono.com/apis/admin/approve-customer`,
-			headers: {
-				
-				"Content-Type": "application/json",
-				Authorization: `${token}`,
-			},
-			data:obj
-		};
-		axios(config)
-			.then(function (response) {
-				setToggle(!toggle)
-				console.log(response.data)
-			})
-			.catch(function (error) {
-				console.log(error.response.data);
-			});
-	} catch (error) {
-		console.log(error.response.data);
-	}
-};
-useEffect(() => {
-	disableUser();
-}, []);
-
-
-
+		try {
+			var config = {
+				method: "post",
+				url: `https://qigenix.ixiono.com/apis/admin/approve-customer`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+				data: obj,
+			};
+			axios(config)
+				.then(function (response) {
+					setToggle(!toggle);
+					console.log(response.data);
+				})
+				.catch(function (error) {
+					console.log(error.response.data);
+				});
+		} catch (error) {
+			console.log(error.response.data);
+		}
+	};
+	useEffect(() => {
+		disableUser();
+	}, []);
 
 	const fetchData = async () => {
 		try {
@@ -70,7 +63,6 @@ useEffect(() => {
 				method: "get",
 				url: `https://qigenix.ixiono.com/apis/admin/getAllCustomer`,
 				headers: {
-					
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
 				},
@@ -79,6 +71,7 @@ useEffect(() => {
 				.then(function (response) {
 					setTableRowsData(response.data);
 					setFiltered(response.data);
+					console.log(response.data);
 				})
 				.catch(function (error) {
 					console.log(error.response.data);
@@ -90,9 +83,9 @@ useEffect(() => {
 	useEffect(() => {
 		fetchData();
 	}, []);
-	useEffect(()=>{
+	useEffect(() => {
 		fetchData();
-	},[toggle])
+	}, [toggle]);
 
 	useEffect(() => {}, [tableRowsData]);
 
@@ -132,30 +125,27 @@ useEffect(() => {
 				color: "#4E7AED",
 			},
 		},
-  
-	{
-		name: "Name",
-		sortable: false,
-		style: {
-			color: "#4E7AED",
+
+		{
+			name: "Name",
+			sortable: false,
+			style: {
+				color: "#4E7AED",
+			},
+			cell: (row) => [
+				<div>
+					<span>{row.firstName}</span> <br></br>
+					<span>{row.lastName}</span>
+				</div>,
+			],
 		},
-		cell:(row)=>[
-			<div>
-<span>{row.firstName }</span> <br></br>
-			 <span >{row.lastName}</span>
-			</div>
-			
-			
-		]
-	},
 		{
 			name: "Company",
-			 selector: "company",
+			selector: "company",
 			sortable: true,
 			style: {
 				color: "#4E7AED",
 			},
-     
 		},
 		{
 			name: "Primary Contact",
@@ -192,9 +182,7 @@ useEffect(() => {
 						name="status"
 						id="flexSwitchCheckChecked"
 						checked={row.status === "1" ? true : false}
-						onClick={() => disableUser(row.email,row.status)}
-						
-						></input>
+						onClick={() => disableUser(row.email, row.status)}></input>
 				</div>,
 			],
 			sortable: false,
@@ -223,24 +211,26 @@ useEffect(() => {
 			},
 		},
 		{
-			name:"Action",
-			style:{
-			  fontSize:"18px",
-	  
+			name: "Action",
+			style: {
+				fontSize: "18px",
 			},
-			cell:(row)=>[
-			  <i class="fa-solid fa-circle-info text-primary mx-2" style={{cursor:"pointer"}} onClick={() => {
-				// eslint-disable-next-line no-restricted-globals
-				history.push({
-				  pathname: "/admin/CustomerDetails",
-				  state: { details: row },
-				});
-			  }}></i>,
-			  <i class="fa-solid fa-trash text-danger mx-2"  style={{cursor:"pointer"}}
-			 >
-			  </i>
-			]
-		  },
+			cell: (row) => [
+				<i
+					class="fa-solid fa-circle-info text-primary mx-2"
+					style={{ cursor: "pointer" }}
+					onClick={() => {
+						// eslint-disable-next-line no-restricted-globals
+						history.push({
+							pathname: "/admin/CustomerDetails",
+							state: { details: row },
+						});
+					}}></i>,
+				<i
+					class="fa-solid fa-trash text-danger mx-2"
+					style={{ cursor: "pointer" }}></i>,
+			],
+		},
 	];
 
 	return (
