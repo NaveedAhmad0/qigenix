@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 const DeviceForm = () => {
 	const location = useLocation();
 	const details = location.state.details;
-console.log(details)
+	console.log(details);
 	const updateCustomer = () => {};
 
 	return (
@@ -75,7 +75,7 @@ console.log(details)
 					<div className="col-md-8">
 						<Form.Group className="row">
 							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Amount</Form.Label>
+								<Form.Label className=" mb-3">Amount($)</Form.Label>
 								<Form.Control
 									className="customerInputN"
 									type="text"
@@ -95,7 +95,7 @@ console.log(details)
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
-									value={details.tax_percentage}
+									value={details.tax_percentage + "%"}
 								/>
 							</div>
 						</Form.Group>
@@ -145,10 +145,8 @@ console.log(details)
 							</div>
 						</Form.Group>
 					</div>
-				
 				</div>
-			
-				
+
 				<div className="row">
 					<div className="col-md-8 text-right">
 						<button
