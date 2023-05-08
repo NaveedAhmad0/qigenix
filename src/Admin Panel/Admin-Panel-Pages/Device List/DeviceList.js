@@ -28,22 +28,24 @@ function DeviceList() {
 
 	const [toggle, setToggle] = useState(true);
 
-	const disableDevice = async (id) => {
-		console.log(id);
+	const disableDevice = async (id,status) => {
+		
+		const obj={device_id:id,status:status=== '1' ? '0' : '1'}
+		console.log(obj)
 
 		try {
 			var config = {
-				method: "put",
-				url: `https://qigenix.ixiono.com/apis/admin/disable-device/${id}`,
+				method: "post",
+				url: `https://qigenix.ixiono.com/apis/admin/approve-device`,
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
 				},
+				data:obj
 			};
 			axios(config)
 				.then(function (response) {
-					alert("status disabled");
-
+					alert(response.data.message)
 					setToggle(!toggle);
 					// setTableRowsData(response.data);
 				})
@@ -71,6 +73,9 @@ function DeviceList() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data);
+					console.log(response.data)
+				
+					
 					setFiltered(response.data);
 				})
 				.catch(function (error) {
@@ -150,8 +155,8 @@ function DeviceList() {
 						type="checkbox"
 						role="switch"
 						id="flexSwitchCheckChecked"
-						checked={row.status === true ? true : false}
-						onClick={() => disableDevice(row.id)}></input>
+						checked={row.status === '0' ? false : true}
+						onClick={() => disableDevice(row.device_id,row.status)}></input>
 				</div>,
 			],
 			sortable: false,
