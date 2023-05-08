@@ -1,14 +1,14 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import "./addCustomer.css";
+import "./addNotification.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import { useState } from "react";
-const AddCustomerForm = () => {
+const AddNotificationForm = () => {
 	const history=useHistory()
 	const token=localStorage.getItem("token")
 	const [inputFields, setInputFields] = useState([
-		{ firstName:"",lastName:"",email:"",company:"",vatNumber:"",phone:"",website:"",currency:"",zipCode:"",address:"",language:"",city:"",state:"",country:"",groups:"",username:"",password:"" }
+		{ firstName:"",lastName:"",email:"",company:"",vatNumber:"",phone:"",website:"",currency:"",zipCode:"",address:"",language:"",city:"",state:"",country:"",groups:"" }
 	  ]);
 	  const handleFormChange = (index, event) => {
 		let data = [...inputFields];
@@ -33,8 +33,6 @@ const AddCustomerForm = () => {
 		const state=inputFields[0].state;
 		const country=inputFields[0].country;
 		const groups=inputFields[0].groups;
-		const username=inputFields[0].username;
-		const password=`${inputFields[0].firstName}@123}`;
 		const status='1'
 
 	
@@ -54,9 +52,7 @@ const AddCustomerForm = () => {
 		 	state:state ,
 		 	zipcode: zipCode,
 		 	country:country ,
-		 	status: status,
-			username:username,
-			password:password
+		 	status: status
 		 
 		 });
 		  console.log(data);
@@ -116,41 +112,6 @@ const AddCustomerForm = () => {
 									 onChange={(event) => handleFormChange(index, event)}
 									type="text"
 									name="lastName"
-									placeholder="Keywords"
-								/>
-							</div>
-						</Form.Group>
-					</div>
-				</div>
-				<div className="row">
-					
-					<div className="col-md-6">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">UserName</Form.Label>
-
-								<Form.Control
-									className="addcustomerInputN"
-									 onChange={(event) => handleFormChange(index, event)}
-									type="text"
-									name="username"
-									placeholder="Keywords"
-								/>
-							</div>
-						</Form.Group>
-					</div>
-					<div className="col-md-6">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Password</Form.Label>
-
-								<Form.Control
-									className="addcustomerInputN"
-									
-									disabled
-									type="text"
-									value={`${inputFields[0].firstName}@123`}
-									name="password"
 									placeholder="Keywords"
 								/>
 							</div>
@@ -361,7 +322,6 @@ const AddCustomerForm = () => {
 						</Form.Group>
 					</div>
 				</div>
-				
 				<div className="row">
 					<div className="col-md-12 text-right">
 						<button className="btn btnCustomerProfileN btn-primary" onClick={handleSubmit}>
@@ -382,4 +342,4 @@ const AddCustomerForm = () => {
 	);
 };
 
-export default AddCustomerForm;
+export default  AddNotificationForm;

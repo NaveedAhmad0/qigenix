@@ -28,27 +28,25 @@ function CustomerList() {
  
 const [toggle,setToggle]=useState(true)
 
-
-  const disableUser = async (email,status) => {
-
-	const obj={email:email,status:status=== '0' ? '1' : '0'}
-
+  const disableUser = async (id) => {
 
 	try {
 		var config = {
-			method: "post",
-			url: `https://qigenix.ixiono.com/apis/admin/approve-customer`,
+			method: "put",
+			url: `https://qigenix.ixiono.com/apis/admin/disable-customer/${id}`,
 			headers: {
 				
 				"Content-Type": "application/json",
 				Authorization: `${token}`,
 			},
-			data:obj
 		};
 		axios(config)
 			.then(function (response) {
+				alert("status disabled")
+
 				setToggle(!toggle)
-				console.log(response.data)
+				// setTableRowsData(response.data);
+			
 			})
 			.catch(function (error) {
 				console.log(error.response.data);
@@ -192,7 +190,7 @@ useEffect(() => {
 						name="status"
 						id="flexSwitchCheckChecked"
 						checked={row.status === "1" ? true : false}
-						onClick={() => disableUser(row.email,row.status)}
+						onClick={() => disableUser(row.id)}
 						
 						></input>
 				</div>,

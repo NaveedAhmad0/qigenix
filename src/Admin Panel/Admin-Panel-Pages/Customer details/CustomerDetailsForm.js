@@ -57,6 +57,24 @@ const CustomerForm = () => {
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">
+									<span className="text-danger">*</span> UserName
+								</Form.Label>
+								<Form.Control
+									className="customerInputN"
+									type="text"
+									placeholder="Keywords"
+									value={details.username}
+								/>
+							</div>
+						
+						</Form.Group>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-md-8">
+						<Form.Group className="row">
+							<div className="col-sm-12">
+								<Form.Label className=" mb-3">
 									<span className="text-danger">*</span> Company
 								</Form.Label>
 								<Form.Control
