@@ -16,7 +16,7 @@ const NotificationDetail = () => {
 					<div className="form-check p-3 text-primary">
 						<h2>{details.customer_id}</h2>
 					</div>
-                    <hr></hr>
+                   
 				</div>
                 
                 <div className="card">
