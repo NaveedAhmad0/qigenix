@@ -257,10 +257,10 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+					<Link className="nav-link ps-3" to="/admin/ScannedInvoice">
 						<i class="fa-solid fa-money-bill-transfer"></i>
 						<span className="menu-title ms-3">
-							<Trans>Transaction Management</Trans>
+							<Trans>Scanned Invoice</Trans>
 						</span>
 					</Link>
 				</li>
@@ -295,6 +295,17 @@ function Sidebar() {
 						<i class="fa-solid fa-envelope"></i>
 						<span className="menu-title ms-3">
 							<Trans>Email Template Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-solid fa-money-bill-transfer"></i>
+						<span className="menu-title ms-3">
+							<Trans>Transaction Management</Trans>
 						</span>
 					</Link>
 				</li>

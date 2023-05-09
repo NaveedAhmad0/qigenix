@@ -127,6 +127,9 @@ const EmailTemplate = lazy(() =>
 const Notifications = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Notification/notificationList")
 );
+const ScannedInvoice = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Scanned Inovices/ScannedInvoices")
+);
 const NotificationDetail = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Notification/NotificationDetail")
 );
@@ -218,6 +221,7 @@ class AppRoutes extends Component {
 					<Route path="/admin/email-template" component={EmailTemplate} />
 					<Route path="/admin/notifications" component={Notifications} />
 					<Route path="/admin/NotificationDetails" component={NotificationDetail} />
+					<Route path="/admin/ScannedInvoice" component={ScannedInvoice} />
 
 					<Route
 						path="/admin/assign-merchnat-to-users"
