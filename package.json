@@ -87,6 +87,7 @@
     "react-svg-gauge": "^1.0.10",
     "react-table": "^6.10.3",
     "react-tag-autocomplete": "^5.11.1",
+    "react-to-pdf": "^0.0.14",
     "react-toastify": "^9.0.8",
     "react-treebeard": "^3.2.4",
     "react-trello": "^2.2.3",
