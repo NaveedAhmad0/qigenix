@@ -37,6 +37,13 @@ const AddNotification = () => {
 	// 	});
 	// }, []);
 
+	function selectAll() {
+		const options = document.getElementsByTagName("option");
+		for (let i = 0; i < options.length; i++) {
+			options[i].selected = "true";
+		}
+	}
+
 	const [inputFields2, setInputFields2] = useState([
 		{ message: "", customer_id: "" },
 	]);
@@ -110,8 +117,10 @@ const AddNotification = () => {
 														...inputFields2,
 														customer_id: e.target.value,
 													});
+													console.log(inputFields2.customer_id);
 												}}>
 												<option>Select User</option>
+												{/* <option onClick={selectAll}>Select All</option> */}
 												{userList.map((x) => {
 													return (
 														<option value={x.customer_id}>{x.firstName}</option>
