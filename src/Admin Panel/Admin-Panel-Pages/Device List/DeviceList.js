@@ -28,10 +28,9 @@ function DeviceList() {
 
 	const [toggle, setToggle] = useState(true);
 
-	const disableDevice = async (id,status) => {
-		
-		const obj={device_id:id,status:status=== '1' ? '0' : '1'}
-		console.log(obj)
+	const disableDevice = async (id, status) => {
+		const obj = { device_id: id, status: status === "1" ? "0" : "1" };
+		console.log(obj);
 
 		try {
 			var config = {
@@ -41,11 +40,11 @@ function DeviceList() {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
 				},
-				data:obj
+				data: obj,
 			};
 			axios(config)
 				.then(function (response) {
-					alert(response.data.message)
+					alert(response.data.message);
 					setToggle(!toggle);
 					// setTableRowsData(response.data);
 				})
@@ -73,9 +72,8 @@ function DeviceList() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data);
-					console.log(response.data)
-				
-					
+					console.log(response.data);
+
 					setFiltered(response.data);
 				})
 				.catch(function (error) {
@@ -155,8 +153,8 @@ function DeviceList() {
 						type="checkbox"
 						role="switch"
 						id="flexSwitchCheckChecked"
-						checked={row.status === '0' ? false : true}
-						onClick={() => disableDevice(row.device_id,row.status)}></input>
+						checked={row.status === "0" ? false : true}
+						onClick={() => disableDevice(row.device_id, row.status)}></input>
 				</div>,
 			],
 			sortable: false,
@@ -431,45 +429,6 @@ function DeviceList() {
 												paginationComponentOptions={{
 													rowsPerPageText: "Showing 1 to 6 of 12 entries:",
 												}}
-												// subHeaderComponent={
-												//   <div
-												//     class="btn-group btn-group-toggle me-4"
-												//     data-toggle="buttons"
-												//   >
-												//     <label
-												//       class="btn active"
-												//       style={{
-												//         borderRight: "1px solid #D9D9D9",
-												//         color: "#475569",
-												//         fontSize: "12px",
-												//         lineHeight: "14px",
-												//       }}
-												//     >
-												//       <i class="fa-solid fa-magnifying-glass"></i>
-												//     </label>
-
-												//     <input
-												//       type="text"
-												//       style={{
-												//         borderRight: "1px solid #D9D9D9",
-												//         color: "#475569",
-												//         fontFamily: "Roboto",
-												//         fontStyle: "normal",
-												//         fontWeight: "500",
-												//         fontSize: "12px",
-												//         lineHeight: "14px",
-												//         border: "none",
-												//         width: "100%",
-												//         textAlign: "center",
-												//       }}
-												//       placeholder="Search..."
-												//       value={search}
-												//       onChange={(e) => {
-												//         setSearch(e.target.value);
-												//       }}
-												//     />
-												//   </div>
-												// }
 											/>
 										</div>
 									</div>
