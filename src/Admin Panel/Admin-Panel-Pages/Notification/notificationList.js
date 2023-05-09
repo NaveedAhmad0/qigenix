@@ -27,35 +27,7 @@ function CustomerList() {
 	const token = localStorage.getItem("token");
 	const history = useHistory();
 
-	const [toggle, setToggle] = useState(true);
-
-	const disableUser = async (id) => {
-		try {
-			var config = {
-				method: "put",
-				url: `https://qigenix.ixiono.com/apis/admin/disable-customer/${id}`,
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `${token}`,
-				},
-			};
-			axios(config)
-				.then(function (response) {
-					alert("status disabled");
-
-					setToggle(!toggle);
-					// setTableRowsData(response.data);
-				})
-				.catch(function (error) {
-					console.log(error.response.data);
-				});
-		} catch (error) {
-			console.log(error.response.data);
-		}
-	};
-	useEffect(() => {
-		disableUser();
-	}, []);
+	
 
 	const fetchData = async () => {
 		try {
@@ -82,9 +54,7 @@ function CustomerList() {
 	useEffect(() => {
 		fetchData();
 	}, []);
-	useEffect(() => {
-		fetchData();
-	}, [toggle]);
+
 
 	useEffect(() => {}, [tableRowsData]);
 
@@ -154,23 +124,6 @@ function CustomerList() {
 				color: "#4E7AED",
 			},
 		},
-		// {
-		// 	name: "Primary Email",
-		// 	selector: "email",
-		// 	sortable: false,
-		// 	style: {
-		// 		color: "#4E7AED",
-		// 	},
-		// },
-		// {
-		// 	name: "Phone",
-		// 	selector: "mobile",
-		// 	sortable: false,
-		// 	style: {
-		// 		color: "#4E7AED",
-		// 	},
-		// },
-
 		{
 			name: "Action",
 			style: {
@@ -183,7 +136,7 @@ function CustomerList() {
 					onClick={() => {
 						// eslint-disable-next-line no-restricted-globals
 						history.push({
-							pathname: "/admin/CustomerDetails",
+							pathname: "/admin/NotificationDetails",
 							state: { details: row },
 						});
 					}}></i>,

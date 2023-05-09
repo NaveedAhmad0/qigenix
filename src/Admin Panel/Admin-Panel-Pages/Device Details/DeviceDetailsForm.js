@@ -6,7 +6,7 @@ const DeviceForm = () => {
 	const location = useLocation();
 	const details = location.state.details;
 	console.log(details);
-	const updateCustomer = () => {};
+	
 
 	return (
 		<div className="col-12 grid-margin">
@@ -151,7 +151,7 @@ const DeviceForm = () => {
 					<div className="col-md-8 text-right">
 						<button
 							className="btn btnCustomerProfileN btn-primary"
-							onClick={updateCustomer}>
+							>
 							Save
 						</button>
 					</div>
