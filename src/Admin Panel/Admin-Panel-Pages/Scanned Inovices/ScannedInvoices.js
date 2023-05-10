@@ -32,7 +32,7 @@ function ScannedInvoice() {
     try {
       var config = {
         method: "get",
-        url: `https://qigenix.ixiono.com/apis/admin/getAllInvoices`,
+        url: `https://qigenix.ixiono.com/apis/admin/getAllScans`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `${token}`,
@@ -40,14 +40,15 @@ function ScannedInvoice() {
       };
       axios(config)
         .then(function (response) {
-          setTableRowsData(response.data);
-          setFiltered(response.data);
+          setTableRowsData(response.data.totalResponse);
+          console.log(response.data.totalResponse)
+          setFiltered(response.data.totalResponse);
         })
         .catch(function (error) {
-          console.log(error.response.data);
+          console.log(error.response.data.totalResponse);
         });
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response.data.totalResponse);
     }
   };
   useEffect(() => {
@@ -58,7 +59,7 @@ function ScannedInvoice() {
 
   useEffect(() => {
     const result = tableRowsData?.filter((tables) => {
-      return tables.company.toLowerCase().match(search.toLowerCase());
+      return tables.scan_id.toLowerCase().match(search.toLowerCase());
     });
     setFiltered(result);
   }, [search]);
@@ -85,8 +86,8 @@ function ScannedInvoice() {
 
   const headerResponsive = [
     {
-      name: "Invoice Id",
-      selector: "invoice_id",
+      name: "Scan Id",
+      selector: "scan_id",
       sortable: false,
       style: {
         color: "#4E7AED",
@@ -94,25 +95,9 @@ function ScannedInvoice() {
     },
 
     {
-      name: "Name",
-      selector: "firstName",
+      name: "Customer Id",
+      selector: "customer_id",
       sortable: true,
-      style: {
-        color: "#4E7AED",
-      },
-    },
-    {
-      name: "Primary Contact",
-      selector: "mobile",
-      sortable: false,
-      style: {
-        color: "#4E7AED",
-      },
-    },
-    {
-      name: "Primary Email",
-      selector: "email",
-      sortable: false,
       style: {
         color: "#4E7AED",
       },
@@ -125,61 +110,43 @@ function ScannedInvoice() {
         color: "#4E7AED",
       },
     },
-
-    {
-      name: "device_name",
-      selector: "device_name",
-      sortable: false,
-      style: {
-        color: "#4E7AED",
-      },
-    },
-    {
-      name: "device_brand",
-      selector: "device_brand",
-      sortable: false,
-      style: {
-        color: "#4E7AED",
-      },
-    },
     {
       name: "Tax",
-      selector: "30%",
+      selector: "tax",
       sortable: false,
       style: {
         color: "#4E7AED",
       },
     },
     {
-      name: "Amount",
-      selector: "3,55,434",
+      name: "Total Amount",
+      selector: "total_amount",
       sortable: false,
       style: {
         color: "#4E7AED",
       },
     },
+
     {
-      name: "Action",
+      name: "Description",
+      selector: "description",
+      sortable: false,
+      style: {
+        color: "#4E7AED",
+      },
+    
+    },
+
+    {
+      name: "Product",
       style: {
         fontSize: "18px",
       },
       cell: (row) => [
-        <i
-          class="fa-solid fa-circle-info text-primary mx-2"
-          style={{ cursor: "pointer" }}
-          onClick={() => {
-            // eslint-disable-next-line no-restricted-globals
-            // history.push({
-            // 	pathname: "/admin/device-details",
-            // 	state: { details: row },
-            // });
-            setToggle(!toggle);
-          }}
-        ></i>,
-        <i
-          class="fa-solid fa-trash text-danger mx-2"
-          style={{ cursor: "pointer" }}
-        ></i>,
+        <p  onClick={() => {
+          setToggle(!toggle);
+        }} class="badge bg-warning" style={{cursor:"pointer"}}>{row.products.length}</p>,
+       
       ],
     },
   ];
@@ -200,33 +167,11 @@ function ScannedInvoice() {
             <div className={toggle ? "col-md-5" : "col-12"}>
               <div className="row">
                 <div className="col-md-12 grid-margin">
-                  {/* <div className="row page-title-header">
-										<div className="col-12">
-											<Link to="/admin/add-device">
-												<button className="btn btn-primary mr-2">
-													<i class="fa-solid fa-plus"></i> Create New Invoice
-												</button>
-											</Link>
-											<button className="btn btn-primary mr-2">
-												<i class="fa-solid fa-upload"></i> Recurring Invoices
-											</button>
-										</div>
-									</div> */}
                   <div className="card">
                     <div className="card-body">
                       {/* <hr style={{ border: "1px #EAEDF1" }}></hr> */}
                       <div className="row page-title-header">
                         <div className="col-12">
-                          {/* <div className="form-check d-flex justify-content-between">
-														<label className="form-check-label text-muted">
-															<input
-																type="checkbox"
-																className="form-check-input"
-															/>
-															<i className="input-helper"></i>
-															Exclude Inactive Devices
-														</label>
-													</div> */}
                           <div
                             class="btn-group btn-group-toggle"
                             data-toggle="buttons"
@@ -252,25 +197,7 @@ function ScannedInvoice() {
                               />{" "}
                               Export
                             </label>
-                            {/* <label
-															class="btn"
-															style={{
-																borderRight: "1px solid #D9D9D9",
-																color: "#475569",
-																fontFamily: "Roboto",
-																fontStyle: "normal",
-																fontWeight: "500",
-																fontSize: "12px",
-																lineHeight: "14px",
-															}}>
-															<input
-																type="radio"
-																name="options"
-																id="option2"
-																autocomplete="off"
-															/>{" "}
-															Bulk Actions
-														</label> */}
+                           
                             <label
                               class="btn"
                               style={{
@@ -345,45 +272,7 @@ function ScannedInvoice() {
                         paginationComponentOptions={{
                           rowsPerPageText: "Showing 1 to 6 of 12 entries:",
                         }}
-                        // subHeaderComponent={
-                        //   <div
-                        //     class="btn-group btn-group-toggle me-4"
-                        //     data-toggle="buttons"
-                        //   >
-                        //     <label
-                        //       class="btn active"
-                        //       style={{
-                        //         borderRight: "1px solid #D9D9D9",
-                        //         color: "#475569",
-                        //         fontSize: "12px",
-                        //         lineHeight: "14px",
-                        //       }}
-                        //     >
-                        //       <i class="fa-solid fa-magnifying-glass"></i>
-                        //     </label>
-
-                        //     <input
-                        //       type="text"
-                        //       style={{
-                        //         borderRight: "1px solid #D9D9D9",
-                        //         color: "#475569",
-                        //         fontFamily: "Roboto",
-                        //         fontStyle: "normal",
-                        //         fontWeight: "500",
-                        //         fontSize: "12px",
-                        //         lineHeight: "14px",
-                        //         border: "none",
-                        //         width: "100%",
-                        //         textAlign: "center",
-                        //       }}
-                        //       placeholder="Search..."
-                        //       value={search}
-                        //       onChange={(e) => {
-                        //         setSearch(e.target.value);
-                        //       }}
-                        //     />
-                        //   </div>
-                        // }
+                      
                       />
                     </div>
                   </div>
