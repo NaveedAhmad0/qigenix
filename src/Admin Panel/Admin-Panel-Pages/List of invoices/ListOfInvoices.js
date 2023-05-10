@@ -218,16 +218,16 @@ function ListOfInvoice() {
 			},
 		},
 		{
-			name: "Tax",
-			selector: "30%",
+			name: "Tax (%)",
+			selector: "tax_percentage",
 			sortable: false,
 			style: {
 				color: "#4E7AED",
 			},
 		},
 		{
-			name: "Amount",
-			selector: "3,55,434",
+			name: "Amount ($)",
+			selector: "amount",
 			sortable: false,
 			style: {
 				color: "#4E7AED",
