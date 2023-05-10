@@ -128,10 +128,24 @@ const Navbar = () => {
 										<Trans>You have</Trans> 7 <Trans>unread mails</Trans>{" "}
 									</p>
 								</Dropdown.Item>
+								<Dropdown.Item
+									className="dropdown-item d-flex align-items-center"
+									href="!#"
+									onClick={(evt) => evt.preventDefault()}>
+									<p className="mb-0 font-weight-medium float-left">
+										unread mails sdjfh skdfj hsdkfj sdfk jhdsfkj ksjdh skdfh
+										sdkfh sdkjf hskdjhf
+										{/* <Trans>You have</Trans> 8{" "}
+										<Trans>
+											unread mails sdjfh skdfj hsdkfj sdfk jhdsfkj ksjdh skdfh
+											sdkfh sdkjf hskdjhf
+										</Trans>{" "} */}
+									</p>
+								</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</li>
-
+					{/* 
 					<li className="nav-item  nav-profile border-0">
 						<Dropdown>
 							<Dropdown.Toggle className="nav-link count-indicator p-0 toggle-arrow-hide bg-transparent">
@@ -178,7 +192,7 @@ const Navbar = () => {
 								</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
-					</li>
+					</li> */}
 
 					{/* <Dropdown.Item
 									className="dropdown-item p-0 preview-item d-flex align-items-center border-bottom"

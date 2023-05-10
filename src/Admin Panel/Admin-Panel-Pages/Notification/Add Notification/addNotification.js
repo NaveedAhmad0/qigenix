@@ -4,6 +4,7 @@ import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 const AddNotification = () => {
 	const history = useHistory();
 	const token = localStorage.getItem("token");
@@ -45,7 +46,7 @@ const AddNotification = () => {
 	}
 
 	const [inputFields2, setInputFields2] = useState([
-		{ message: "", customer_id: "" },
+		{ message: "", customers: [] },
 	]);
 	// const handleFormChange2 = (index2, event) => {
 	// 	let data = [...inputFields2];
@@ -103,6 +104,19 @@ const AddNotification = () => {
 									<Form.Group className="row">
 										<div className="col-12">
 											<label>Select User</label> <br />
+											{/* <Select
+												isMulti={true}
+												className="basic-multi-select"
+												isClearable={true}
+												// defaultValue={userList}
+												// value={[inputFields2.customers]}
+												onChange={(value) => {
+													console.log(value[0].customer_id);
+												}}
+												options={userList}
+												// getOptionLabel={(option) => option}
+												// getOptionValue={(option) => option}
+											/> */}
 											<select
 												name="userId"
 												className="input col-12"
