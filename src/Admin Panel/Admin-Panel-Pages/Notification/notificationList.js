@@ -42,6 +42,7 @@ function CustomerList() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data.totalResponse);
+					console.log(response.data.totalResponse)
 					setFiltered(response.data.totalResponse);
 				})
 				.catch(function (error) {

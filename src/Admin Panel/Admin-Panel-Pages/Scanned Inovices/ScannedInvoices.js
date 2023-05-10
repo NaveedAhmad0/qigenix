@@ -8,9 +8,11 @@ import ToolkitProvider, {
   Search,
   CSVExport,
 } from "react-bootstrap-table2-toolkit";
+import { Fragment } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import DataTable from "react-data-table-component";
 import moment from "moment";
+import Pdf from "react-to-pdf";
 
 import { useHistory } from "react-router-dom";
 import API from "../../../backend";
@@ -20,6 +22,9 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 function ScannedInvoice() {
   const { ExportCSVButton } = CSVExport;
   const [tableRowsData, setTableRowsData] = useState();
+  const [rowData, setRowData] = useState();
+  const ref = React.createRef();
+
   const [search, setSearch] = useState("");
   const [Filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -41,7 +46,7 @@ function ScannedInvoice() {
       axios(config)
         .then(function (response) {
           setTableRowsData(response.data.totalResponse);
-          console.log(response.data.totalResponse)
+          console.log(response.data.totalResponse);
           setFiltered(response.data.totalResponse);
         })
         .catch(function (error) {
@@ -134,7 +139,6 @@ function ScannedInvoice() {
       style: {
         color: "#4E7AED",
       },
-    
     },
 
     {
@@ -143,10 +147,16 @@ function ScannedInvoice() {
         fontSize: "18px",
       },
       cell: (row) => [
-        <p  onClick={() => {
-          setToggle(!toggle);
-        }} class="badge bg-warning" style={{cursor:"pointer"}}>{row.products.length}</p>,
-       
+        <p
+          onClick={() => {
+            setToggle(!toggle);
+            setRowData(row);
+          }}
+          class="badge bg-warning"
+          style={{ cursor: "pointer" }}
+        >
+          {row.products.length}
+        </p>,
       ],
     },
   ];
@@ -164,7 +174,7 @@ function ScannedInvoice() {
         <div>
           <div className="row">
             <h4>List Of Invoices</h4>
-            <div className={toggle ? "col-md-5" : "col-12"}>
+            <div className={toggle ? "col-md-12" : "col-12"}>
               <div className="row">
                 <div className="col-md-12 grid-margin">
                   <div className="card">
@@ -197,7 +207,7 @@ function ScannedInvoice() {
                               />{" "}
                               Export
                             </label>
-                           
+
                             <label
                               class="btn"
                               style={{
@@ -272,34 +282,29 @@ function ScannedInvoice() {
                         paginationComponentOptions={{
                           rowsPerPageText: "Showing 1 to 6 of 12 entries:",
                         }}
-                      
                       />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className={toggle ? "col-7" : "invoiceDisplay"}>
-              <div className="card">
+            <div className={toggle ? "col-12" : "invoiceDisplay"}>
+              <div className="card" ref={ref}>
                 <div className="card-body">
                   <div className="col-12 grid-margin">
-                   
                     <div className="row mt-4">
                       <div className="col-6">
-                        <h5 className="text-primary float-left">INV001</h5>
+                        <h5 className="text-primary">Scan Id :</h5>
+                        <p>{rowData?.scan_id}</p>
                       </div>
                       <div className="col-6 text-right">
                         <p className="font-weight-bold">
-                          Bill To :<p className="text-primary">Vikash</p>
+                          Bill To :
+                          <p className="text-primary">{rowData?.customer_id}</p>
                         </p>
                         <p className="font-weight-bold">
-                          Name:{" "}
-                          <span className="font-weight-normal">Vikash</span>{" "}
-                        </p>
-                        <p className="font-weight-bold">
-                          Invoice Date:{" "}
-                          <span className="font-weight-normal">05-05-2023 12:05:10
-						  </span>{" "}
+                          Name:
+                          <span className="font-weight-normal"></span>
                         </p>
                       </div>
                     </div>
@@ -307,59 +312,56 @@ function ScannedInvoice() {
                       <table class="table">
                         <thead className="bg-dark text-white">
                           <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Item</th>
-                          
-                            <th scope="col">Rate</th>
-							<th scope="col">Tax</th>
-							<th scope="col">Amount</th>
+                            <th scope="col">#Product Id</th>
+                            <th scope="col">Product Name</th>
+
+                            <th scope="col">QR Code</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Created At</th>
                           </tr>
                         </thead>
                         <tbody>
-                         
+                          {rowData?.products?.map((item) => {
+                            return (
+                              <tr>
+                               <td>{item.product_id}</td> 
+                                <td>{item.product_name}</td>
+                                <td>{item.qr_code}</td>
+                                <td>{item.quantity}</td>
+                                <td>{item.price}</td>
+                                <td>
+                                  {moment(item.createdAt).local().format("DD-MM-YYYY hh:mm:ss ")}
+                                  </td>
+                              </tr>
+                            );
+                          })}
+
                           <tr>
-                           
-                            <td >INV001</td>
-                           
-							<td >mobile</td>
-                            <td>$55,000</td>
-							<td >10%</td>
-							<td >33,878</td>
+                            <th>Total Price</th>
+                            <td>
+                           33,000
+                            </td>
                           </tr>
-						 
                         </tbody>
                       </table>
 
-					  <table class="table table-bordered mt-5">
-                        
-                          <tr>
-                            <th scope="col" className="text-dark">Sub Total :</th>
-							<td>$55,000</td>
-                           
-                          </tr>
-						  <tr>
-							<th className="text-dark">Total :</th>
-							<td>
-								$55,000
-							</td>
-						  </tr>
-						  <tr>
-							<th className="text-danger">Amount Due :</th>
-							<td>
-								$55,000
-							</td>
-						  </tr>
-                        
-                       
-                      </table>
+                
 
-					  <div className="row">
-                      <div className="col-12 ">
-                        <button className="btn btn-success mt-4">
-                          Print
-                        </button>
+                      <div className="row">
+                        <div className="col-12 ">
+                          <Pdf targetRef={ref} filename="invoice.pdf">
+                            {({ toPdf }) => (
+                              <button
+                                className="btn btn-success mt-4"
+                                onClick={toPdf}
+                              >
+                                Generate Pdf
+                              </button>
+                            )}
+                          </Pdf>
+                        </div>
                       </div>
-                    </div>
                     </div>
                   </div>
                 </div>

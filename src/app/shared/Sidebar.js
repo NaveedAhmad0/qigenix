@@ -281,7 +281,7 @@ function Sidebar() {
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
 					<Link className="nav-link ps-3" to="/admin/notifications">
-						<i class="fa-solid fa-envelope"></i>
+					<i class="fa-regular fa-bell"></i>
 						<span className="menu-title ms-3">
 							<Trans>Notifications Management</Trans>
 						</span>
