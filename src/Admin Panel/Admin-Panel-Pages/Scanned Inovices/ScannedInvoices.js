@@ -309,7 +309,7 @@ function ScannedInvoice() {
                       </div>
                     </div>
                     <div className="row">
-                      <table class="table table-responsive">
+                      <table class="table">
                         <thead className="bg-dark text-white">
                           <tr>
                             <th scope="col">#Product Id</th>
@@ -336,25 +336,17 @@ function ScannedInvoice() {
                               </tr>
                             );
                           })}
+
+                          <tr>
+                            <th>Total Price</th>
+                            <td>
+                           33,000
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
 
-                      <table class="table table-bordered mt-5">
-                        <tr>
-                          <th scope="col" className="text-dark">
-                            Sub Total :
-                          </th>
-                          <td>$55,000</td>
-                        </tr>
-                        <tr>
-                          <th className="text-dark">Total :</th>
-                          <td>$55,000</td>
-                        </tr>
-                        <tr>
-                          <th className="text-danger">Amount Due :</th>
-                          <td>$55,000</td>
-                        </tr>
-                      </table>
+                
 
                       <div className="row">
                         <div className="col-12 ">
