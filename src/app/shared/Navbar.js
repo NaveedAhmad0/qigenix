@@ -97,13 +97,38 @@ const Navbar = () => {
 						</a>
 					</li>
 					<li className="nav-item ">
-						<a href="#" className="profile" aria-expanded="false">
+						<Dropdown>
+							<Dropdown.Toggle className="nav-link count-indicator p-0 toggle-arrow-hide bg-transparent">
+								<img
+									src={pic}
+									alt="user"
+									className="img img-responsive staff-profile-image-small pull-left"
+									style={{ width: "2.5rem" }}
+								/>{" "}
+							</Dropdown.Toggle>
+							<Dropdown.Menu className="navbar-dropdown preview-list">
+								<Dropdown.Item
+									className="dropdown-item  d-flex align-items-center"
+									href="!#"
+									onClick={(evt) => evt.preventDefault()}>
+									<p
+										className="mb-0 font-weight-medium float-left"
+										onClick={() => {
+											localStorage.clear();
+											history.push("/admin/login");
+										}}>
+										Log Out
+									</p>
+								</Dropdown.Item>
+							</Dropdown.Menu>
+						</Dropdown>
+						{/* <a href="#" className="profile" aria-expanded="false">
 							<img
 								src={pic}
 								className="img img-responsive staff-profile-image-small pull-left"
 								style={{ width: "2.5rem" }}
 							/>{" "}
-						</a>
+						</a> */}
 					</li>
 					<li className="nav-item  nav-profile border-0">
 						<Dropdown>
@@ -133,8 +158,7 @@ const Navbar = () => {
 									href="!#"
 									onClick={(evt) => evt.preventDefault()}>
 									<p className="mb-0 font-weight-medium float-left">
-										unread mails sdjfh skdfj hsdkfj sdfk jhdsfkj ksjdh skdfh
-										sdkfh sdkjf hskdjhf
+										unread mails
 										{/* <Trans>You have</Trans> 8{" "}
 										<Trans>
 											unread mails sdjfh skdfj hsdkfj sdfk jhdsfkj ksjdh skdfh
