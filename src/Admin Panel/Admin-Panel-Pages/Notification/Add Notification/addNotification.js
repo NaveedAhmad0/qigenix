@@ -4,12 +4,48 @@ import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { components } from "react-select";
+import MySelect from "../My select/MySelect";
+
+const Option = (props) => {
+	return (
+		<div>
+			<components.Option {...props}>
+				<input
+					type="checkbox"
+					checked={props.isSelected}
+					onChange={() => null}
+				/>{" "}
+				<label>{props.label}</label>
+			</components.Option>
+		</div>
+	);
+};
+
+const MultiValue = (props) => (
+	<components.MultiValue {...props}>
+		{/* {console.log(props.data, "props")}	 */}
+		<span>{props.data.firstName}</span>
+	</components.MultiValue>
+);
 
 const AddNotification = () => {
 	const history = useHistory();
 	const token = localStorage.getItem("token");
-	// const [deviceList, setDeviceList] = useState([]);
+	const [optionSelected, setOptionSelected] = useState([]);
 	const [userList, setUserList] = useState([]);
+
+	const handleChange = (selected, i) => {
+		const data = [];
+		for (let i = 0; i < selected?.length; i++) {
+			console.log("select", selected[i].customer_id);
+			data.push({
+				customer_id: selected[i].customer_id,
+				firstName: selected[i].firstName,
+			});
+		}
+		setOptionSelected(data);
+	};
 
 	useEffect(() => {
 		var config = {
@@ -38,13 +74,6 @@ const AddNotification = () => {
 	// 	});
 	// }, []);
 
-	function selectAll() {
-		const options = document.getElementsByTagName("option");
-		for (let i = 0; i < options.length; i++) {
-			options[i].selected = "true";
-		}
-	}
-
 	const [inputFields2, setInputFields2] = useState([
 		{ message: "", customers: [] },
 	]);
@@ -60,7 +89,7 @@ const AddNotification = () => {
 		// const deviceId = inputFields2[0].deviceId;
 
 		const data = JSON.stringify({
-			customer_id: inputFields2.customer_id,
+			customers: optionSelected.customer_id,
 			message: inputFields2.message,
 		});
 
@@ -78,11 +107,8 @@ const AddNotification = () => {
 				console.log("res", res.data);
 				if (res.data.code === 200) {
 					alert("Asssigned sucessfully!");
-					// history.push('/admin/DeviceList')
-					// history.push("/admin/CustomerList");
 				} else {
 					alert(res.data.message);
-					// history.push("/admin/CustomerList");
 				}
 			});
 		} catch (error) {
@@ -108,16 +134,26 @@ const AddNotification = () => {
 												isMulti={true}
 												className="basic-multi-select"
 												isClearable={true}
-												// defaultValue={userList}
-												// value={[inputFields2.customers]}
+												defaultValue={userList}
+												value={[inputFields2.customers]}
 												onChange={(value) => {
 													console.log(value[0].customer_id);
 												}}
 												options={userList}
-												// getOptionLabel={(option) => option}
-												// getOptionValue={(option) => option}
+												getOptionLabel={(option) => option}
+												getOptionValue={(option) => option}
 											/> */}
-											<select
+											<MySelect
+												options={userList}
+												isMulti
+												closeMenuOnSelect={false}
+												hideSelectedOptions={false}
+												components={{ Option, MultiValue }}
+												onChange={handleChange}
+												allowSelectAll={true}
+												value={optionSelected}
+											/>
+											{/* <sele<select
 												name="userId"
 												className="input col-12"
 												style={{
@@ -125,7 +161,6 @@ const AddNotification = () => {
 													padding: "5px",
 													borderRadius: "5px",
 												}}
-												// multiple
 												onChange={(e) => {
 													setInputFields2({
 														...inputFields2,
@@ -134,13 +169,33 @@ const AddNotification = () => {
 													console.log(inputFields2.customer_id);
 												}}>
 												<option>Select User</option>
-												{/* <option onClick={selectAll}>Select All</option> */}
 												{userList.map((x) => {
 													return (
 														<option value={x.customer_id}>{x.firstName}</option>
 													);
 												})}
-											</select>
+											</select>ct
+												name="userId"
+												className="input col-12"
+												style={{
+													border: "1px solid rgb(234, 237, 241)",
+													padding: "5px",
+													borderRadius: "5px",
+												}}
+												onChange={(e) => {
+													setInputFields2({
+														...inputFields2,
+														customer_id: e.target.value,
+													});
+													console.log(inputFields2.customer_id);
+												}}>
+												<option>Select User</option>
+												{userList.map((x) => {
+													return (
+														<option value={x.customer_id}>{x.firstName}</option>
+													);
+												})}
+											</select> */}
 										</div>
 									</Form.Group>
 								</div>
