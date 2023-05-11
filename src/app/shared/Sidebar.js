@@ -188,9 +188,9 @@ function Sidebar() {
 							? "nav-item active mt-4"
 							: "nav-item mt-4"
 					}>
-					<Link className="nav-link" to="/admin/dashboard">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/dashboard">
+						<i class="fa-solid fa-house"></i>
+						<span className="menu-title ms-3">
 							<Trans>Dashboard</Trans>
 						</span>
 					</Link>
@@ -200,21 +200,9 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/accoutnManagement">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
-							<Trans>Account Management</Trans>
-						</span>
-					</Link>
-				</li>
-
-				<li
-					className={
-						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
-					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/CustomerList">
+						<i class="fa-regular fa-user"></i>
+						<span className="menu-title ms-3">
 							<Trans>Customers</Trans>
 						</span>
 					</Link>
@@ -223,14 +211,139 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link" to="/admin/AdminPaymentTransaction">
-						<i className="mdi mdi-television menu-icon"></i>
-						<span className="menu-title">
+					<Link className="nav-link ps-3" to="/admin/DeviceList">
+						<i class="fa-solid fa-mobile-screen-button"></i>
+						<span className="menu-title ms-3">
 							<Trans>Licensing Management</Trans>
 						</span>
 					</Link>
 				</li>
 				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/Assigned-devices">
+						<i class="fa-solid fa-mobile-button"></i>
+						<span className="menu-title ms-3">
+							<Trans>Assigned Devices</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/ListOfInvoices">
+						<i class="fa-solid fa-receipt"></i>
+						<span className="menu-title ms-3">
+							<Trans>Invoices</Trans>
+						</span>
+					</Link>
+				</li>
+
+				{/* <li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/accoutnManagement">
+						<i class="fa-solid fa-book"></i>
+						<span className="menu-title ms-3">
+							<Trans>Access History</Trans>
+						</span>
+					</Link>
+				</li> */}
+
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/ScannedInvoice">
+						<i class="fa-solid fa-money-bill-transfer"></i>
+						<span className="menu-title ms-3">
+							<Trans>Scanned Invoice</Trans>
+						</span>
+					</Link>
+				</li>
+				{/* <li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-regular fa-bell"></i>
+
+						<span className="menu-title ms-3">
+							<Trans>Notification Management</Trans>
+						</span>
+					</Link>
+				</li> */}
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/notifications">
+						<i class="fa-regular fa-bell"></i>
+						<span className="menu-title ms-3">
+							<Trans>Notifications Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/access-history">
+						<i class="fa-solid fa-envelope"></i>
+						<span className="menu-title ms-3">
+							<Trans>Access History</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/email-template">
+						<i class="fa-solid fa-envelope"></i>
+						<span className="menu-title ms-3">
+							<Trans>Email Template Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-solid fa-money-bill-transfer"></i>
+						<span className="menu-title ms-3">
+							<Trans>Transaction Management</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-regular fa-life-ring"></i>
+						<span className="menu-title ms-3">
+							<Trans>Support</Trans>
+						</span>
+					</Link>
+				</li>
+
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
+					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+						<i class="fa-solid fa-screwdriver-wrench"></i>
+						<span className="menu-title ms-3">
+							<Trans>Setup</Trans>
+						</span>
+					</Link>
+				</li>
+				{/* <li
 					className={
 						isPathActive("/basic-ui") ? "nav-item active" : "nav-item"
 					}>
@@ -274,7 +387,7 @@ function Sidebar() {
 							</li>
 						</ul>
 					</Collapse>
-				</li>
+				</li> */}
 				{/* <li
 					className={
 						isPathActive("/basic-ui") ? "nav-item active" : "nav-item"
@@ -331,7 +444,7 @@ function Sidebar() {
 						</span>
 					</Link>
 				</li> */}
-				<li
+				{/* <li
 					className={
 						isPathActive("/admin/dashboard") ? "nav-item active" : "nav-item"
 					}>
@@ -341,9 +454,9 @@ function Sidebar() {
 							<Trans>Assign Merchant to User</Trans>
 						</span>
 					</Link>
-				</li>
+				</li> */}
 
-				<li
+				{/* <li
 					className={
 						isPathActive("/basic-ui") ? "nav-item active" : "nav-item"
 					}>
@@ -387,7 +500,7 @@ function Sidebar() {
 							</li>
 						</ul>
 					</Collapse>
-				</li>
+				</li> */}
 			</ul>
 		</nav>
 	);

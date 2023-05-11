@@ -3,19 +3,25 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./forgotPassword.css";
 import logo from "../../../assets/images/logo.png";
-const ResetPassword = () => {
-	const [email, setEmail] = useState("");
-	const [newPassword, setNewPassword] = useState("");
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+function ForgotPassword() {
+	const history = useHistory();
+	useEffect(() => {
+		localStorage.clear();
+		// console.log(API);
+	}, []);
+	const [email, setId] = useState("");
+	const [password, setpassword] = useState("");
 	const [success, setSuccess] = useState(false);
 
 	async function onSubmit(event) {
 		event.preventDefault();
-		console.log(email, newPassword);
+		console.log("sdkjfshfkshdfkj", email, password);
 
 		try {
 			const response = await axios.patch(
 				`https://backend.klivepay.com/api/admin/forget-password?email=${email}`,
-				JSON.stringify({ newPassword }),
+				JSON.stringify({ password }),
 				{
 					headers: { "Content-Type": "application/json" },
 					// withCredentials: true,
@@ -28,8 +34,8 @@ const ResetPassword = () => {
 
 			// const accessToken = response?.data?.accessToken;
 			// localStorage.setItem("token", response?.data?.accessToken);
-			setEmail("");
-			setNewPassword("");
+			setId("");
+			setpassword("");
 			setSuccess(true);
 		} catch (err) {
 			console.log(err);
@@ -47,24 +53,31 @@ const ResetPassword = () => {
 			<div className="d-flex align-items-center auth px-0">
 				<div className="row w-100 mx-0">
 					<div className="text-center">
-						<img src={logo} alt="" className="PForgotPasswordLogo" />
+						{/* <img src={logo} alt="" className="PForgotPasswordLogo" /> */}
+						<img
+							src={logo}
+							className="img-responsive"
+							alt="ixiono pte. ltd"
+							style={{ height: "70px", width: "200px" }}
+						/>
 						<br />
 					</div>
 					<div className="text-center mt-5">
-						<h4 className="text-primary">Forgot Password</h4>
+						<h4 className="ptext-primary">Get Forgot Password Link</h4>
 						<br />
 					</div>
-					<div className="col-lg-8 mx-auto">
-						<div className="auth-form-light cardForgot text-left py-5 px-4 px-sm-5">
-							<form className="pt-3">
+					<div className="col-lg-4 mx-auto">
+						<div className="auth-form-light cardForgot text-left py-10 px-4 px-sm-17">
+							<form className="pt-1">
 								<div className="form-group">
+									<label>Email Address</label>
 									<input
 										type="email"
 										className="form-control Pinput form-control-lg"
 										id="exampleInputEmail1"
-										onChange={(e) => setEmail(e.target.value)}
+										onChange={(e) => setId(e.target.value)}
 										value={email}
-										placeholder="Email"
+										placeholder="Email Address"
 									/>
 								</div>
 								<div className="form-group">
@@ -73,23 +86,27 @@ const ResetPassword = () => {
 										className="form-control form-control-lg"
 										id="password"
 										placeholder="New Password"
-										onChange={(e) => setNewPassword(e.target.value)}
-										value={newPassword}
+										onChange={(e) => setpassword(e.target.value)}
+										value={password}
 									/>
 								</div>
-								<div className="form-group">
+								{/* <div className="form-group">
 									<Link to="/admin/login">
 										<h5 className="text-primary">Login?</h5>
 									</Link>
-								</div>
+								</div> */}
 
 								<div className="mt-3">
 									<button
-										href="/admin/login"
-										onClick={(event) => onSubmit(event)}
+										type="button"
+										// href="/admin/dashboard"
+										onClick={(event) => {
+											onSubmit(event);
+										}}
 										className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
-										Forgot Password
+										submit
 									</button>
+									<div className="mt-3"></div>
 								</div>
 							</form>
 						</div>
@@ -98,6 +115,6 @@ const ResetPassword = () => {
 			</div>
 		</div>
 	);
-};
+}
 
-export default ResetPassword;
+export default ForgotPassword;

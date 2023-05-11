@@ -66,7 +66,7 @@
           display: block;
           max-width: 100%;
           .nav-link {
-            padding: 10px 0px 10px 70px; 
+            // padding: 10px 0px 10px 70px; 
             position: relative;
             color: rgba($sidebar-light-menu-color, 0.8);
             font-size: calc(#{$sidebar-menu-font-size} - 2px);
@@ -121,6 +121,9 @@
         }
       }
 
+       a.nav-link:before{
+        display: none !important;
+      }
       .nav-link {
         align-items: center;
         display: flex;

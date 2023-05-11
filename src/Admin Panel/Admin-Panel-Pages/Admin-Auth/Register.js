@@ -2,8 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import styles from "./registration.module.css";
 import { Link } from "react-router-dom";
+import { Form } from "react-bootstrap";
 import axios from "axios";
 import UserLogin from "./Login";
+import "./Register.css";
+import "./registration.module.css";
+import logo from "../../../assets/images/logo.png";
+
 import {
 	faCheck,
 	faTimes,
@@ -12,6 +17,7 @@ import {
 	faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import API from "../../../backend";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -20,13 +26,13 @@ const MOBILE_REGEX = /^[0-9]{8,}$/;
 
 function UserRegistration() {
 	const userRef = useRef();
-	// const errRef = useRef();
+	const errRef = useRef();
 
-	const [name, setName] = useState("");
+	const [username, setUserName] = useState("");
 	const [validName, setValidName] = useState(false);
 	const [userFocus, setUserFocus] = useState(false);
 
-	const [mobile, setMobile] = useState({});
+	const [mobile, setMobile] = useState("");
 	const [validMobile, setValidMobile] = useState(false);
 	const [mobileFocus, setMobileFocus] = useState(false);
 
@@ -56,11 +62,11 @@ function UserRegistration() {
 	}, []);
 
 	useEffect(() => {
-		const result = USER_REGEX.test(name);
+		const result = USER_REGEX.test(username);
 		console.log(result);
-		console.log(name);
+		console.log(username);
 		setValidName(result);
-	}, [name]);
+	}, [username]);
 
 	useEffect(() => {
 		const result = EMAIL_REGEX.test(email);
@@ -87,12 +93,12 @@ function UserRegistration() {
 
 	useEffect(() => {
 		setErrMsg("");
-	}, [password, name, matchPwd]);
+	}, [password, username, matchPwd]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// if button enabled with JS hack
-		const v1 = USER_REGEX.test(name);
+		const v1 = USER_REGEX.test(username);
 		const v2 = PWD_REGEX.test(password);
 		if (!v1 || !v2) {
 			setErrMsg("Invalid Entry");
@@ -101,13 +107,12 @@ function UserRegistration() {
 		try {
 			const response = await axios
 				.post(
-					"https://backend.klivepay.com/api/user/register",
+					`${API}/admin/register`,
 					JSON.stringify({
-						name,
-						mobile,
+						username,
+						mobile: mobile.toString(),
 						email,
 						password,
-						typeOfStreem: "web",
 					}),
 					{
 						headers: { "Content-Type": "application/json" },
@@ -115,17 +120,17 @@ function UserRegistration() {
 					}
 				)
 				.then((res) => {
-					if (res.status === 201) {
+					if (res.status === 200) {
 						alert(res.data.message);
+						setSuccess(true);
 					}
 				});
 			console.log(response?.data);
 			// console.log(response?.accessToken);
 			console.log(JSON.stringify(response));
-			setSuccess(true);
 			//clear state and controlled inputs
 			//need value attrib on inputs for this
-			setName("");
+			setUserName("");
 			setEmail("");
 			setPassword("");
 			setMatchPwd("");
@@ -137,7 +142,7 @@ function UserRegistration() {
 			} else {
 				setErrMsg("Registration Failed");
 			}
-			// errRef.current.focus();
+			errRef.current.focus();
 		}
 	};
 
@@ -149,23 +154,79 @@ function UserRegistration() {
 				<div>
 					<div className="d-flex align-items-center auth px-0">
 						<div className="row w-100 mx-0">
-							<div className="col-lg-10 mx-auto">
-								<div className="auth-form-light text-left py-5 px-4 px-sm-5">
-									{/* <p
+							<div className="text-center">
+								<img src={logo} alt="" className="loginLogo" />
+							</div>
+							<div className="text-center mb-5">
+								<h4 className="signTittleM">Sign Up</h4>
+							</div>
+
+							<div className="col-lg-6 mx-auto">
+								<div className="auth-form-light text-left py-4 px-4 px-sm-5">
+									<p
 										ref={errRef}
 										className={errMsg ? "errmsg" : "offscreen"}
 										aria-live="assertive">
 										{errMsg}
-									</p> */}
-									<h2 className="text-primary font-weight-bolder mb-5 text-center">
-										User Registeration
-									</h2>
+									</p>
+									<div className="row">
+										<form className="pt-3">
+											<div className="form-group">
+												<label className="signFormLabel">
+													Enter your Email address{" "}
+													<span className="text-danger">*</span>{" "}
+													{emailFocus && validEmail ? (
+														<FontAwesomeIcon
+															icon={faCheck}
+															className={"text-success"}
+														/>
+													) : (
+														""
+													)}
+													{emailFocus && !validEmail ? (
+														<FontAwesomeIcon
+															icon={faTimes}
+															className={"text-danger"}
+														/>
+													) : (
+														""
+													)}
+												</label>
+												<input
+													type="email"
+													id="email"
+													onChange={(e) => setEmail(e.target.value)}
+													value={email}
+													aria-invalid={validEmail ? "false" : "true"}
+													required
+													onFocus={() => setEmailFocus(true)}
+													onBlur={() => setEmailFocus(false)}
+													className={`form-control form-control-lg $ ${styles.registerInputs}`}
+													placeholder="Email"
+												/>
+												{emailFocus && !validEmail ? (
+													<p
+														id="uidnote"
+														className={
+															emailFocus && email && !validEmail
+																? "instructions"
+																: "offscreen"
+														}>
+														<FontAwesomeIcon icon={faInfoCircle} />
+														must be a proper email address.
+													</p>
+												) : (
+													""
+												)}
+											</div>
+										</form>
+									</div>
 
 									<div className="row">
 										<div className="col-lg-6">
 											<form>
 												<div className="form-group">
-													<label className={`${styles.registerLabel}`}>
+													<label className="signFormLabel">
 														User Name <span className="text-danger">*</span>{" "}
 														{userFocus && validName ? (
 															<FontAwesomeIcon
@@ -189,8 +250,8 @@ function UserRegistration() {
 														id="username"
 														ref={userRef}
 														autoComplete="off"
-														onChange={(e) => setName(e.target.value)}
-														value={name}
+														onChange={(e) => setUserName(e.target.value)}
+														value={username}
 														required
 														aria-invalid={validName ? "false" : "true"}
 														aria-describedby="uidnote"
@@ -203,7 +264,7 @@ function UserRegistration() {
 														<p
 															id="uidnote"
 															className={
-																userFocus && name && !validName
+																userFocus && username && !validName
 																	? "instructions"
 																	: "offscreen"
 															}>
@@ -223,9 +284,8 @@ function UserRegistration() {
 										<div className="col-lg-6">
 											<form>
 												<div className="form-group">
-													<label className={`${styles.registerLabel}`}>
-														Mobile Number (exclude + in country code){" "}
-														<span className="text-danger">*</span>
+													<label className="signFormLabel">
+														Mobile Number <span className="text-danger">*</span>
 														{""}
 														{mobileFocus && validMobile ? (
 															<FontAwesomeIcon
@@ -278,11 +338,12 @@ function UserRegistration() {
 										</div>
 									</div>
 									<div className="row">
+										{/* <div className="col-lg-6"> */}
 										<form className="pt-3">
 											<div className="form-group">
-												<label className={`${styles.registerLabel}`}>
-													Email Address <span className="text-danger">*</span>{" "}
-													{emailFocus && validEmail ? (
+												<label className="signFormLabel">
+													Password <span className="text-danger">*</span>{" "}
+													{pwdFocus && validPwd ? (
 														<FontAwesomeIcon
 															icon={faCheck}
 															className={"text-success"}
@@ -290,7 +351,7 @@ function UserRegistration() {
 													) : (
 														""
 													)}
-													{emailFocus && !validEmail ? (
+													{pwdFocus && !validPwd ? (
 														<FontAwesomeIcon
 															icon={faTimes}
 															className={"text-danger"}
@@ -300,168 +361,108 @@ function UserRegistration() {
 													)}
 												</label>
 												<input
-													type="email"
-													id="email"
-													onChange={(e) => setEmail(e.target.value)}
-													value={email}
-													aria-invalid={validEmail ? "false" : "true"}
+													type={show ? "text" : "password"}
+													id="password"
+													onChange={(e) => setPassword(e.target.value)}
+													value={password}
 													required
-													onFocus={() => setEmailFocus(true)}
-													onBlur={() => setEmailFocus(false)}
+													aria-invalid={validPwd ? "false" : "true"}
+													aria-describedby="pwdnote"
+													onFocus={() => setPwdFocus(true)}
+													onBlur={() => setPwdFocus(false)}
 													className={`form-control form-control-lg $ ${styles.registerInputs}`}
-													placeholder="Email"
+													placeholder="Password"
 												/>
-												{emailFocus && !validEmail ? (
+												{/* <FontAwesomeIcon
+													style={{
+														position: "absolute",
+														zIndex: "70",
+														right: "70px",
+														top: "378px",
+														// left: "525px",
+														// bottom: "33px",
+													}}
+													onClick={() => {
+														setShow(!show);
+													}}
+													icon={show ? faEye : faEyeSlash}
+												/> */}
+												{pwdFocus && !validPwd ? (
 													<p
 														id="uidnote"
 														className={
-															emailFocus && email && !validEmail
+															userFocus && username && !validPwd
 																? "instructions"
 																: "offscreen"
 														}>
 														<FontAwesomeIcon icon={faInfoCircle} />
-														must be a proper email address.
+														Must contain a capital letter.
+														<br />
+														Must container a small letter.
+														<br />
+														Must container a number
+														<br />
+														Must container a special letter(! @ # $ % ).
 													</p>
 												) : (
 													""
 												)}
 											</div>
-										</form>
-									</div>
-									<div className="row">
-										<div className="col-lg-6">
-											<form className="pt-3">
-												<div className="form-group">
-													<label className={`${styles.registerLabel}`}>
-														Password <span className="text-danger">*</span>{" "}
-														{pwdFocus && validPwd ? (
-															<FontAwesomeIcon
-																icon={faCheck}
-																className={"text-success"}
-															/>
-														) : (
-															""
-														)}
-														{pwdFocus && !validPwd ? (
-															<FontAwesomeIcon
-																icon={faTimes}
-																className={"text-danger"}
-															/>
-														) : (
-															""
-														)}
-													</label>
-													<input
-														type={show ? "text" : "password"}
-														id="password"
-														onChange={(e) => setPassword(e.target.value)}
-														value={password}
-														required
-														aria-invalid={validPwd ? "false" : "true"}
-														aria-describedby="pwdnote"
-														onFocus={() => setPwdFocus(true)}
-														onBlur={() => setPwdFocus(false)}
-														className={`form-control form-control-lg $ ${styles.registerInputs}`}
-														placeholder="Password"
-													/>
-													<FontAwesomeIcon
-														style={{
-															position: "absolute",
-															zIndex: "70",
-															right: "30px",
-															top: "55px",
-															// left: "505px",
-															// bottom: "33px",
-														}}
-														onClick={() => {
-															setShow(!show);
-														}}
-														icon={show ? faEye : faEyeSlash}
-													/>
-													{pwdFocus && !validPwd ? (
-														<p
-															id="uidnote"
-															className={
-																userFocus && name && !validPwd
-																	? "instructions"
-																	: "offscreen"
-															}>
-															<FontAwesomeIcon icon={faInfoCircle} />
-															Must contain a capital letter.
-															<br />
-															Must container a small letter.
-															<br />
-															Must container a number
-															<br />
-															Must container a special letter(! @ # $ % ).
-														</p>
+											<div className="form-group">
+												<label className={`${styles.registerLabel}`}>
+													Confirm Password {""}
+													<span className="text-danger">*</span>{" "}
+													{matchFocus && validMatch ? (
+														<FontAwesomeIcon
+															icon={faCheck}
+															className={"text-success"}
+														/>
 													) : (
 														""
 													)}
-												</div>
-											</form>
-										</div>
-										<div className="col-lg-6">
-											<form className="pt-3">
-												<div className="form-group">
-													<label className={`${styles.registerLabel}`}>
-														Confirm Password {""}
-														<span className="text-danger">*</span>{" "}
-														{matchFocus && validMatch ? (
-															<FontAwesomeIcon
-																icon={faCheck}
-																className={"text-success"}
-															/>
-														) : (
-															""
-														)}
-														{matchFocus && !validMatch ? (
-															<FontAwesomeIcon
-																icon={faTimes}
-																className={"text-danger"}
-															/>
-														) : (
-															""
-														)}
-													</label>
-													<input
-														type={show1 ? "text" : "password"}
-														id="Confirm-password"
-														onChange={(e) => setMatchPwd(e.target.value)}
-														value={matchPwd}
-														required
-														aria-invalid={validMatch ? "false" : "true"}
-														aria-describedby="confirmnote"
-														onFocus={() => setMatchFocus(true)}
-														onBlur={() => setMatchFocus(false)}
-														className={`form-control form-control-lg $ ${styles.registerInputs}`}
-														placeholder="Confirm Password"
-													/>
-													<FontAwesomeIcon
-														style={{
-															position: "absolute",
-															zIndex: "70",
-															right: "30px",
-															top: "55px",
-															// left: "505px",
-															// bottom: "33px",
-														}}
-														onClick={() => {
-															setShow1(!show1);
-														}}
-														icon={show1 ? faEye : faEyeSlash}
-													/>
 													{matchFocus && !validMatch ? (
-														<p className="text-danger">
-															{" "}
-															Paswwords do not match
-														</p>
+														<FontAwesomeIcon
+															icon={faTimes}
+															className={"text-danger"}
+														/>
 													) : (
 														""
 													)}
-												</div>
-											</form>
-										</div>
+												</label>
+												<input
+													type={show1 ? "text" : "password"}
+													id="Confirm-password"
+													onChange={(e) => setMatchPwd(e.target.value)}
+													value={matchPwd}
+													required
+													aria-invalid={validMatch ? "false" : "true"}
+													aria-describedby="confirmnote"
+													onFocus={() => setMatchFocus(true)}
+													onBlur={() => setMatchFocus(false)}
+													className={`form-control form-control-lg $ ${styles.registerInputs}`}
+													placeholder="Confirm Password"
+												/>
+												{/* <FontAwesomeIcon
+													style={{
+														position: "absolute",
+														zIndex: "70",
+														right: "30px",
+														top: "55px",
+														// left: "505px",
+														// bottom: "33px",
+													}}
+													onClick={() => {
+														setShow1(!show1);
+													}}
+													icon={show1 ? faEye : faEyeSlash}
+												/> */}
+												{matchFocus && !validMatch ? (
+													<p className="text-danger"> Paswwords do not match</p>
+												) : (
+													""
+												)}
+											</div>
+										</form>
 									</div>
 									<div className="row">
 										<form className="pt-3">
@@ -476,7 +477,7 @@ function UserRegistration() {
 													}}
 												/>
 											</div>
-											<div className="mb-4">
+											{/* <div className="mb-4">
 												<div className="form-check">
 													<label className="form-check-label text-muted">
 														<input
@@ -513,13 +514,13 @@ function UserRegistration() {
 														and conditions.
 													</label>
 												</div>
-											</div>
+											</div> */}
 										</form>
 									</div>
 									<div className="row">
 										<div className="mt-3">
 											<button
-												// type="submit"
+												type="submit"
 												href="/user/login"
 												onClick={handleSubmit}
 												disabled={
@@ -528,15 +529,15 @@ function UserRegistration() {
 													!validMobile ||
 													!validEmail ||
 													!validMatch ||
-													checked === false ||
-													checkedone === false ||
 													!captcha
 														? true
 														: false
 												}
 												className={`btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn ${styles.registerBtn}`}>
 												{/* <Link to="/merchant/dashboard" className="text-white"> */}
-												SIGN UP
+												<Link to="/user/login" className="text-white">
+													SIGN UP
+												</Link>
 												{/* </Link> */}
 											</button>
 										</div>
@@ -547,11 +548,6 @@ function UserRegistration() {
 											<Link to="/admin/login" className="text-primary">
 												Login
 											</Link>
-										</div>
-										<div className=" font-weight-light">
-											<a className="text-decoration-none" href="/admin/login">
-												Go Back to Home Page?
-											</a>
 										</div>
 									</div>
 								</div>

@@ -120,7 +120,6 @@ const AdminManageUser = () => {
 							pathname: "/admin/getUserProfile",
 							state: { dataEmail: row.email },
 						});
-						// console.log(row.email);
 					}}>
 					view
 				</button>

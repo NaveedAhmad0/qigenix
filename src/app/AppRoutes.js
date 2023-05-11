@@ -32,8 +32,11 @@ const AdminLogin = lazy(() =>
 );
 const AdminTransaction = lazy(() =>
 	import(
-		"../Admin Panel/Admin-Panel-Pages/Admin-Payment_Transaction/AdminPaymentTransaction"
+		"../Admin Panel/Admin-Panel-Pages/Admin-Payment_Transaction/Transaction"
 	)
+);
+const AccessHistory = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Access History/AccessHistory")
 );
 const WithdrawalRequest = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/WithdrawalRequest/WithdrawalRequest")
@@ -64,9 +67,10 @@ const GetMerchantProfile = lazy(() =>
 	)
 );
 const AdminChangePassword = lazy(() =>
-	import(
-		"../Admin Panel/Admin-Panel-Pages/Admin-Reset-Password/AdminChangePassword"
-	)
+	import("../Admin Panel/Admin-Panel-Pages/Admin-Reset-Password/resetPassword")
+);
+const ForgotPasswordLink = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Forgot Password/ForgotPasswordLink")
 );
 const ForgotPassword = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Forgot Password/ForgotPassword")
@@ -87,14 +91,50 @@ const AssignMerchToUser = lazy(() =>
 		"../Admin Panel/Admin-Panel-Pages/Assign-Merchant-To-User/AssignMerchToUser"
 	)
 );
-const TransactionDetails = lazy(() =>
+
+const DeviceList = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Device List/DeviceList")
+);
+const CustomerList = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Customer List/CustomerList")
+);
+const AddCustomer = lazy(() =>
 	import(
-		"../Admin Panel/Admin-Panel-Pages/Admin-Payment_Transaction/TransactionDetails"
+		"../Admin Panel/Admin-Panel-Pages/Customer List/Add Customer/AddCustomer"
 	)
+);
+const AddDevice = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Device List/Add Device/AddDevice")
+);
+const CustomerDetails = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Customer details/CustomerDetails")
+);
+const DeviceDetails = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Device Details/DeviceDetails")
 );
 
 const SignUp = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/Register")
+);
+const ListOfInvoices = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/List of invoices/ListOfInvoices")
+);
+const ListOfAssDevices = lazy(() =>
+	import(
+		"../Admin Panel/Admin-Panel-Pages/List of Assigned Devices/ListOfAssignedDevice"
+	)
+);
+const EmailTemplate = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Email Template/Setup")
+);
+const Notifications = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Notification/notificationList")
+);
+const ScannedInvoice = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Scanned Inovices/ScannedInvoices")
+);
+const NotificationDetail = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Notification/NotificationDetail")
 );
 
 class AppRoutes extends Component {
@@ -139,6 +179,14 @@ class AppRoutes extends Component {
 						component={WithdrawalDetails}
 					/>
 					<Route path="/admin/Registration" component={SignUp} />
+					<Route path="/admin/CustomerList" component={CustomerList} />
+					<Route path="/admin/addCustomer" component={AddCustomer} />
+					<Route path="/admin/CustomerDetails" component={CustomerDetails} />
+
+					<Route path="/admin/DeviceList" component={DeviceList} />
+					<Route path="/admin/device-details" component={DeviceDetails} />
+					<Route path="/admin/add-device" component={AddDevice} />
+
 					<Route path="/admin/AdminVoid" component={AdminVoid} />
 					<Route path="/admin/AdminRefund" component={AdminRefund} />
 					<Route path="/admin/update-profile" component={AdminProfile} />
@@ -154,9 +202,11 @@ class AppRoutes extends Component {
 						component={GetMerchantProfile}
 					/>
 					<Route path="/admin/resetPassword" component={AdminChangePassword} />
+
 					<Route
-						path="/admin/TransactionDetails"
-						component={TransactionDetails}
+						exact
+						path="/admin/get_forgotPassword_link"
+						component={ForgotPasswordLink}
 					/>
 					<Route
 						exact
@@ -169,6 +219,17 @@ class AppRoutes extends Component {
 					/>
 					<Route path="/admin/AdminManageUser" component={AdminManageUser} />
 					<Route path="/admin/AdminManageRole" component={AdminManageRole} />
+					<Route path="/admin/ListOfInvoices" component={ListOfInvoices} />
+					<Route path="/admin/Assigned-devices" component={ListOfAssDevices} />
+					<Route path="/admin/email-template" component={EmailTemplate} />
+					<Route path="/admin/notifications" component={Notifications} />
+					<Route
+						path="/admin/NotificationDetails"
+						component={NotificationDetail}
+					/>
+					<Route path="/admin/ScannedInvoice" component={ScannedInvoice} />
+					<Route path="/admin/access-history" component={AccessHistory} />
+
 					<Route
 						path="/admin/assign-merchnat-to-users"
 						component={AssignMerchToUser}
@@ -176,7 +237,7 @@ class AppRoutes extends Component {
 
 					<Route path="/admin/error-pages/error-404" component={Error404} />
 					<Route path="/admin/error-pages/error-500" component={Error500} />
-
+					{/* <Route path="*" component={<Redirect to="/admin/login" />} /> */}
 					<Redirect to="/admin/login" />
 				</Switch>
 			</Suspense>
