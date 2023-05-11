@@ -130,7 +130,7 @@ const Navbar = () => {
 							/>{" "}
 						</a> */}
 					</li>
-					<li className="nav-item  nav-profile border-0">
+					{/* <li className="nav-item  nav-profile border-0">
 						<Dropdown>
 							<Dropdown.Toggle className="nav-link count-indicator p-0 toggle-arrow-hide bg-transparent">
 								<svg
@@ -159,16 +159,12 @@ const Navbar = () => {
 									onClick={(evt) => evt.preventDefault()}>
 									<p className="mb-0 font-weight-medium float-left">
 										unread mails
-										{/* <Trans>You have</Trans> 8{" "}
-										<Trans>
-											unread mails sdjfh skdfj hsdkfj sdfk jhdsfkj ksjdh skdfh
-											sdkfh sdkjf hskdjhf
-										</Trans>{" "} */}
+										
 									</p>
 								</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
-					</li>
+					</li> */}
 					{/* 
 					<li className="nav-item  nav-profile border-0">
 						<Dropdown>

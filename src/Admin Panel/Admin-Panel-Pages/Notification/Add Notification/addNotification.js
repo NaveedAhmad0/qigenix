@@ -3,6 +3,7 @@ import Select from "react-select";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
+import makeAnimated from "react-select/animated";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { components } from "react-select";
 import MySelect from "../My select/MySelect";
@@ -35,17 +36,19 @@ const AddNotification = () => {
 	const [optionSelected, setOptionSelected] = useState([]);
 	const [userList, setUserList] = useState([]);
 
+	const animatedComponents = makeAnimated();
 	const handleChange = (selected, i) => {
-		const data = [];
+		const dataa = [];
 		for (let i = 0; i < selected?.length; i++) {
 			console.log("select", selected[i].customer_id);
-			data.push({
+			dataa.push({
 				customer_id: selected[i].customer_id,
 				firstName: selected[i].firstName,
 			});
 		}
-		setOptionSelected(data);
+		setOptionSelected(dataa);
 	};
+	console.log(optionSelected);
 
 	useEffect(() => {
 		var config = {
@@ -60,19 +63,6 @@ const AddNotification = () => {
 			setUserList(res.data);
 		});
 	}, []);
-	// useEffect(() => {
-	// 	var config = {
-	// 		method: "get",
-	// 		url: `https://qigenix.ixiono.com/apis/admin/list-devices`,
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 			Authorization: `${token}`,
-	// 		},
-	// 	};
-	// 	axios(config).then((res) => {
-	// 		setDeviceList(res.data);
-	// 	});
-	// }, []);
 
 	const [inputFields2, setInputFields2] = useState([
 		{ message: "", customers: [] },
@@ -89,7 +79,7 @@ const AddNotification = () => {
 		// const deviceId = inputFields2[0].deviceId;
 
 		const data = JSON.stringify({
-			customers: optionSelected.customer_id,
+			customers: optionSelected,
 			message: inputFields2.message,
 		});
 
@@ -148,7 +138,7 @@ const AddNotification = () => {
 												isMulti
 												closeMenuOnSelect={false}
 												hideSelectedOptions={false}
-												components={{ Option, MultiValue }}
+												components={{ Option, MultiValue, animatedComponents }}
 												onChange={handleChange}
 												allowSelectAll={true}
 												value={optionSelected}

@@ -35,6 +35,9 @@ const AdminTransaction = lazy(() =>
 		"../Admin Panel/Admin-Panel-Pages/Admin-Payment_Transaction/Transaction"
 	)
 );
+const AccessHistory = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Access History/AccessHistory")
+);
 const WithdrawalRequest = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/WithdrawalRequest/WithdrawalRequest")
 );
@@ -220,8 +223,12 @@ class AppRoutes extends Component {
 					<Route path="/admin/Assigned-devices" component={ListOfAssDevices} />
 					<Route path="/admin/email-template" component={EmailTemplate} />
 					<Route path="/admin/notifications" component={Notifications} />
-					<Route path="/admin/NotificationDetails" component={NotificationDetail} />
+					<Route
+						path="/admin/NotificationDetails"
+						component={NotificationDetail}
+					/>
 					<Route path="/admin/ScannedInvoice" component={ScannedInvoice} />
+					<Route path="/admin/access-history" component={AccessHistory} />
 
 					<Route
 						path="/admin/assign-merchnat-to-users"

@@ -213,9 +213,9 @@ function DeviceList() {
 													<i class="fa-solid fa-plus"></i> New Device
 												</button>
 											</Link>
-											<button className="btn btn-primary mr-2">
+											{/* <button className="btn btn-primary mr-2">
 												<i class="fa-solid fa-upload"></i> Import Devices
-											</button>
+											</button> */}
 										</div>
 									</div>
 									<div className="card">
@@ -303,7 +303,7 @@ function DeviceList() {
 															/>{" "}
 															Export
 														</label>
-														<label
+														{/* <label
 															class="btn"
 															style={{
 																borderRight: "1px solid #D9D9D9",
@@ -321,7 +321,7 @@ function DeviceList() {
 																autocomplete="off"
 															/>{" "}
 															Bulk Actions
-														</label>
+														</label> */}
 														<label
 															class="btn"
 															style={{

@@ -18,6 +18,8 @@ const MySelect = (props) => {
 					}
 					return props.onChange(selected);
 				}}
+				getOptionLabel={(option) => option.firstName}
+				getOptionValue={(option) => option.customer_id}
 			/>
 		);
 	}

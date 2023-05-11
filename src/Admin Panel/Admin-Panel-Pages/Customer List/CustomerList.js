@@ -11,7 +11,7 @@ import ToolkitProvider, {
 import ClipLoader from "react-spinners/ClipLoader";
 import DataTable from "react-data-table-component";
 import moment from "moment";
-
+import { CSVLink, CSVDownload } from "react-csv";
 import { useHistory } from "react-router-dom";
 import API from "../../../backend";
 import "./List.css";
@@ -19,7 +19,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function CustomerList() {
 	const { ExportCSVButton } = CSVExport;
-	const [tableRowsData, setTableRowsData] = useState();
+	const [tableRowsData, setTableRowsData] = useState([]);
 	const [search, setSearch] = useState("");
 	const [Filtered, setFiltered] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -255,12 +255,12 @@ function CustomerList() {
 													<i class="fa-solid fa-plus"></i> New Customer
 												</button>
 											</Link>
-											<button className="btn btn-primary mr-2">
+											{/* <button className="btn btn-primary mr-2">
 												<i class="fa-solid fa-upload"></i> Import Customers
 											</button>
 											<button className="btn btn-outline-secondary mr-2">
 												<i class="fa-regular fa-user"></i> Contacts
-											</button>
+											</button> */}
 										</div>
 									</div>
 									<div className="card">
@@ -346,9 +346,9 @@ function CustomerList() {
 																autocomplete="off"
 																checked
 															/>{" "}
-															Export
+															<CSVLink data={tableRowsData}>Export</CSVLink>
 														</label>
-														<label
+														{/* <label
 															class="btn"
 															style={{
 																borderRight: "1px solid #D9D9D9",
@@ -366,7 +366,7 @@ function CustomerList() {
 																autocomplete="off"
 															/>{" "}
 															Bulk Actions
-														</label>
+														</label> */}
 														<label
 															class="btn"
 															style={{
