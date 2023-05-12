@@ -258,7 +258,7 @@ function Sidebar() {
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
 					<Link className="nav-link ps-3" to="/admin/ScannedInvoice">
-						<i class="fa-solid fa-money-bill-transfer"></i>
+					<i class="fa-solid fa-qrcode"></i>
 						<span className="menu-title ms-3">
 							<Trans>Scanned Invoice</Trans>
 						</span>

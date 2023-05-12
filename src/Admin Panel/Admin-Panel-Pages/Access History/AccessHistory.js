@@ -115,22 +115,7 @@ function AccessHistory() {
 				color: "#4E7AED",
 			},
 		},
-		{
-			name: "Tax",
-			selector: "tax",
-			sortable: false,
-			style: {
-				color: "#4E7AED",
-			},
-		},
-		{
-			name: "Total Amount",
-			selector: "total_amount",
-			sortable: false,
-			style: {
-				color: "#4E7AED",
-			},
-		},
+	
 
 		{
 			name: "Description",
@@ -273,9 +258,7 @@ function AccessHistory() {
 												highlightOnHover
 												subHeader
 												customStyles={customStyles}
-												paginationComponentOptions={{
-													rowsPerPageText: "Showing 1 to 6 of 12 entries:",
-												}}
+												
 											/>
 										</div>
 									</div>
@@ -283,81 +266,96 @@ function AccessHistory() {
 							</div>
 						</div>
 						<div className={toggle ? "col-12" : "invoiceDisplay"}>
-							<div className="card" ref={ref}>
-								<div className="card-body">
-									<div className="col-12 grid-margin">
-										<div className="row mt-4">
-											<div className="col-6">
-												<h5 className="text-primary">Scan Id :</h5>
-												<p>{rowData?.scan_id}</p>
-											</div>
-											<div className="col-6 text-right">
-												<p className="font-weight-bold">
-													Bill To :
-													<p className="text-primary">{rowData?.customer_id}</p>
-												</p>
-												<p className="font-weight-bold">
-													Name:
-													<span className="font-weight-normal"></span>
-												</p>
-											</div>
-										</div>
-										<div className="row">
-											<table class="table">
-												<thead className="bg-dark text-white">
-													<tr>
-														<th scope="col">#Product Id</th>
-														<th scope="col">Product Name</th>
+              <div className="card" ref={ref}>
+                <div className="card-body">
+                  <div className="col-12 grid-margin">
+                    <div className="row mt-4">
+                      <div className="col-6">
+                        <h5 className="text-primary">Scan Id :</h5>
+                        <p>{rowData?.scan_id}</p>
+                      </div>
+                      <div className="col-6 text-right">
+                        <p className="font-weight-bold">
+                          Bill To :
+                          <p className="text-primary">{rowData?.customer_id}</p>
+                        </p>
+                        <p className="font-weight-bold">
+                          Name:
+                          <span className="font-weight-normal"></span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <table class="table table-responsive">
+                        <thead className="bg-dark text-white">
+                          <tr>
+                            <th scope="col">#Product Id</th>
+                            <th scope="col">Product Name</th>
 
-														<th scope="col">QR Code</th>
-														<th scope="col">Quantity</th>
-														<th scope="col">Price</th>
-														<th scope="col">Created At</th>
-													</tr>
-												</thead>
-												<tbody>
-													{rowData?.products?.map((item) => {
-														return (
-															<tr>
-																<td>{item.product_id}</td>
-																<td>{item.product_name}</td>
-																<td>{item.qr_code}</td>
-																<td>{item.quantity}</td>
-																<td>{item.price}</td>
-																<td>
-																	{moment(item.createdAt)
-																		.local()
-																		.format("DD-MM-YYYY hh:mm:ss ")}
-																</td>
-															</tr>
-														);
-													})}
+                            <th scope="col">QR Code</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th>Quantity Price</th>
+                           
+                            <th scope="col">Created At</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {rowData?.products?.map((item) => {
+                            return (
+                              <tr>
+                               <td>{item.product_id}</td> 
+                                <td>{item.product_name}</td>
+                                <td>{item.qr_code}</td>
+                                <td>{item.quantity}</td>
+                                <td>{item.price}</td>
+                                <td>{item.quantityPrice}</td>
+                               
+                               
+                                <td>
+                                  {moment(item.createdAt).local().format("DD-MM-YYYY hh:mm:ss ")}
+                                  </td>
+                              </tr>
+                            );
+                          })}
+<tr>
+  <th className="pt-5">Tax :</th>
+  <td className="pt-5">{rowData?.tax}</td>
+</tr>
+                          <tr>
+                            <th>Total Price</th>
+                            <td>
+                         {rowData?.total_amount}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Total Amount With Tax</th>
+                            <td>{rowData?.amountWithTax}</td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-													<tr>
-														<th>Total Price</th>
-														<td>33,000</td>
-													</tr>
-												</tbody>
-											</table>
+                
 
-											<div className="row">
-												<div className="col-12 ">
-													<Pdf targetRef={ref} filename="invoice.pdf">
-														{({ toPdf }) => (
-															<button
-																className="btn btn-success mt-4"
-																onClick={toPdf}>
-																Generate Pdf
-															</button>
-														)}
-													</Pdf>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                      <div className="row">
+                        <div className="col-12 ">
+                          <Pdf targetRef={ref} filename="invoice.pdf">
+                            {({ toPdf }) => (
+                              <button
+                                className="btn btn-success mt-4"
+                                onClick={toPdf}
+                              >
+                                Generate Pdf
+                              </button>
+                            )}
+                          </Pdf>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 					</div>
 				</div>
 			)}
