@@ -362,9 +362,7 @@ function CustomerList() {
 												highlightOnHover
 												subHeader
 												customStyles={customStyles}
-												paginationComponentOptions={{
-													rowsPerPageText: "Showing 1 to 6 of 12 entries:",
-												}}
+												
 												// subHeaderComponent={
 												//   <div
 												//     class="btn-group btn-group-toggle me-4"

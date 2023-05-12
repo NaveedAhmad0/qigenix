@@ -198,12 +198,15 @@ const AddNotification = () => {
 							})} */}
 
 							<div className="row">
-								<div className="col-12">
+								<div className="col-md-12">
+								<input type="date" className="p-2 w-100" style={{border:"1px solid #d9d9d9",borderRadius:"5px"}}></input>
+								</div>
+								<div className="col-12 mt-4">
 									<label>Enter Notification</label> <br />
-									<textarea
+									<textarea style={{border:"1px solid #d9d9d9",borderRadius:"5px"}}
 										name="message"
 										id=""
-										cols="40"
+										className="w-100"
 										rows="10"
 										value={inputFields2.message}
 										onChange={(e) => {
@@ -219,8 +222,8 @@ const AddNotification = () => {
 								<div className="col-md-6 mx-auto">
 									<button
 										onClick={onSubmit}
-										className="btn btn-success btn-lg btn-block rounded-pill">
-										Agree
+										className="btn btn-success btn-lg btn-block rounded-pill mt-2">
+										Send Notification
 									</button>
 								</div>
 							</div>

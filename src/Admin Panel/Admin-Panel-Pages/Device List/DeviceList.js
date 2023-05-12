@@ -72,7 +72,7 @@ function DeviceList() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data);
-					console.log(response.data);
+					console.log(response);
 
 					setFiltered(response.data);
 				})
