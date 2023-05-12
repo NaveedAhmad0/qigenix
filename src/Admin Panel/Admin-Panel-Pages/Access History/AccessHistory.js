@@ -93,7 +93,7 @@ function AccessHistory() {
 		{
 			name: "Scan Id",
 			selector: "scan_id",
-			sortable: false,
+			sortable: true,
 			style: {
 				color: "#4E7AED",
 			},
@@ -172,7 +172,7 @@ function AccessHistory() {
 			) : (
 				<div>
 					<div className="row">
-						<h4>List Of Invoices</h4>
+						<h4>Access History</h4>
 						<div className={toggle ? "col-md-12" : "col-12"}>
 							<div className="row">
 								<div className="col-md-12 grid-margin">
@@ -256,7 +256,7 @@ function AccessHistory() {
 																width: "100%",
 																textAlign: "center",
 															}}
-															placeholder="Search..."
+															placeholder="Search By Id"
 															value={search}
 															onChange={(e) => {
 																setSearch(e.target.value);

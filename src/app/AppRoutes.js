@@ -136,7 +136,12 @@ const ScannedInvoice = lazy(() =>
 const NotificationDetail = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Notification/NotificationDetail")
 );
-
+const Support = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/support/Queries/QueryList")
+);
+const SupportDetails = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/support/Queries/QueryDetails")
+);
 class AppRoutes extends Component {
 	render() {
 		return (
@@ -229,6 +234,9 @@ class AppRoutes extends Component {
 					/>
 					<Route path="/admin/ScannedInvoice" component={ScannedInvoice} />
 					<Route path="/admin/access-history" component={AccessHistory} />
+					<Route path="/admin/Support" component={Support} />
+					<Route path="/admin/query-details" component={SupportDetails} />
+
 
 					<Route
 						path="/admin/assign-merchnat-to-users"

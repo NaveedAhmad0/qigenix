@@ -2,10 +2,12 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import moment from "moment";
+import "./List.css";
+
+
 const NotificationDetail = () => {
   const location = useLocation();
   const details = location.state.details;
-
   console.log(details);
 
   return (
@@ -19,7 +21,7 @@ const NotificationDetail = () => {
               <i class="fa-solid fa-user me-2"></i>   {details.firstName} {details.lastName} : {details.customer_id}
               </h4>
               <div className="row mt-4">
-                <table class="table ">
+                <table class="table table-responsive" >
                   <thead className="bg-dark text-white">
                     <tr>
                       <th scope="col">Notification</th>
@@ -31,8 +33,8 @@ const NotificationDetail = () => {
                     {details?.notification?.map((item) => {
                       return (
                         <tr>
-                          <td>{item.message}</td>
-                          <td>
+                          <td  className="p-2 w-50">{item.message}</td>
+                          <td >
                             {moment(item.createdAt)
                               .local()
                               .format("DD-MM-YYYY  hh:mm:ss ")}

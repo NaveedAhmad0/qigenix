@@ -123,14 +123,7 @@ function ScannedInvoice() {
         color: "#4E7AED",
       },
     },
-    {
-      name: "Total Amount",
-      selector: "total_amount",
-      sortable: false,
-      style: {
-        color: "#4E7AED",
-      },
-    },
+
 
     {
       name: "Description",
@@ -309,7 +302,7 @@ function ScannedInvoice() {
                       </div>
                     </div>
                     <div className="row">
-                      <table class="table">
+                      <table class="table table-responsive">
                         <thead className="bg-dark text-white">
                           <tr>
                             <th scope="col">#Product Id</th>
@@ -318,6 +311,8 @@ function ScannedInvoice() {
                             <th scope="col">QR Code</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Price</th>
+                            <th>Quantity Price</th>
+                           
                             <th scope="col">Created At</th>
                           </tr>
                         </thead>
@@ -330,18 +325,28 @@ function ScannedInvoice() {
                                 <td>{item.qr_code}</td>
                                 <td>{item.quantity}</td>
                                 <td>{item.price}</td>
+                                <td>{item.quantityPrice}</td>
+                               
+                               
                                 <td>
                                   {moment(item.createdAt).local().format("DD-MM-YYYY hh:mm:ss ")}
                                   </td>
                               </tr>
                             );
                           })}
-
+<tr>
+  <th className="pt-5">Tax :</th>
+  <td className="pt-5">{rowData?.tax}</td>
+</tr>
                           <tr>
                             <th>Total Price</th>
                             <td>
-                           33,000
+                         {rowData?.total_amount}
                             </td>
+                          </tr>
+                          <tr>
+                            <th>Total Amount With Tax</th>
+                            <td>{rowData?.amountWithTax}</td>
                           </tr>
                         </tbody>
                       </table>
