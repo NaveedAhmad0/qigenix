@@ -28,57 +28,6 @@ function CustomerDetails() {
 	console.log("items is", ittems);
 	const location = useLocation();
 	const details = location.state.details;
-	const ProfileSection = () => {
-		return (
-			<div>
-				<div className="page-title-header">Profile</div>
-				<div className="card" id="#list-home-list">
-					<div className="card-body">
-						<ul className="nav nav-tabs" id="myTab" role="tablist">
-							<li className="nav-item">
-								<a
-									className="nav-link active"
-									id="home-tab"
-									data-toggle="tab"
-									href="#home"
-									role="tab"
-									aria-controls="home"
-									aria-selected="true">
-									Customer Details
-								</a>
-							</li>
-							<li className="nav-item">
-								<a
-									className="nav-link"
-									id="profile-tab"
-									data-toggle="tab"
-									href="#profile"
-									role="tab"
-									aria-controls="profile"
-									aria-selected="false">
-									Billing & Shipping
-								</a>
-							</li>
-						</ul>
-
-						<div className="row mt-2">
-							<div className="col-12">
-								<div className="form-check">
-									<label className="form-check-label text-muted">
-										<input type="checkbox" className="form-check-input" />
-										<i className="input-helper"></i>
-										Show primary contact full name on Invoices, Estimates,
-										Payments, Credit Notes
-									</label>
-								</div>
-							</div>
-						</div>
-						<CustomerForm />
-					</div>
-				</div>
-			</div>
-		);
-	};
 
 	// list.map((list)=>{})
 	return (

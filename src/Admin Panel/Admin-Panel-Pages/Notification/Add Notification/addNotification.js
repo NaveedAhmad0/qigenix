@@ -33,9 +33,9 @@ const MultiValue = (props) => (
 
 const AddNotification = () => {
 	const history = useHistory();
-	const token = localStorage.getItem("token");
 	const [optionSelected, setOptionSelected] = useState([]);
 	const [userList, setUserList] = useState([]);
+	const token = localStorage.getItem("token");
 	const [scheduledDate, setScheduledDate] = useState("");
 
 	const animatedComponents = makeAnimated();
@@ -52,8 +52,8 @@ const AddNotification = () => {
 	};
 	console.log(optionSelected);
 	const date = new Date();
-	const newDate = moment(date).local().format("DD-MM-YYYY hh:mm:ss ");
-	// console.log(newDate, "date");
+	const newDate = moment.utc(date).format("YYYY-MM-DD hh:mm:ss ");
+	console.log(newDate, "date");
 
 	useEffect(() => {
 		var config = {
@@ -82,10 +82,11 @@ const AddNotification = () => {
 		e.preventDefault();
 		// const userId = inputFields2[0].userId;
 		// const deviceId = inputFields2[0].deviceId;
+		const utcDate = moment.utc(scheduledDate).format("YYYY-MM-DD hh:mm:ss ");
 
 		const data = JSON.stringify({
 			customers: optionSelected,
-			scheduledTime: scheduledDate ? scheduledDate : newDate,
+			scheduledTime: utcDate ? utcDate : newDate,
 			message: inputFields2.message,
 		});
 
@@ -156,6 +157,7 @@ const AddNotification = () => {
 
 							<div className="row">
 								<div className="col-md-12">
+									<label>Enter Time in UTC Format</label>
 									<input
 										type="datetime-local"
 										className="p-2 w-100"

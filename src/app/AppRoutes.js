@@ -145,6 +145,9 @@ const Support = lazy(() =>
 const SupportDetails = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/support/Queries/QueryDetails")
 );
+const SendEmail = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Email Template/Send Email/SendEmail")
+);
 class AppRoutes extends Component {
 	render() {
 		return (
@@ -231,6 +234,7 @@ class AppRoutes extends Component {
 					<Route path="/admin/ListOfInvoices" component={ListOfInvoices} />
 					<Route path="/admin/Assigned-devices" component={ListOfAssDevices} />
 					<Route path="/admin/email-template" component={EmailTemplate} />
+					<Route path="/admin/send-email" component={SendEmail} />
 					<Route path="/admin/notifications" component={Notifications} />
 					<Route
 						path="/admin/NotificationDetails"

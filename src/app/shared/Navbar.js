@@ -60,42 +60,7 @@ const Navbar = () => {
 					<li className="nav-item  nav-profile border-0 pl-4">
 						<h5 style={{ font: "Roboto" }}>Admin Area</h5>
 					</li>
-					<li className=" nav-item list">
-						<a
-							href="#"
-							className="open_newsfeed desktop"
-							data-toggle="tooltip"
-							title="Share documents, ideas.."
-							data-placement="bottom">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="22"
-								height="23"
-								fill="black Color"
-								class="bi bi-share"
-								viewBox="0 0 16 16">
-								<path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" />
-							</svg>
-						</a>
-					</li>
-					<li className=" nav-item list">
-						<a
-							href="#"
-							data-toggle="tooltip"
-							title="Todo items"
-							data-placement="bottom">
-							{" "}
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="22"
-								height="23"
-								class="bi bi-check2"
-								fill="black"
-								viewBox="0 0 16 16">
-								<path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-							</svg>
-						</a>
-					</li>
+
 					<li className="nav-item ">
 						<Dropdown>
 							<Dropdown.Toggle className="nav-link count-indicator p-0 toggle-arrow-hide bg-transparent">

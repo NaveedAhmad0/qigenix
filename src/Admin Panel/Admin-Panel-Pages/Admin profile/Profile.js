@@ -1,14 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import BootstrapTable from "react-bootstrap-table-next";
+import { Form } from "react-bootstrap";
+import paginationFactory from "react-bootstrap-table2-paginator";
 
-import { CSVExport } from "react-bootstrap-table2-toolkit";
+import ToolkitProvider, {
+	Search,
+	CSVExport,
+} from "react-bootstrap-table2-toolkit";
 import ClipLoader from "react-spinners/ClipLoader";
 
 import { useHistory, useLocation } from "react-router-dom";
 import API from "../../../backend";
-import DeviceForm from "./ProfileForm";
-// import BillingForm from "./Billing Form/BillingForm";
+import CustomerForm from "./ProfileForm";
+import AdminForm from "../../Admin-Panel-Components/Admin-Panel-Form/Admin-Form";
 
 function Profile() {
 	const { ExportCSVButton } = CSVExport;
@@ -20,7 +26,7 @@ function Profile() {
 
 	console.log("items is", ittems);
 	const location = useLocation();
-	const details = location.state.details;
+	// const details = location.state.details;
 
 	// list.map((list)=>{})
 	return (
@@ -37,11 +43,11 @@ function Profile() {
 					<div className="row">
 						<div className="col-md-12">
 							<div className="row">
-								<div className="col-md-4 grid-margin">
+								<div className="col-md-3 grid-margin">
 									<div
 										className="page-title-header"
 										style={{ fontWeight: "500", fontSize: "17px" }}>
-										#{details.device_id}
+										{/* #{details.company} */}
 									</div>
 									<div className="card">
 										<div
@@ -79,13 +85,13 @@ function Profile() {
 										</div>
 									</div>
 								</div>
-								<div className="col-md-8">
+								<div className="col-md-9">
 									<div className="row m-auto">
 										<div className="col-md-12 m-auto grid-margin">
 											<div
 												className="page-title-header"
 												style={{ fontWeight: "500", fontSize: "17px" }}>
-												Device Details
+												Profile
 											</div>
 
 											<div className="card" id="#list-home-list">
@@ -96,7 +102,7 @@ function Profile() {
 																className="nav-link active"
 																data-bs-toggle="tab"
 																data-bs-target="#MyTasks">
-																Device Details
+																Customer Details
 															</button>
 														</li>
 													</ul>
@@ -104,7 +110,7 @@ function Profile() {
 														<div
 															className="tab-pane fade show active MyTasks"
 															id="MyTasks">
-															<DeviceForm />
+															<CustomerForm />
 														</div>
 													</div>
 												</div>

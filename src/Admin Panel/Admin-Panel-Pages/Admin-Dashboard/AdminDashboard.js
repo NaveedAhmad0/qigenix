@@ -68,14 +68,14 @@ function AdminDashboard() {
 
 	const email = localStorage.getItem("email");
 
-	useEffect(() => {
-		axios
-			.get(`https://qigenix.ixiono.com/apis/users/getDetails/${email}`)
-			.then((res) => {
-				console.log(res.data);
-				// setCustId(res)
-			});
-	}, []);
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`https://qigenix.ixiono.com/apis/users/getDetails/${email}`)
+	// 		.then((res) => {
+	// 			console.log(res.data);
+	// 			setCustId(res)
+	// 		});
+	// }, []);
 
 	const { SearchBar } = Search;
 
