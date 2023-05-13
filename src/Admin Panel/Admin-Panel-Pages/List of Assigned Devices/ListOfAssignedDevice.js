@@ -39,7 +39,7 @@ function ListOfInvoice() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data.totalResponse);
-					console.log(response.data)
+					console.log(response.data);
 					setFiltered(response.data.totalResponse);
 				})
 				.catch(function (error) {
@@ -82,8 +82,6 @@ function ListOfInvoice() {
 		},
 	};
 
-
-
 	const headerResponsive = [
 		{
 			name: "Customer Id",
@@ -120,12 +118,12 @@ function ListOfInvoice() {
 			style: {
 				color: "#4E7AED",
 			},
-			cell:(row)=>[
+			cell: (row) => [
 				<div>
-	<span>{row.firstName }</span> <br></br>
-				 <span >{row.lastName}</span>
-				</div>	
-			]
+					<span>{row.firstName}</span> <br></br>
+					<span>{row.lastName}</span>
+				</div>,
+			],
 		},
 		{
 			name: "Contact",
@@ -168,7 +166,6 @@ function ListOfInvoice() {
 				color: "#4E7AED",
 			},
 		},
-	
 	];
 
 	return (
@@ -193,7 +190,6 @@ function ListOfInvoice() {
 									</div>
 									<div className="card">
 										<div className="card-body">
-											
 											<div className="row page-title-header">
 												<div className="col-12">
 													{/* <div className="form-check d-flex justify-content-between">
@@ -230,25 +226,7 @@ function ListOfInvoice() {
 															/>{" "}
 															Export
 														</label>
-														<label
-															class="btn"
-															style={{
-																borderRight: "1px solid #D9D9D9",
-																color: "#475569",
-																fontFamily: "Roboto",
-																fontStyle: "normal",
-																fontWeight: "500",
-																fontSize: "12px",
-																lineHeight: "14px",
-															}}>
-															<input
-																type="radio"
-																name="options"
-																id="option2"
-																autocomplete="off"
-															/>{" "}
-															Bulk Actions
-														</label>
+
 														<label
 															class="btn"
 															style={{

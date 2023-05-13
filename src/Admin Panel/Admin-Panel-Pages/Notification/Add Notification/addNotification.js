@@ -7,6 +7,7 @@ import makeAnimated from "react-select/animated";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { components } from "react-select";
 import MySelect from "../My select/MySelect";
+import moment from "moment";
 
 const Option = (props) => {
 	return (
@@ -35,6 +36,7 @@ const AddNotification = () => {
 	const token = localStorage.getItem("token");
 	const [optionSelected, setOptionSelected] = useState([]);
 	const [userList, setUserList] = useState([]);
+	const [scheduledDate, setScheduledDate] = useState("");
 
 	const animatedComponents = makeAnimated();
 	const handleChange = (selected, i) => {
@@ -49,6 +51,9 @@ const AddNotification = () => {
 		setOptionSelected(dataa);
 	};
 	console.log(optionSelected);
+	const date = new Date();
+	const newDate = moment(date).local().format("DD-MM-YYYY hh:mm:ss ");
+	// console.log(newDate, "date");
 
 	useEffect(() => {
 		var config = {
@@ -80,13 +85,14 @@ const AddNotification = () => {
 
 		const data = JSON.stringify({
 			customers: optionSelected,
+			scheduledTime: scheduledDate ? scheduledDate : newDate,
 			message: inputFields2.message,
 		});
 
 		try {
 			var config = {
 				method: "post",
-				url: `https://qigenix.ixiono.com/apis/admin/create-notification`,
+				url: `https://qigenix.ixiono.com/apis/admin/schedule-notification`,
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
@@ -143,67 +149,29 @@ const AddNotification = () => {
 												allowSelectAll={true}
 												value={optionSelected}
 											/>
-											{/* <sele<select
-												name="userId"
-												className="input col-12"
-												style={{
-													border: "1px solid rgb(234, 237, 241)",
-													padding: "5px",
-													borderRadius: "5px",
-												}}
-												onChange={(e) => {
-													setInputFields2({
-														...inputFields2,
-														customer_id: e.target.value,
-													});
-													console.log(inputFields2.customer_id);
-												}}>
-												<option>Select User</option>
-												{userList.map((x) => {
-													return (
-														<option value={x.customer_id}>{x.firstName}</option>
-													);
-												})}
-											</select>ct
-												name="userId"
-												className="input col-12"
-												style={{
-													border: "1px solid rgb(234, 237, 241)",
-													padding: "5px",
-													borderRadius: "5px",
-												}}
-												onChange={(e) => {
-													setInputFields2({
-														...inputFields2,
-														customer_id: e.target.value,
-													});
-													console.log(inputFields2.customer_id);
-												}}>
-												<option>Select User</option>
-												{userList.map((x) => {
-													return (
-														<option value={x.customer_id}>{x.firstName}</option>
-													);
-												})}
-											</select> */}
 										</div>
 									</Form.Group>
 								</div>
 							</div>
-							{/* {inputFields2.map((input, index2) => {
-								return (
-									<div key={index2}>
-									</div>
-								);
-							})} */}
 
 							<div className="row">
 								<div className="col-md-12">
-								<input type="date" className="p-2 w-100" style={{border:"1px solid #d9d9d9",borderRadius:"5px"}}></input>
+									<input
+										type="datetime-local"
+										className="p-2 w-100"
+										value={scheduledDate}
+										onChange={(e) => {
+											setScheduledDate(e.target.value);
+										}}
+										style={{
+											border: "1px solid #d9d9d9",
+											borderRadius: "5px",
+										}}></input>
 								</div>
 								<div className="col-12 mt-4">
 									<label>Enter Notification</label> <br />
-									<textarea style={{border:"1px solid #d9d9d9",borderRadius:"5px"}}
+									<textarea
+										style={{ border: "1px solid #d9d9d9", borderRadius: "5px" }}
 										name="message"
 										id=""
 										className="w-100"

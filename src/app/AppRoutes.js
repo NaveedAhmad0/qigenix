@@ -30,6 +30,9 @@ const AdminDashboard = lazy(() =>
 const AdminLogin = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Admin-Auth/LoginProcess")
 );
+const Profile = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/Admin profile/Profile")
+);
 const AdminTransaction = lazy(() =>
 	import(
 		"../Admin Panel/Admin-Panel-Pages/Admin-Payment_Transaction/Transaction"
@@ -223,6 +226,7 @@ class AppRoutes extends Component {
 						component={AdminMerchantProfile}
 					/>
 					<Route path="/admin/AdminManageUser" component={AdminManageUser} />
+					<Route path="/admin/profile" component={Profile} />
 					<Route path="/admin/AdminManageRole" component={AdminManageRole} />
 					<Route path="/admin/ListOfInvoices" component={ListOfInvoices} />
 					<Route path="/admin/Assigned-devices" component={ListOfAssDevices} />
@@ -236,7 +240,6 @@ class AppRoutes extends Component {
 					<Route path="/admin/access-history" component={AccessHistory} />
 					<Route path="/admin/Support" component={Support} />
 					<Route path="/admin/query-details" component={SupportDetails} />
-
 
 					<Route
 						path="/admin/assign-merchnat-to-users"

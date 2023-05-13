@@ -109,6 +109,18 @@ const Navbar = () => {
 							<Dropdown.Menu className="navbar-dropdown preview-list">
 								<Dropdown.Item
 									className="dropdown-item  d-flex align-items-center"
+									onClick={(evt) => evt.preventDefault()}>
+									<p
+										className="mb-0 font-weight-medium float-left"
+										onClick={() => {
+											localStorage.clear();
+											history.push("/admin/profile");
+										}}>
+										Profile
+									</p>
+								</Dropdown.Item>
+								<Dropdown.Item
+									className="dropdown-item  d-flex align-items-center"
 									href="!#"
 									onClick={(evt) => evt.preventDefault()}>
 									<p
