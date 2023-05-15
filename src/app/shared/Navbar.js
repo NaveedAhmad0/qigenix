@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Dropdown, Form, Button } from "react-bootstrap";
-import { Trans } from "react-i18next";
 import { useHistory } from "react-router-dom";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import pic from "../../assets/images/Ellipse 21.png";
 import "./navbar.css";
 const Navbar = () => {
@@ -78,7 +75,6 @@ const Navbar = () => {
 									<p
 										className="mb-0 font-weight-medium float-left"
 										onClick={() => {
-											localStorage.clear();
 											history.push("/admin/profile");
 										}}>
 										Profile
