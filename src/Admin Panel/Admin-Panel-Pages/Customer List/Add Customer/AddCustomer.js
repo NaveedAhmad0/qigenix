@@ -14,6 +14,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useHistory } from "react-router-dom";
 // import API from "../../../backend";
 import AddCustomerForm from "./AddCustomerForm";
+import AddBillingForm from "./AddBillingForm";
 
 function AddCustomer() {
 	const { ExportCSVButton } = CSVExport;
@@ -40,7 +41,7 @@ function AddCustomer() {
 			) : (
 				<div>
 					<div className="row ">
-						<div className="col-md-8 m-auto">
+						<div className="col-md-10 m-auto">
 							<div className="row m-auto">
 								<div className="col-md-12 m-auto grid-margin">
 									<div className="card" id="#list-home-list">
@@ -72,7 +73,10 @@ function AddCustomer() {
 
 												<div
 													className="tab-pane fade MyProjects pt-3"
-													id="MyProjects"></div>
+													id="MyProjects">
+													{" "}
+													<AddBillingForm />
+												</div>
 											</div>
 										</div>
 									</div>

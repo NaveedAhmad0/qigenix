@@ -106,6 +106,30 @@ const ProfileForm = () => {
 						</Form.Group>
 					</div>
 				</div>
+
+				<div className="row">
+					<div className="col-md-8">
+						<Form.Group className="row">
+							<div className="col-sm-12">
+								<Form.Label className=" mb-3">Email</Form.Label>
+
+								<Form.Control
+									className="customerInputN"
+									type="text"
+									placeholder="Keywords"
+									disabled
+									value={InputFields.email}
+									// onChange={(e) => {
+									// 	setInputFields({
+									// 		...InputFields,
+									// 		email: e.target.value,
+									// 	});
+									// }}
+								/>
+							</div>
+						</Form.Group>
+					</div>
+				</div>
 				<div className="row">
 					<div className="col-md-8">
 						<Form.Group className="row">
@@ -116,14 +140,15 @@ const ProfileForm = () => {
 								<Form.Control
 									className="customerInputN"
 									type="text"
+									disabled
 									placeholder="Keywords"
 									value={InputFields.username}
-									onChange={(e) => {
-										setInputFields({
-											...InputFields,
-											username: e.target.value,
-										});
-									}}
+									// onChange={(e) => {
+									// 	setInputFields({
+									// 		...InputFields,
+									// 		username: e.target.value,
+									// 	});
+									// }}
 								/>
 							</div>
 						</Form.Group>
@@ -140,13 +165,14 @@ const ProfileForm = () => {
 									className="customerInputN"
 									type="text"
 									placeholder="Keywords"
+									disabled
 									value={InputFields.admin_id}
-									onChange={(e) => {
-										setInputFields({
-											...InputFields,
-											company: e.target.value,
-										});
-									}}
+									// onChange={(e) => {
+									// 	setInputFields({
+									// 		...InputFields,
+									// 		company: e.target.value,
+									// 	});
+									// }}
 								/>
 							</div>
 						</Form.Group>
@@ -160,37 +186,15 @@ const ProfileForm = () => {
 								<Form.Control
 									className="customerInputN"
 									type="text"
+									disabled
 									placeholder="Keywords"
 									value={InputFields.mobile}
-									onChange={(e) => {
-										setInputFields({
-											...InputFields,
-											vat_number: e.target.value,
-										});
-									}}
-								/>
-							</div>
-						</Form.Group>
-					</div>
-				</div>
-
-				<div className="row">
-					<div className="col-md-8">
-						<Form.Group className="row">
-							<div className="col-sm-12">
-								<Form.Label className=" mb-3">Email</Form.Label>
-
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={InputFields.email}
-									onChange={(e) => {
-										setInputFields({
-											...InputFields,
-											email: e.target.value,
-										});
-									}}
+									// onChange={(e) => {
+									// 	setInputFields({
+									// 		...InputFields,
+									// 		vat_number: e.target.value,
+									// 	});
+									// }}
 								/>
 							</div>
 						</Form.Group>

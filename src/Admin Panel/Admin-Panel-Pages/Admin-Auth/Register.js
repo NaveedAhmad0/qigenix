@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import styles from "./registration.module.css";
 import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
 import axios from "axios";
 import UserLogin from "./Login";
 import "./Register.css";

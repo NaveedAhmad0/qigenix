@@ -43,49 +43,7 @@ function Profile() {
 					<div className="row">
 						<div className="col-md-12">
 							<div className="row">
-								<div className="col-md-3 grid-margin">
-									<div
-										className="page-title-header"
-										style={{ fontWeight: "500", fontSize: "17px" }}>
-										{/* #{details.company} */}
-									</div>
-									<div className="card">
-										<div
-											className="list-group list-group-flush"
-											id="list-tab"
-											role="tablist"
-											style={{ borderRadius: "5px" }}>
-											<a
-												className="list-group-item list-group-item-action"
-												id="list-home-list"
-												data-toggle="list"
-												href="#list-home"
-												role="tab"
-												aria-controls="home">
-												Profile
-											</a>
-											<a
-												className="list-group-item list-group-item-action"
-												id="list-profile-list"
-												data-toggle="list"
-												href="#list-profile"
-												role="tab"
-												aria-controls="profile">
-												Contents
-											</a>
-											<a
-												className="list-group-item list-group-item-action"
-												id="list-messages-list"
-												data-toggle="list"
-												href="#list-messages"
-												role="tab"
-												aria-controls="messages">
-												Notes
-											</a>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-9">
+								<div className="col-md-9 m-auto">
 									<div className="row m-auto">
 										<div className="col-md-12 m-auto grid-margin">
 											<div
@@ -102,7 +60,7 @@ function Profile() {
 																className="nav-link active"
 																data-bs-toggle="tab"
 																data-bs-target="#MyTasks">
-																Customer Details
+																Admin Details
 															</button>
 														</li>
 													</ul>
