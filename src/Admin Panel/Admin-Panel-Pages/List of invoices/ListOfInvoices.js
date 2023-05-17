@@ -505,20 +505,26 @@ function ListOfInvoice() {
 												</tr>
 											</table>
 
-											<div className="row">
-												<div className="col-12 ">
+											<div className="row justify-content-between">
+												<div className="col-6 ">
 													<Pdf targetRef={ref} filename="invoice.pdf">
 														{({ toPdf }) => (
 															<button
 																className="btn btn-success mt-4"
 																onClick={toPdf}>
-																Generate Pdf
+																<i class="fa-regular fa-file-pdf"></i> Generate
+																Pdf
 															</button>
 														)}
 													</Pdf>
 													{/* <button className="btn btn-success mt-4">
 														Print
 													</button> */}
+												</div>
+												<div className="col-6">
+													<button className="btn btn-success float-right mt-4">
+														<i class="fa-solid fa-dollar-sign"></i> Payment
+													</button>
 												</div>
 											</div>
 										</div>

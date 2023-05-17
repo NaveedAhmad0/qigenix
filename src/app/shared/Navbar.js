@@ -1,9 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Dropdown, Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import pic from "../../assets/images/Ellipse 21.png";
 import "./navbar.css";
+import axios from "axios";
 const Navbar = () => {
+	const [userName, setUserName] = useState("");
+	const token = localStorage.getItem("token");
+	const email = localStorage.getItem("email");
 	let history = useHistory();
 	const toggleOffcanvas = () => {
 		document.querySelector(".sidebar-offcanvas").classList.toggle("active");
@@ -11,6 +15,35 @@ const Navbar = () => {
 	const toggleRightSidebar = () => {
 		document.querySelector(".right-sidebar").classList.toggle("open");
 	};
+
+	const fetchCustomerData = async () => {
+		try {
+			var config = {
+				method: "get",
+				url: `https://qigenix.ixiono.com/apis/admin/getAdminProfile/${email}`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+			};
+
+			axios(config)
+				.then(async function (response) {
+					console.log(response.data);
+					await setUserName(response.data.username);
+					// console.log(response.data.notifications);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		fetchCustomerData();
+	}, []);
 
 	return (
 		<nav className="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
@@ -55,7 +88,7 @@ const Navbar = () => {
 
 				<ul className="navbar-nav navbar-nav-right dropdwn">
 					<li className="nav-item  nav-profile border-0 pl-4">
-						<h5 style={{ font: "Roboto" }}>Admin Area</h5>
+						<h5 style={{ font: "Roboto" }}>{`${userName} (Admin)`}</h5>
 					</li>
 
 					<li className="nav-item ">

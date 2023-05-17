@@ -54,6 +54,7 @@
     "react-collapse": "^5.0.0",
     "react-color": "^2.17.3",
     "react-contextmenu": "^2.11.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-csv": "^2.2.2",
     "react-data-sort": "^1.2.1",
     "react-data-table-component": "^7.5.3",

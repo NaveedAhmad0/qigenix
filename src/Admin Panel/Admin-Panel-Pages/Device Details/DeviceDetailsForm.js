@@ -1,13 +1,25 @@
-import React from "react";
-import { Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, InputGroup } from "react-bootstrap";
+import copy from "copy-to-clipboard";
+
 import "./deviceForm.css";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 const DeviceForm = () => {
+	const [copied, setCopied] = useState(false);
 	const location = useLocation();
 	const details = location.state.details;
+	const licenseKey = details.device_license_key;
 	console.log(details);
-	
 
+	const copyToClipboard = (e) => {
+		e.preventDefault();
+		copy(licenseKey);
+		setCopied(true);
+		setTimeout(() => {
+			setCopied(false);
+		}, 2000);
+		// alert(`You have copied "${licenseKey}"`);
+	};
 	return (
 		<div className="col-12 grid-margin">
 			<div className="row mt-2">
@@ -106,16 +118,33 @@ const DeviceForm = () => {
 						<Form.Group className="row">
 							<div className="col-sm-12">
 								<Form.Label className=" mb-3">Device License Key</Form.Label>
-								<Form.Control
-									className="customerInputN"
-									type="text"
-									placeholder="Keywords"
-									value={details.device_license_key}
-								/>
+								<InputGroup className="mb-3">
+									<Form.Control
+										placeholder="Username"
+										aria-label="Username"
+										aria-describedby="basic-addon1"
+										value={details.device_license_key}
+									/>
+									<InputGroup.Text
+										id="basic-addon1"
+										data-toggle="tooltip"
+										data-placement="top"
+										title={copied ? "Copied" : "Copy"}
+										style={{ cursor: "pointer" }}
+										onClick={(e) => copyToClipboard(e)}>
+										{copied ? (
+											<i class="fa-solid text-primary fa-check"></i>
+										) : (
+											// "copied"
+											<i class="fa-regular fa-paste"></i>
+										)}
+									</InputGroup.Text>
+								</InputGroup>
 							</div>
 						</Form.Group>
 					</div>
 				</div>
+
 				<div className="row">
 					<div className="col-md-8">
 						<Form.Group className="row">
@@ -149,9 +178,7 @@ const DeviceForm = () => {
 
 				<div className="row">
 					<div className="col-md-8 text-right">
-						<button
-							className="btn btnCustomerProfileN btn-primary"
-							>
+						<button className="btn btnCustomerProfileN btn-primary">
 							Save
 						</button>
 					</div>
