@@ -325,6 +325,17 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
+					<Link className="nav-link ps-3" to="/admin/list-of-tokens">
+						<i class="fa-solid fa-money-bill-transfer"></i>
+						<span className="menu-title ms-3">
+							<Trans>List Of Tokens</Trans>
+						</span>
+					</Link>
+				</li>
+				<li
+					className={
+						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+					}>
 					<Link className="nav-link ps-3" to="/admin/support">
 						<i class="fa-regular fa-life-ring"></i>
 						<span className="menu-title ms-3">
