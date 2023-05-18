@@ -48,7 +48,7 @@ function CustomerDetails() {
 									<div
 										className="page-title-header"
 										style={{ fontWeight: "500", fontSize: "17px" }}>
-										#{details.company}
+										#{details.firstName} 
 									</div>
 									<div className="card">
 										<div
@@ -63,25 +63,25 @@ function CustomerDetails() {
 												href="#list-home"
 												role="tab"
 												aria-controls="home">
-												Profile
+											<i class="fa-regular fa-user text-primary me-2"></i>	Profile
 											</a>
 											<a
 												className="list-group-item list-group-item-action"
 												id="list-profile-list"
 												data-toggle="list"
-												href="#list-profile"
+												
 												role="tab"
 												aria-controls="profile">
-												Contents
+											<i class="fa-solid fa-file-pen me-2 text-secondary"></i>	Contents
 											</a>
 											<a
 												className="list-group-item list-group-item-action"
 												id="list-messages-list"
 												data-toggle="list"
-												href="#list-messages"
+												
 												role="tab"
 												aria-controls="messages">
-												Notes
+											<i class="fa-regular fa-file-lines me-2 text-secondary"></i>	Notes
 											</a>
 										</div>
 									</div>

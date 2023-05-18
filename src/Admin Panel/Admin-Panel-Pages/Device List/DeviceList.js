@@ -122,7 +122,7 @@ function DeviceList() {
 
 	const headerResponsive = [
 		{
-			name: "#",
+			name: "#Device ID",
 			selector: "device_id",
 			sortable: true,
 			style: {
@@ -322,25 +322,7 @@ function DeviceList() {
 															/>{" "}
 															Bulk Actions
 														</label> */}
-														<label
-															class="btn"
-															style={{
-																borderRight: "1px solid #D9D9D9",
-																color: "#475569",
-																fontFamily: "Roboto",
-																fontStyle: "normal",
-																fontWeight: "500",
-																fontSize: "12px",
-																lineHeight: "14px",
-															}}>
-															<input
-																type="radio"
-																name="options"
-																id="option3"
-																autocomplete="off"
-															/>
-															<i class="fa-solid fa-rotate"></i>
-														</label>
+														
 													</div>
 
 													<button
@@ -408,7 +390,7 @@ function DeviceList() {
 																width: "100%",
 																textAlign: "center",
 															}}
-															placeholder="Search..."
+															placeholder="Search By Id"
 															value={search}
 															onChange={(e) => {
 																setSearch(e.target.value);
@@ -426,18 +408,14 @@ function DeviceList() {
 												highlightOnHover
 												subHeader
 												customStyles={customStyles}
-												paginationComponentOptions={{
-													rowsPerPageText: "Showing 1 to 6 of 12 entries:",
-												}}
+												
 											/>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className="col-md-4">
-							<div className="row"></div>
-						</div>
+						
 					</div>
 				</div>
 			)}
