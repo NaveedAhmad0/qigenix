@@ -31,6 +31,7 @@ const Navbar = () => {
 				.then(async function (response) {
 					console.log(response.data);
 					await setUserName(response.data.username);
+					localStorage.setItem("adminId", response.data.admin_id);
 					// console.log(response.data.notifications);
 				})
 				.catch(function (error) {

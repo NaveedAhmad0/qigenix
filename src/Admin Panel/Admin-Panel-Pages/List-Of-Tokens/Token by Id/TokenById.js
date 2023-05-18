@@ -1,28 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import ToolkitProvider, {
-	Search,
-	CSVExport,
-} from "react-bootstrap-table2-toolkit";
+
 import ClipLoader from "react-spinners/ClipLoader";
 import DataTable from "react-data-table-component";
 import { useHistory } from "react-router-dom";
-import API from "../../../backend";
-import "./ListOfTokens.css";
+import API from "../../../../backend";
+import "../ListOfTokens.css";
 import moment from "moment";
 import Pdf from "react-to-pdf";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-function ListOfInvoice() {
+function TokenById() {
 	const [tableRowsData, setTableRowsData] = useState([]);
-	const [rowData, setRowData] = useState();
 	const ref = React.createRef();
-
+	const location = useLocation();
 	const [search, setSearch] = useState("");
 	const [Filtered, setFiltered] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [toggle, setToggle] = useState(false);
-	const customer_id = localStorage.getItem("customerId");
+	const custId = location.state.custId;
 	const token = localStorage.getItem("token");
 	const history = useHistory();
 
@@ -30,7 +27,7 @@ function ListOfInvoice() {
 		try {
 			var config = {
 				method: "get",
-				url: `${API}/admin/getAllTokens`,
+				url: `${API}/admin/getTokens/${custId}`,
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
@@ -38,15 +35,15 @@ function ListOfInvoice() {
 			};
 			axios(config)
 				.then(function (response) {
-					setTableRowsData(response.data.totalResponse);
-					console.log(response.data.totalResponse);
-					setFiltered(response.data.totalResponse);
+					setTableRowsData(response.data.tokens);
+					console.log(response.data);
+					setFiltered(response.data.tokens);
 				})
 				.catch(function (error) {
-					console.log(error.data.totalResponse);
+					console.log(error.data.message);
 				});
 		} catch (error) {
-			console.log(error.data.totalResponse);
+			console.log(error.data.message);
 		}
 	};
 	useEffect(() => {
@@ -100,17 +97,7 @@ function ListOfInvoice() {
 				color: "#4E7AED",
 			},
 		},
-		{
-			name: "First Name",
-			selector: "firstName",
-			sortable: false,
-			style: {
-				color: "#4E7AED",
-			},
-			// cell: (d) => {
-			// 	return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
-			// },
-		},
+
 		{
 			name: "Subject",
 			selector: "subject",
@@ -131,6 +118,17 @@ function ListOfInvoice() {
 				<span>{row.tokenStatus === "1" ? "Open" : "Closed"}</span>,
 			],
 		},
+		{
+			name: "Created At",
+			// selector: "createdAt",
+			sortable: false,
+			style: {
+				color: "#4E7AED",
+			},
+			cell: (d) => {
+				return moment(d.createdAt).local().format("DD-MM-YYYY hh:mm:ss ");
+			},
+		},
 
 		{
 			name: "Action",
@@ -144,8 +142,8 @@ function ListOfInvoice() {
 					onClick={() => {
 						// eslint-disable-next-line no-restricted-globals
 						history.push({
-							pathname: "/admin/token-by-Id",
-							state: { custId: row.customer_id },
+							pathname: "/admin/token-details",
+							state: { tokenId: row.token_id },
 						});
 					}}></i>,
 				// <i
@@ -341,4 +339,4 @@ function ListOfInvoice() {
 		</div>
 	);
 }
-export default ListOfInvoice;
+export default TokenById;

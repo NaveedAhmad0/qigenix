@@ -110,6 +110,16 @@ const SendEmail = lazy(() =>
 const ListOfTokens = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/List-Of-Tokens/ListOfTokens")
 );
+const TokenDetailsById = lazy(() =>
+	import(
+		"../Admin Panel/Admin-Panel-Pages/List-Of-Tokens/Token by Id/TokenById"
+	)
+);
+const TokenDetails = lazy(() =>
+	import(
+		"../Admin Panel/Admin-Panel-Pages/List-Of-Tokens/Token Details/TokenDetails"
+	)
+);
 class AppRoutes extends Component {
 	render() {
 		return (
@@ -169,6 +179,8 @@ class AppRoutes extends Component {
 					<Route path="/admin/ListOfInvoices" component={ListOfInvoices} />
 					<Route path="/admin/Assigned-devices" component={ListOfAssDevices} />
 					<Route path="/admin/list-of-tokens" component={ListOfTokens} />
+					<Route path="/admin/token-by-Id" component={TokenDetailsById} />
+					<Route path="/admin/token-details" component={TokenDetails} />
 					<Route path="/admin/email-template" component={EmailTemplate} />
 					<Route path="/admin/send-email" component={SendEmail} />
 					<Route path="/admin/notifications" component={Notifications} />
