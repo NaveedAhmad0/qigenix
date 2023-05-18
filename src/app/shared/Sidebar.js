@@ -328,11 +328,11 @@ function Sidebar() {
 					<Link className="nav-link ps-3" to="/admin/list-of-tokens">
 						<i class="fa-solid fa-money-bill-transfer"></i>
 						<span className="menu-title ms-3">
-							<Trans>List Of Tokens</Trans>
+							<Trans>Customer Support</Trans>
 						</span>
 					</Link>
 				</li>
-				<li
+				{/* <li
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
@@ -342,7 +342,7 @@ function Sidebar() {
 							<Trans>Support</Trans>
 						</span>
 					</Link>
-				</li>
+				</li> */}
 
 				<li
 					className={
