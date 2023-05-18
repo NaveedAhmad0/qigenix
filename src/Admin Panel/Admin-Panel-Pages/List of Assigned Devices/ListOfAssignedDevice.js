@@ -151,7 +151,7 @@ function ListOfInvoice() {
 		},
 
 		{
-			name: "device_name",
+			name: "Device Name",
 			selector: "device_name",
 			sortable: false,
 			style: {
@@ -159,7 +159,7 @@ function ListOfInvoice() {
 			},
 		},
 		{
-			name: "device_license_key",
+			name: "Device Brand",
 			selector: "device_brand",
 			sortable: false,
 			style: {

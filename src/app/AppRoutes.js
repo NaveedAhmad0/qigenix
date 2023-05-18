@@ -103,6 +103,9 @@ const Support = lazy(() =>
 const SupportDetails = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/support/Queries/QueryDetails")
 );
+const Setup = lazy(() =>
+	import("../Admin Panel/Admin-Panel-Pages/setup/setup")
+);
 const SendEmail = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Email Template/Send Email/SendEmail")
 );
@@ -182,7 +185,7 @@ class AppRoutes extends Component {
 					<Route path="/admin/token-by-Id" component={TokenDetailsById} />
 					<Route path="/admin/token-details" component={TokenDetails} />
 					<Route path="/admin/email-template" component={EmailTemplate} />
-					<Route path="/admin/send-email" component={SendEmail} />
+					 <Route path="/admin/send-email" component={SendEmail} /> 
 					<Route path="/admin/notifications" component={Notifications} />
 					<Route
 						path="/admin/NotificationDetails"
@@ -192,6 +195,8 @@ class AppRoutes extends Component {
 					<Route path="/admin/access-history" component={AccessHistory} />
 					<Route path="/admin/Support" component={Support} />
 					<Route path="/admin/query-details" component={SupportDetails} />
+					<Route path="/admin/Setup" component={Setup} />
+
 
 					<Route path="/admin/error-pages/error-404" component={Error404} />
 					<Route path="/admin/error-pages/error-500" component={Error500} />

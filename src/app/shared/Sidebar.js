@@ -93,7 +93,7 @@ function Sidebar() {
 	return (
 		<nav className="sidebar sidebar-offcanvas" id="sidebar">
 			<div className="text-center sidebar-brand-wrapper d-flex align-items-center">
-				<a className="sidebar-brand brand-logo text-white" href="index.html">
+				<a className="sidebar-brand brand-logo text-white" href="/admin/dashboard">
 					<h2 className="mt-4">
 						<img
 							className="img-sm text-white"
@@ -348,7 +348,7 @@ function Sidebar() {
 					className={
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
-					<Link className="nav-link ps-3" to="/admin/AdminPaymentTransaction">
+					<Link className="nav-link ps-3" to="/admin/Setup">
 						<i class="fa-solid fa-screwdriver-wrench"></i>
 						<span className="menu-title ms-3">
 							<Trans>Setup</Trans>

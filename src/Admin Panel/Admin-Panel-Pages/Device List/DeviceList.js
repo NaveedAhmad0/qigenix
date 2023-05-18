@@ -145,7 +145,7 @@ function DeviceList() {
 			sortable: false,
 		},
 		{
-			name: "active",
+			name: "Active",
 			cell: (row) => [
 				<div class="form-check form-switch text-center">
 					<input
