@@ -184,9 +184,9 @@ function DeviceList() {
 							state: { details: row },
 						});
 					}}></i>,
-				<i
-					class="fa-solid fa-trash text-danger mx-2"
-					style={{ cursor: "pointer" }}></i>,
+				// <i
+				// 	class="fa-solid fa-trash text-danger mx-2"
+				// 	style={{ cursor: "pointer" }}></i>,
 			],
 		},
 	];

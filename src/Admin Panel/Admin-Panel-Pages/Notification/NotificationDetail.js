@@ -21,7 +21,8 @@ const NotificationDetail = () => {
               <i class="fa-solid fa-user me-2"></i>   {details.firstName} {details.lastName} : {details.customer_id}
               </h4>
               <div className="row mt-4">
-                <table class="table table-responsive" >
+                <table class="table table-responsive
+                " id="table" >
                   <thead className="bg-dark text-white">
                     <tr>
                       <th scope="col">Notification</th>
@@ -33,8 +34,8 @@ const NotificationDetail = () => {
                     {details?.notification?.map((item) => {
                       return (
                         <tr>
-                          <td  className="p-2 w-50">{item.message}</td>
-                          <td >
+                          <td  className="p-2">{item.message}</td>
+                          <td style={{width:"40%"}}>
                             {moment(item.createdAt)
                               .local()
                               .format("DD-MM-YYYY  hh:mm:ss ")}

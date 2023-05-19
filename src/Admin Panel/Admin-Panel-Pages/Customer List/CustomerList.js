@@ -44,7 +44,7 @@ function CustomerList() {
 			axios(config)
 				.then(function (response) {
 					setToggle(!toggle);
-					console.log(response.data);
+				
 				})
 				.catch(function (error) {
 					console.log(error.response.data);
@@ -53,10 +53,34 @@ function CustomerList() {
 			console.log(error.response.data);
 		}
 	};
-	useEffect(() => {
-		disableUser();
-	}, []);
+	
+	const handleDelete=(id)=>{
+		
+		const obj={
+			customer_id:id
+		}
+	try {
+		var config = {
+			method: "delete",
+			url: `https://qigenix.ixiono.com/apis/admin/deleteCustomer`,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `${token}`,
+			},
+			data:obj
+		};
+		axios(config)
+			.then(function (response) {
+				setToggle(!toggle)
+			})
+			.catch(function (error) {
+				console.log(error.response.data);
+			});
+	} catch (error) {
+		console.log(error.response.data);
+	}
 
+	}
 	const fetchData = async () => {
 		try {
 			var config = {
@@ -86,6 +110,9 @@ function CustomerList() {
 	useEffect(() => {
 		fetchData();
 	}, [toggle]);
+
+
+	
 
 	useEffect(() => {}, [tableRowsData]);
 
@@ -228,7 +255,9 @@ function CustomerList() {
 					}}></i>,
 				<i
 					class="fa-solid fa-trash text-danger mx-2"
-					style={{ cursor: "pointer" }}></i>,
+					style={{ cursor: "pointer" }}
+					onClick={()=>handleDelete(row.customer_id)}
+					></i>,
 			],
 		},
 	];

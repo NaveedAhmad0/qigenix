@@ -33,6 +33,7 @@ const ProfileForm = () => {
 
 	const updateCustomer = async (event) => {
 		event.preventDefault();
+		const id=InputFields.id;
 		const obj = {
 			firstName: InputFields.firstName,
 			lastName: InputFields.lastName,
@@ -42,7 +43,7 @@ const ProfileForm = () => {
 		};
 		var config = {
 			method: "put",
-			url: `https://qigenix.ixiono.com/apis/admin/updateProfile/${email}`,
+			url: `https://qigenix.ixiono.com/apis/admin/updateProfile/${id}`,
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `${token}`,

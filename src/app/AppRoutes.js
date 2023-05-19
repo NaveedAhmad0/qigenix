@@ -39,9 +39,9 @@ const AccessHistory = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Access History/AccessHistory")
 );
 
-const AdminProfile = lazy(() =>
-	import("../Admin Panel/Admin-Panel-Pages/Admin-Profile/AdminProfile")
-);
+// const AdminProfile = lazy(() =>
+// 	import("../Admin Panel/Admin-Panel-Pages/Admin-Profile/AdminProfile")
+// );
 
 const AdminChangePassword = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Admin-Reset-Password/resetPassword")
@@ -163,7 +163,7 @@ class AppRoutes extends Component {
 					<Route path="/admin/device-details" component={DeviceDetails} />
 					<Route path="/admin/add-device" component={AddDevice} />
 
-					<Route path="/admin/update-profile" component={AdminProfile} />
+					{/* <Route path="/admin/update-profile" component={AdminProfile} /> */}
 
 					<Route path="/admin/resetPassword" component={AdminChangePassword} />
 

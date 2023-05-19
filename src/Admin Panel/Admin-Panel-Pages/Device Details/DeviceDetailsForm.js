@@ -176,13 +176,13 @@ const DeviceForm = () => {
 					</div>
 				</div>
 
-				<div className="row">
+				{/* <div className="row">
 					<div className="col-md-8 text-right">
 						<button className="btn btnCustomerProfileN btn-primary">
 							Save
 						</button>
 					</div>
-				</div>
+				</div> */}
 			</form>
 			{/* <div className="card">
 				<div className="card-body">

@@ -251,9 +251,9 @@ function ListOfInvoice() {
 						setInvId(row.invoice_id);
 						setToggle(!toggle);
 					}}></i>,
-				<i
-					class="fa-solid fa-trash text-danger mx-2"
-					style={{ cursor: "pointer" }}></i>,
+				// <i
+				// 	class="fa-solid fa-trash text-danger mx-2"
+				// 	style={{ cursor: "pointer" }}></i>,
 			],
 		},
 	];

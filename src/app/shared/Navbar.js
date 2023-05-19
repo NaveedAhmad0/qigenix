@@ -6,6 +6,7 @@ import "./navbar.css";
 import axios from "axios";
 const Navbar = () => {
 	const [userName, setUserName] = useState("");
+	const [name,setName]=useState("")
 	const token = localStorage.getItem("token");
 	const email = localStorage.getItem("email");
 	let history = useHistory();
@@ -30,7 +31,8 @@ const Navbar = () => {
 			axios(config)
 				.then(async function (response) {
 					console.log(response.data);
-					await setUserName(response.data.username);
+					setUserName(response.data.username);
+					setName(response.data)
 					localStorage.setItem("adminId", response.data.admin_id);
 					// console.log(response.data.notifications);
 				})
@@ -102,7 +104,17 @@ const Navbar = () => {
 									style={{ width: "2.5rem" }}
 								/>{" "}
 							</Dropdown.Toggle>
-							<Dropdown.Menu className="navbar-dropdown preview-list">
+							<Dropdown.Menu className="navbar-dropdown preview-list p-3">
+							<Dropdown.Item disabled
+									className="  d-flex align-items-center"
+								>
+									<p
+										className="mb-0 font-weight-medium float-left"
+										>
+									<i class="fa-regular fa-user me-2" style={{fontSize:'18px'}}></i>	{name.firstName} {name.lastName}
+									</p>
+								</Dropdown.Item>
+								<hr></hr>
 								<Dropdown.Item
 									className="dropdown-item  d-flex align-items-center"
 									onClick={(evt) => evt.preventDefault()}>
@@ -111,7 +123,7 @@ const Navbar = () => {
 										onClick={() => {
 											history.push("/admin/profile");
 										}}>
-										Profile
+									<i class="fa-solid fa-id-badge me-2" style={{fontSize:'18px'}}></i>	Profile
 									</p>
 								</Dropdown.Item>
 								<Dropdown.Item
@@ -124,7 +136,7 @@ const Navbar = () => {
 											localStorage.clear();
 											history.push("/admin/login");
 										}}>
-										Log Out
+									<i class="fa-solid fa-right-from-bracket me-2" style={{fontSize:'18px'}}></i>	Log Out
 									</p>
 								</Dropdown.Item>
 							</Dropdown.Menu>
