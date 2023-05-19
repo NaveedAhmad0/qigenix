@@ -48,6 +48,9 @@ border: 1px solid #E4E4EC;
 border-radius: 5px;
 height: 29px
 }
+#table .table td{
+    width:"40%" !important;
+}
 .kgEPYv {
     height: 80px !important;
 }

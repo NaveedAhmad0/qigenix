@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Form } from "react-bootstrap";
@@ -23,7 +23,7 @@ function ScannedInvoice() {
 	const { ExportCSVButton } = CSVExport;
 	const [tableRowsData, setTableRowsData] = useState();
 	const [rowData, setRowData] = useState();
-	const ref = React.createRef();
+	// const ref = React.createRef();
 
 	const [search, setSearch] = useState("");
 	const [Filtered, setFiltered] = useState([]);
@@ -32,6 +32,10 @@ function ScannedInvoice() {
 
 	const token = localStorage.getItem("token");
 	const history = useHistory();
+
+	const ref = useRef(null);
+
+	const executeScroll = () => ref.current.scrollIntoView();
 
 	const fetchData = async () => {
 		try {
@@ -46,6 +50,7 @@ function ScannedInvoice() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data.totalResponse);
+					// setToggle(true);
 					console.log(response.data.totalResponse);
 					setFiltered(response.data.totalResponse);
 				})
@@ -140,9 +145,10 @@ function ScannedInvoice() {
 			},
 			cell: (row) => [
 				<p
-					onClick={() => {
-						setToggle(!toggle);
+					onClick={async () => {
+						// await executeScroll();
 						setRowData(row);
+						setToggle(!toggle);
 					}}
 					class="badge bg-warning"
 					style={{ cursor: "pointer" }}>
@@ -165,7 +171,7 @@ function ScannedInvoice() {
 				<div>
 					<div className="row">
 						<h4>List Of Invoices</h4>
-						<div className={toggle ? "col-md-12" : "col-12"}>
+						<div className={toggle ? "col-4" : "col-12"}>
 							<div className="row">
 								<div className="col-md-12 grid-margin">
 									<div className="card">
@@ -196,14 +202,16 @@ function ScannedInvoice() {
 															/>{" "}
 															Export
 														</label>
-
-														
 													</div>
 
 													<div
-														class="btn-group btn-group-toggle me-4"
+														className={
+															toggle
+																? "btn-group btn-group-toggle mt-2 me-4"
+																: "btn-group btn-group-toggle me-4"
+														}
 														data-toggle="buttons"
-														style={{ float: "right" }}>
+														style={{ float: toggle ? "left" : "right" }}>
 														<label
 															class="btn active"
 															style={{
@@ -247,22 +255,30 @@ function ScannedInvoice() {
 												highlightOnHover
 												subHeader
 												customStyles={customStyles}
-												
 											/>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className={toggle ? "col-9" : "invoiceDisplay"}>
-							<div className="card" ref={ref}>
-								<div className="card-body">
+						<div className={toggle ? "col-8" : "invoiceDisplay"}>
+							<div className="card">
+								<div
+									className="card-body"
+									style={{ display: !toggle && "none" }}
+									ref={ref}>
+									<i
+										className="fa-solid fa-xmark"
+										style={{ cursor: "pointer" }}
+										onClick={() => {
+											setToggle(!toggle);
+										}}></i>
 									<div className="col-12 grid-margin">
 										<div className="row mt-4">
 											<div className="col-6">
 												<h5 className="text-primary">Scan Id :</h5>
 												<p>{rowData?.scan_id}</p>
-											
+
 												<p className="font-weight-bold">
 													Bill To :
 													<p className="text-primary">{rowData?.customer_id}</p>
@@ -276,44 +292,37 @@ function ScannedInvoice() {
 
 												<p className="font-weight-bold">
 													Created At :
-												<span className="font-weight-normal ms-1">
-												{moment(rowData?.createdAt)
-																		.local()
-																		.format("DD-MM-YYYY hh:mm:ss ")}
-
-												</span>
-												
+													<span className="font-weight-normal ms-1">
+														{moment(rowData?.createdAt)
+															.local()
+															.format("DD-MM-YYYY hh:mm:ss ")}
+													</span>
 												</p>
-												
 											</div>
 										</div>
 										<div className="row">
 											<table class="table table-responsive">
 												<thead className="bg-dark text-white">
 													<tr>
-														<th scope="col">#Product Id</th>
+														{/* <th scope="col">#Product Id</th> */}
 														<th scope="col">Product Name</th>
 
 														<th scope="col">QR Code</th>
 														<th scope="col">Quantity</th>
 														<th scope="col">Price</th>
 														<th>Quantity Price</th>
-
-														
 													</tr>
 												</thead>
 												<tbody>
 													{rowData?.products?.map((item) => {
 														return (
 															<tr>
-																<td>{item.product_id}</td>
+																{/* <td>{item.product_id}</td> */}
 																<td>{item.product_name}</td>
 																<td>{item.qr_code}</td>
 																<td>{item.quantity}</td>
 																<td>{item.price}</td>
 																<td>{item.quantityPrice}</td>
-
-															
 															</tr>
 														);
 													})}

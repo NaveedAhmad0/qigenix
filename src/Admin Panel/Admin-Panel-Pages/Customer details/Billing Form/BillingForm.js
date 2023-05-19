@@ -5,6 +5,7 @@ import {
 	useHistory,
 	useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect } from "react";
 import axios from "axios";
 const BillingForm = () => {
 	const location = useLocation();
@@ -14,6 +15,46 @@ const BillingForm = () => {
 	console.log(details);
 
 	const [inputFields, setInputFields] = useState(details);
+
+	const handleUpdate = async (event) => {
+
+
+		event.preventDefault();
+		const obj = {
+			email:inputFields.email,
+			billAddress: inputFields.billAddress,
+			billCity: inputFields.billCity,
+			billState: inputFields.billState,
+			billZipcode: inputFields.billZipcode,
+			billCountry: inputFields.billCountry,
+		};
+		console.log(obj)
+
+	try {
+		var config = {
+			method: "post",
+			url: `https://qigenix.ixiono.com/apis/admin/save-billing-address`,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `${token}`,
+			},
+			data:obj
+		};
+		axios(config)
+			.then(function (response) {
+				alert(response.data.message)
+				history.push('/admin/CustomerList')
+				
+			})
+			.catch(function (error) {
+				console.log(error.response.data);
+			});
+	} catch (error) {
+		console.log(error.response.data);
+	}
+	};
+
+
 
 	return (
 		<div className="col-md-12 grid-margin">
@@ -40,6 +81,14 @@ const BillingForm = () => {
 											value={inputFields.email}
 											type="text"
 											name="email"
+											disabled
+											onChange={(e) => {
+												setInputFields({
+													...inputFields,
+													email: e.target.value,
+												});
+											}}
+										
 											placeholder="Email"
 										/>
 									</div>
@@ -51,8 +100,14 @@ const BillingForm = () => {
 									<textarea
 										className="form-control"
 										id="exampleFormControlTextarea1"
-										name="address"
+										name="billAddress"
 										value={inputFields.billAddress}
+										onChange={(e) => {
+											setInputFields({
+												...inputFields,
+												billAddress: e.target.value,
+											});
+										}}
 										rows="3"></textarea>
 								</div>
 							</div>
@@ -65,7 +120,13 @@ const BillingForm = () => {
 											className="addcustomerInputN"
 											value={inputFields.billCity}
 											type="text"
-											name="city"
+											onChange={(e) => {
+												setInputFields({
+													...inputFields,
+													billCity: e.target.value,
+												});
+											}}
+											name="billCity"
 											placeholder="City"
 										/>
 									</div>
@@ -80,7 +141,13 @@ const BillingForm = () => {
 											className="addcustomerInputN"
 											value={inputFields.billState}
 											type="text"
-											name="state"
+											name="billState"
+											onChange={(e) => {
+												setInputFields({
+													...inputFields,
+													billState: e.target.value,
+												});
+											}}
 											placeholder="State"
 										/>
 									</div>
@@ -95,7 +162,13 @@ const BillingForm = () => {
 											className="addcustomerInputN"
 											value={inputFields.billZipcode}
 											type="text"
-											name="zipCode"
+											name="billZipcode"
+											onChange={(e) => {
+												setInputFields({
+													...inputFields,
+													billZipcode: e.target.value,
+												});
+											}}
 											placeholder="Zip Code"
 										/>
 									</div>
@@ -110,14 +183,21 @@ const BillingForm = () => {
 											className="addcustomerInputN"
 											value={inputFields.billCountry}
 											type="text"
-											name="country"
+											name="billCountry"
+											onChange={(e) => {
+												setInputFields({
+													...inputFields,
+													billCountry: e.target.value,
+												});
+											}}
 											placeholder="Country"
 										/>
 									</div>
 								</Form.Group>
 							</div>
 							<div className="col-md-12">
-								<button className="btn btn-primary">Save</button>
+								<button className="btn btn-primary"
+								onClick={handleUpdate}>Save</button>
 							</div>
 						</div>
 					</form>

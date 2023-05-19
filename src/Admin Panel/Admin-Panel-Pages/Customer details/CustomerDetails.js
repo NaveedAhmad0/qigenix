@@ -60,10 +60,10 @@ function CustomerDetails() {
 												className="list-group-item list-group-item-action"
 												id="list-home-list"
 												data-toggle="list"
-												href="#list-home"
+												href="/admin/CustomerDetails"
 												role="tab"
 												aria-controls="home">
-											<i class="fa-regular fa-user text-primary me-2"></i>	Profile
+											<i class="fa-regular fa-user text-primary me-2"></i>Customer	Details
 											</a>
 											<a
 												className="list-group-item list-group-item-action"
@@ -92,7 +92,7 @@ function CustomerDetails() {
 											<div
 												className="page-title-header"
 												style={{ fontWeight: "500", fontSize: "17px" }}>
-												Profile
+												 Details
 											</div>
 
 											<div className="card" id="#list-home-list">

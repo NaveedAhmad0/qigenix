@@ -53,7 +53,7 @@ function DeviceDetails() {
 												className="list-group-item list-group-item-action"
 												id="list-home-list"
 												data-toggle="list"
-												href="#list-home"
+												href="/admin/device-details"
 												role="tab"
 												aria-controls="home">
 											<i class="fa-solid fa-circle-info me-2 text-primary"></i> 	Details
