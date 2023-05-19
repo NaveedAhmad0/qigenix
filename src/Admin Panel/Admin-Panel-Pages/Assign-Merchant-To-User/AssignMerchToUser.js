@@ -162,7 +162,7 @@ const AssignMerchToUser = () => {
 									<button
 										onClick={onSubmit}
 										className="btn btn-success btn-lg btn-block rounded-pill">
-										Agree
+										Assign device
 									</button>
 								</div>
 							</div>

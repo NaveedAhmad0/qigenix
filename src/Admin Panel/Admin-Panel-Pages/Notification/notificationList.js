@@ -181,8 +181,7 @@ function CustomerList() {
 												className="btn btn-primary btn-small ms-4"
 												data-bs-toggle="modal"
 												data-bs-target="#exampleModalTwo">
-												<i className="fa-solid fa-plus"></i>Send Simple
-												Notification
+												<i className="fa-solid fa-plus"></i>Send Notification
 											</button>
 
 											<div

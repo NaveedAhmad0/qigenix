@@ -56,26 +56,9 @@ function DeviceDetails() {
 												href="#list-home"
 												role="tab"
 												aria-controls="home">
-												Profile
+											<i class="fa-solid fa-circle-info me-2 text-primary"></i> 	Details
 											</a>
-											<a
-												className="list-group-item list-group-item-action"
-												id="list-profile-list"
-												data-toggle="list"
-												href="#list-profile"
-												role="tab"
-												aria-controls="profile">
-												Contents
-											</a>
-											<a
-												className="list-group-item list-group-item-action"
-												id="list-messages-list"
-												data-toggle="list"
-												href="#list-messages"
-												role="tab"
-												aria-controls="messages">
-												Notes
-											</a>
+											
 										</div>
 									</div>
 								</div>

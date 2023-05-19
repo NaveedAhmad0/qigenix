@@ -270,7 +270,7 @@ function ListOfInvoice() {
 			) : (
 				<div>
 					<div className="row">
-						<h4>List Of Invoices</h4>
+						<h4>List Of Device Invoices</h4>
 						<div className={toggle ? "col-md-5" : "col-12"}>
 							<div className="row">
 								<div className="col-md-12 grid-margin">
@@ -343,25 +343,6 @@ function ListOfInvoice() {
 															/>{" "}
 															Bulk Actions
 														</label> */}
-														<label
-															class="btn"
-															style={{
-																borderRight: "1px solid #D9D9D9",
-																color: "#475569",
-																fontFamily: "Roboto",
-																fontStyle: "normal",
-																fontWeight: "500",
-																fontSize: "12px",
-																lineHeight: "14px",
-															}}>
-															<input
-																type="radio"
-																name="options"
-																id="option3"
-																autocomplete="off"
-															/>
-															<i class="fa-solid fa-rotate"></i>
-														</label>
 													</div>
 
 													<div
@@ -394,7 +375,7 @@ function ListOfInvoice() {
 																width: "100%",
 																textAlign: "center",
 															}}
-															placeholder="Search..."
+															placeholder="Search By Id"
 															value={search}
 															onChange={(e) => {
 																setSearch(e.target.value);
@@ -411,9 +392,6 @@ function ListOfInvoice() {
 												highlightOnHover
 												subHeader
 												customStyles={customStyles}
-												paginationComponentOptions={{
-													rowsPerPageText: "Showing 1 to 6 of 12 entries:",
-												}}
 											/>
 										</div>
 									</div>
@@ -456,9 +434,9 @@ function ListOfInvoice() {
 														<th scope="col">#</th>
 														<th scope="col">Item</th>
 
-														<th scope="col">Rate</th>
-														<th scope="col">Tax</th>
-														<th scope="col">Amount</th>
+														<th scope="col">Rate($)</th>
+														<th scope="col">Tax(%)</th>
+														<th scope="col">Amount($)</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -466,9 +444,9 @@ function ListOfInvoice() {
 														<td>{showData.invoice_id}</td>
 
 														<td>{showData.device_brand}</td>
-														<td>{showData.amount}</td>
-														<td>{showData.tax_percentage}</td>
-														<td>{showData.amount}</td>
+														<td>{showData.amount}$</td>
+														<td>{showData.tax_percentage}%</td>
+														<td>{showData.amount}$</td>
 													</tr>
 												</tbody>
 											</table>
@@ -483,6 +461,7 @@ function ListOfInvoice() {
 															Number(showData.tax_percentage)) /
 															100 +
 															Number(showData.amount)}
+														$
 													</td>
 												</tr>
 												<tr>
@@ -492,6 +471,7 @@ function ListOfInvoice() {
 															Number(showData.tax_percentage)) /
 															100 +
 															Number(showData.amount)}
+														$
 													</td>
 												</tr>
 												<tr>
@@ -501,6 +481,7 @@ function ListOfInvoice() {
 															Number(showData.tax_percentage)) /
 															100 +
 															Number(showData.amount)}
+														$
 													</td>
 												</tr>
 											</table>

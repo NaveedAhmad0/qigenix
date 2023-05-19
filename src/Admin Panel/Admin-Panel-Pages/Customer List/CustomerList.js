@@ -256,12 +256,7 @@ function CustomerList() {
 													<i class="fa-solid fa-plus"></i> New Customer
 												</button>
 											</Link>
-											{/* <button className="btn btn-primary mr-2">
-												<i class="fa-solid fa-upload"></i> Import Customers
-											</button>
-											<button className="btn btn-outline-secondary mr-2">
-												<i class="fa-regular fa-user"></i> Contacts
-											</button> */}
+											
 										</div>
 									</div>
 									<div className="card">
@@ -368,25 +363,7 @@ function CustomerList() {
 															/>{" "}
 															Bulk Actions
 														</label> */}
-														<label
-															class="btn"
-															style={{
-																borderRight: "1px solid #D9D9D9",
-																color: "#475569",
-																fontFamily: "Roboto",
-																fontStyle: "normal",
-																fontWeight: "500",
-																fontSize: "12px",
-																lineHeight: "14px",
-															}}>
-															<input
-																type="radio"
-																name="options"
-																id="option3"
-																autocomplete="off"
-															/>
-															<i class="fa-solid fa-rotate"></i>
-														</label>
+														
 													</div>
 
 													<div
@@ -419,7 +396,7 @@ function CustomerList() {
 																width: "100%",
 																textAlign: "center",
 															}}
-															placeholder="Search..."
+															placeholder="Search By Id"
 															value={search}
 															onChange={(e) => {
 																setSearch(e.target.value);

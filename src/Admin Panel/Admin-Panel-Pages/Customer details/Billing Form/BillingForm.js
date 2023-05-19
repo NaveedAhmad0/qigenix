@@ -116,6 +116,9 @@ const BillingForm = () => {
 									</div>
 								</Form.Group>
 							</div>
+							<div className="col-md-12">
+								<button className="btn btn-primary">Save</button>
+							</div>
 						</div>
 					</form>
 				</div>

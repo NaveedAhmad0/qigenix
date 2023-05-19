@@ -50,7 +50,7 @@ function ScannedInvoice() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data.totalResponse);
-					setToggle(true);
+					// setToggle(true);
 					console.log(response.data.totalResponse);
 					setFiltered(response.data.totalResponse);
 				})
@@ -146,9 +146,9 @@ function ScannedInvoice() {
 			cell: (row) => [
 				<p
 					onClick={async () => {
-						await executeScroll();
+						// await executeScroll();
 						setRowData(row);
-						setToggle(true);
+						setToggle(!toggle);
 					}}
 					class="badge bg-warning"
 					style={{ cursor: "pointer" }}>
@@ -171,7 +171,7 @@ function ScannedInvoice() {
 				<div>
 					<div className="row">
 						<h4>List Of Invoices</h4>
-						<div className={"col-12"}>
+						<div className={toggle ? "col-4" : "col-12"}>
 							<div className="row">
 								<div className="col-md-12 grid-margin">
 									<div className="card">
@@ -202,32 +202,16 @@ function ScannedInvoice() {
 															/>{" "}
 															Export
 														</label>
-
-														<label
-															class="btn"
-															style={{
-																borderRight: "1px solid #D9D9D9",
-																color: "#475569",
-																fontFamily: "Roboto",
-																fontStyle: "normal",
-																fontWeight: "500",
-																fontSize: "12px",
-																lineHeight: "14px",
-															}}>
-															<input
-																type="radio"
-																name="options"
-																id="option3"
-																autocomplete="off"
-															/>
-															<i class="fa-solid fa-rotate"></i>
-														</label>
 													</div>
 
 													<div
-														class="btn-group btn-group-toggle me-4"
+														className={
+															toggle
+																? "btn-group btn-group-toggle mt-2 me-4"
+																: "btn-group btn-group-toggle me-4"
+														}
 														data-toggle="buttons"
-														style={{ float: "right" }}>
+														style={{ float: toggle ? "left" : "right" }}>
 														<label
 															class="btn active"
 															style={{
@@ -254,7 +238,7 @@ function ScannedInvoice() {
 																width: "100%",
 																textAlign: "center",
 															}}
-															placeholder="Search..."
+															placeholder="Search By Id"
 															value={search}
 															onChange={(e) => {
 																setSearch(e.target.value);
@@ -271,17 +255,13 @@ function ScannedInvoice() {
 												highlightOnHover
 												subHeader
 												customStyles={customStyles}
-												paginationComponentOptions={{
-													rowsPerPageText: "Showing 1 to 6 of 12 entries:",
-												}}
 											/>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						<div>
+						<div className={toggle ? "col-8" : "invoiceDisplay"}>
 							<div className="card">
 								<div
 									className="card-body"
@@ -291,22 +271,32 @@ function ScannedInvoice() {
 										className="fa-solid fa-xmark"
 										style={{ cursor: "pointer" }}
 										onClick={() => {
-											setToggle(false);
+											setToggle(!toggle);
 										}}></i>
 									<div className="col-12 grid-margin">
 										<div className="row mt-4">
 											<div className="col-6">
 												<h5 className="text-primary">Scan Id :</h5>
 												<p>{rowData?.scan_id}</p>
-											</div>
-											<div className="col-6 text-right">
+
 												<p className="font-weight-bold">
 													Bill To :
 													<p className="text-primary">{rowData?.customer_id}</p>
 												</p>
 												<p className="font-weight-bold">
-													Name:
-													<span className="font-weight-normal"></span>
+													Name :
+													<span className="font-weight-normal ms-1">
+														{rowData?.firstName}&nbsp; {rowData?.lastName}
+													</span>
+												</p>
+
+												<p className="font-weight-bold">
+													Created At :
+													<span className="font-weight-normal ms-1">
+														{moment(rowData?.createdAt)
+															.local()
+															.format("DD-MM-YYYY hh:mm:ss ")}
+													</span>
 												</p>
 											</div>
 										</div>
@@ -314,33 +304,25 @@ function ScannedInvoice() {
 											<table class="table table-responsive">
 												<thead className="bg-dark text-white">
 													<tr>
-														<th scope="col">#Product Id</th>
+														{/* <th scope="col">#Product Id</th> */}
 														<th scope="col">Product Name</th>
 
 														<th scope="col">QR Code</th>
 														<th scope="col">Quantity</th>
 														<th scope="col">Price</th>
 														<th>Quantity Price</th>
-
-														<th scope="col">Created At</th>
 													</tr>
 												</thead>
 												<tbody>
 													{rowData?.products?.map((item) => {
 														return (
 															<tr>
-																<td>{item.product_id}</td>
+																{/* <td>{item.product_id}</td> */}
 																<td>{item.product_name}</td>
 																<td>{item.qr_code}</td>
 																<td>{item.quantity}</td>
 																<td>{item.price}</td>
 																<td>{item.quantityPrice}</td>
-
-																<td>
-																	{moment(item.createdAt)
-																		.local()
-																		.format("DD-MM-YYYY hh:mm:ss ")}
-																</td>
 															</tr>
 														);
 													})}

@@ -111,6 +111,15 @@ const TokenDetails = () => {
 														: item.sentFrom === "admin" &&
 														  "message p-1 text-right"
 												}>
+												{/* <p
+												className={
+													item.sentFrom === "user"
+														? " p-1 text-left"
+														: item.sentFrom === "admin" && " p-1 text-right"
+												}
+												style={{ fontSize: "11px" }}>
+												From: {item.sentFrom}
+											</p> */}
 												{item.message} <br />
 												<p style={{ fontSize: "9px" }}>
 													{moment(item.createdAt)
