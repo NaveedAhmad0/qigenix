@@ -16,7 +16,8 @@ import { useHistory } from "react-router-dom";
 import API from "../../../backend";
 import "./List.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import AddNotification from "./Add Notification/addNotification";
+import AddNotification from "./Add Notification/ScheduleNotification";
+import SimpleNotification from "./Add Notification/SimpleNotification";
 
 function CustomerList() {
 	const { ExportCSVButton } = CSVExport;
@@ -26,8 +27,6 @@ function CustomerList() {
 	const [loading, setLoading] = useState(false);
 	const token = localStorage.getItem("token");
 	const history = useHistory();
-
-	
 
 	const fetchData = async () => {
 		try {
@@ -42,7 +41,7 @@ function CustomerList() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data.totalResponse);
-					console.log(response.data.totalResponse)
+					console.log(response.data.totalResponse);
 					setFiltered(response.data.totalResponse);
 				})
 				.catch(function (error) {
@@ -55,7 +54,6 @@ function CustomerList() {
 	useEffect(() => {
 		fetchData();
 	}, []);
-
 
 	useEffect(() => {}, [tableRowsData]);
 
@@ -164,7 +162,7 @@ function CustomerList() {
 							<div className="row">
 								<div className="col-md-12 grid-margin">
 									<div className="row page-title-header">
-										<div className="col-12">
+										<div className="col-12 d-flex">
 											{/* <Link to="/admin/addCustomer">
 												<button className="btn btn-primary mr-2">
 													<i class="fa-solid fa-plus"></i>Send New Notification
@@ -175,13 +173,47 @@ function CustomerList() {
 												className="btn btn-primary btn-small ms-4"
 												data-bs-toggle="modal"
 												data-bs-target="#exampleModal">
-												<i className="fa-solid fa-plus"></i>Send New
+												<i className="fa-solid fa-plus"></i>Schedule
+												Notification
+											</button>
+											<button
+												type="button"
+												className="btn btn-primary btn-small ms-4"
+												data-bs-toggle="modal"
+												data-bs-target="#exampleModalTwo">
+												<i className="fa-solid fa-plus"></i>Send Simple
 												Notification
 											</button>
 
 											<div
 												className="modal fade"
 												id="exampleModal"
+												tabindex="-1"
+												aria-labelledby="exampleModalLabel"
+												aria-hidden="true">
+												<div className="modal-dialog">
+													<div className="modal-content">
+														<div className="modal-header">
+															<h5
+																className="modal-title"
+																id="exampleModalLabel">
+																Schedule New Notification
+															</h5>
+															<button
+																type="button"
+																className="btn-close"
+																data-bs-dismiss="modal"
+																aria-label="Close"></button>
+														</div>
+														<div className="modal-body">
+															<AddNotification />
+														</div>
+													</div>
+												</div>
+											</div>
+											<div
+												className="modal fade"
+												id="exampleModalTwo"
 												tabindex="-1"
 												aria-labelledby="exampleModalLabel"
 												aria-hidden="true">
@@ -200,7 +232,7 @@ function CustomerList() {
 																aria-label="Close"></button>
 														</div>
 														<div className="modal-body">
-															<AddNotification />
+															<SimpleNotification />
 														</div>
 													</div>
 												</div>
@@ -362,7 +394,7 @@ function CustomerList() {
 												highlightOnHover
 												subHeader
 												customStyles={customStyles}
-												
+
 												// subHeaderComponent={
 												//   <div
 												//     class="btn-group btn-group-toggle me-4"

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Form } from "react-bootstrap";
@@ -23,7 +23,7 @@ function ScannedInvoice() {
 	const { ExportCSVButton } = CSVExport;
 	const [tableRowsData, setTableRowsData] = useState();
 	const [rowData, setRowData] = useState();
-	const ref = React.createRef();
+	// const ref = React.createRef();
 
 	const [search, setSearch] = useState("");
 	const [Filtered, setFiltered] = useState([]);
@@ -32,6 +32,10 @@ function ScannedInvoice() {
 
 	const token = localStorage.getItem("token");
 	const history = useHistory();
+
+	const ref = useRef(null);
+
+	const executeScroll = () => ref.current.scrollIntoView();
 
 	const fetchData = async () => {
 		try {
@@ -46,6 +50,7 @@ function ScannedInvoice() {
 			axios(config)
 				.then(function (response) {
 					setTableRowsData(response.data.totalResponse);
+					setToggle(true);
 					console.log(response.data.totalResponse);
 					setFiltered(response.data.totalResponse);
 				})
@@ -140,9 +145,10 @@ function ScannedInvoice() {
 			},
 			cell: (row) => [
 				<p
-					onClick={() => {
-						setToggle(!toggle);
+					onClick={async () => {
+						await executeScroll();
 						setRowData(row);
+						setToggle(true);
 					}}
 					class="badge bg-warning"
 					style={{ cursor: "pointer" }}>
@@ -165,7 +171,7 @@ function ScannedInvoice() {
 				<div>
 					<div className="row">
 						<h4>List Of Invoices</h4>
-						<div className={toggle ? "col-md-12" : "col-12"}>
+						<div className={"col-12"}>
 							<div className="row">
 								<div className="col-md-12 grid-margin">
 									<div className="card">
@@ -274,9 +280,19 @@ function ScannedInvoice() {
 								</div>
 							</div>
 						</div>
-						<div className={toggle ? "col-12" : "invoiceDisplay"}>
-							<div className="card" ref={ref}>
-								<div className="card-body">
+
+						<div>
+							<div className="card">
+								<div
+									className="card-body"
+									style={{ display: !toggle && "none" }}
+									ref={ref}>
+									<i
+										className="fa-solid fa-xmark"
+										style={{ cursor: "pointer" }}
+										onClick={() => {
+											setToggle(false);
+										}}></i>
 									<div className="col-12 grid-margin">
 										<div className="row mt-4">
 											<div className="col-6">
