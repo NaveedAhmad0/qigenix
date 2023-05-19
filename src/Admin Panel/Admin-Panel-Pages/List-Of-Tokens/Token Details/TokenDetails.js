@@ -4,6 +4,7 @@ import "./TokenDetails.css";
 import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import API from "../../../../backend";
+import moment from "moment";
 
 const TokenDetails = () => {
 	const [tableRowsData, setTableRowsData] = useState([]);
@@ -102,25 +103,54 @@ const TokenDetails = () => {
 							<div class="accordion" id="accordionExample">
 								{tableRowsData.map((item) => {
 									return (
-										<div class="accordion-item">
-											<h2 class="accordion-header">
-												<button
-													class="accordion-button"
-													type="button"
-													data-bs-toggle="collapse"
-													data-bs-target={`#collapse${item.id}`}
-													aria-expanded="true"
-													aria-controls={`collapse${item.id}`}>
-													{item.message}
-												</button>
-											</h2>
-											<div
-												id={`collapse${item.id}`}
-												class="accordion-collapse collapse show"
-												data-bs-parent="#accordionExample">
-												<div class="accordion-body">{item.message}</div>
-											</div>
+										<div className="row">
+											<p
+												className={
+													item.sentFrom === "user"
+														? "message p-1 text-left"
+														: item.sentFrom === "admin" &&
+														  "message p-1 text-right"
+												}>
+												{/* <p
+												className={
+													item.sentFrom === "user"
+														? " p-1 text-left"
+														: item.sentFrom === "admin" && " p-1 text-right"
+												}
+												style={{ fontSize: "11px" }}>
+												From: {item.sentFrom}
+											</p> */}
+												{item.message} <br />
+												<p style={{ fontSize: "9px" }}>
+													{moment(item.createdAt)
+														.local()
+														.format("DD-MM-YYYY hh:mm:ss ")}
+												</p>
+											</p>
 										</div>
+										// <div
+										// 	className={
+										// 		item.sentFrom === "user" &&
+										// 		` text-right accordion-item `
+										// 	}>
+										// 	<h2 className="accordion-header">
+										// 		<button
+										// 			className="accordion-button"
+										// 			type="button"
+										// 			data-bs-toggle="collapse"
+										// 			data-bs-target={`#collapse${item.id}`}
+										// 			aria-expanded="true"
+										// 			aria-controls={`collapse${item.id}`}>
+										// 			{item.message}
+										// 		</button>
+										// 	</h2>
+										// 	<div
+										// 		id={`collapse${item.id}`}
+										// 		className="accordion-collapse collapse show"
+										// 		data-bs-parent="#accordionExample">
+										// 		<div className="accordion-body">{item.message}</div>
+										// 	</div>
+										// </div>
 									);
 								})}
 							</div>

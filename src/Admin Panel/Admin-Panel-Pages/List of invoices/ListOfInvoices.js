@@ -343,7 +343,6 @@ function ListOfInvoice() {
 															/>{" "}
 															Bulk Actions
 														</label> */}
-													
 													</div>
 
 													<div
@@ -393,7 +392,6 @@ function ListOfInvoice() {
 												highlightOnHover
 												subHeader
 												customStyles={customStyles}
-												
 											/>
 										</div>
 									</div>
@@ -436,9 +434,9 @@ function ListOfInvoice() {
 														<th scope="col">#</th>
 														<th scope="col">Item</th>
 
-														<th scope="col">Rate</th>
-														<th scope="col">Tax</th>
-														<th scope="col">Amount</th>
+														<th scope="col">Rate($)</th>
+														<th scope="col">Tax(%)</th>
+														<th scope="col">Amount($)</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -446,9 +444,9 @@ function ListOfInvoice() {
 														<td>{showData.invoice_id}</td>
 
 														<td>{showData.device_brand}</td>
-														<td>{showData.amount}</td>
-														<td>{showData.tax_percentage}</td>
-														<td>{showData.amount}</td>
+														<td>{showData.amount}$</td>
+														<td>{showData.tax_percentage}%</td>
+														<td>{showData.amount}$</td>
 													</tr>
 												</tbody>
 											</table>
@@ -463,6 +461,7 @@ function ListOfInvoice() {
 															Number(showData.tax_percentage)) /
 															100 +
 															Number(showData.amount)}
+														$
 													</td>
 												</tr>
 												<tr>
@@ -472,6 +471,7 @@ function ListOfInvoice() {
 															Number(showData.tax_percentage)) /
 															100 +
 															Number(showData.amount)}
+														$
 													</td>
 												</tr>
 												<tr>
@@ -481,6 +481,7 @@ function ListOfInvoice() {
 															Number(showData.tax_percentage)) /
 															100 +
 															Number(showData.amount)}
+														$
 													</td>
 												</tr>
 											</table>
