@@ -81,17 +81,16 @@ function TokenById() {
 
 	const headerResponsive = [
 		{
-			name: "Ticket Id",
-			selector: "token_id",
+			name: "Customer Id",
+			selector: "customer_id",
 			sortable: false,
 			style: {
 				color: "#4E7AED",
 			},
 		},
-
 		{
-			name: "Customer Id",
-			selector: "customer_id",
+			name: "Ticket Id",
+			selector: "token_id",
 			sortable: true,
 			style: {
 				color: "#4E7AED",

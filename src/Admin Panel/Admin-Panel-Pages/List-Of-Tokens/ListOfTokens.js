@@ -86,7 +86,7 @@ function ListOfInvoice() {
 		{
 			name: "Ticket Id",
 			selector: "token_id",
-			sortable: false,
+			sortable: true,
 			style: {
 				color: "#4E7AED",
 			},
@@ -95,7 +95,7 @@ function ListOfInvoice() {
 		{
 			name: "Customer Id",
 			selector: "customer_id",
-			sortable: true,
+			sortable: false,
 			style: {
 				color: "#4E7AED",
 			},
