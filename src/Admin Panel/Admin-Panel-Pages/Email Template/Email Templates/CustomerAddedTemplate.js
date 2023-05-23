@@ -2,52 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./templateContent.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { components } from "react-select";
 import makeAnimated from "react-select/animated";
-import MySelect from "../../Notification/My select/MySelect";
 import axios from "axios";
+import {
+	useLocation,
+	useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 
-const Option = (props) => {
-	return (
-		<div>
-			<components.Option {...props}>
-				<input
-					type="checkbox"
-					checked={props.isSelected}
-					onChange={() => null}
-				/>{" "}
-				<label>{props.label}</label>
-			</components.Option>
-		</div>
-	);
-};
-
-const MultiValue = (props) => (
-	<components.MultiValue {...props}>
-		{/* {console.log(props.data, "props")}	 */}
-		<span>{props.data.firstName}</span>
-	</components.MultiValue>
-);
-
-const autoCloseTIcket = `<p class="card-text pt-2 pb-4">
-			Hi <strong>firstName </strong> <strong>lastname</strong>
-			<br />
-			Ticket <strong> ticket_subject </strong> has been auto close due to
-			inactivity.
-			<br />
-			<br />
-			Ticket #:<strong> ticket_id </strong>
-			<br />
-			Department: <strong> ticket_department </strong>
-			<br />
-			Priority: <strong> ticket_priority </strong>
-			<br />
-			<br />
-			Kind Regards, <br />
-			{/* {email_signature} */}
-		</p>`;
-
-const SendEmail = () => {
+const CustomerAdded = () => {
 	const [optionSelected, setOptionSelected] = useState("");
 	const animatedComponents = makeAnimated();
 	const [userList, setUserList] = useState([]);
@@ -55,19 +17,8 @@ const SendEmail = () => {
 	const [html, setHtml] = useState("");
 	const [email, setEmail] = useState("");
 	const token = localStorage.getItem("token");
-
-	const handleChange = (selected, i) => {
-		const dataa = [];
-		for (let i = 0; i < selected?.length; i++) {
-			console.log("select", selected[i].email);
-			dataa.push({
-				customer_id: selected[i].email,
-				firstName: selected[i].firstName,
-			});
-		}
-		setOptionSelected(dataa);
-	};
-
+	const { query } = useLocation();
+	console.log("QU", query);
 	useEffect(() => {
 		var config = {
 			method: "get",
@@ -90,13 +41,12 @@ const SendEmail = () => {
 		const data = JSON.stringify({
 			email: email,
 			subject: subject,
-			html: html,
 		});
 
 		try {
 			var config = {
 				method: "post",
-				url: `https://qigenix.ixiono.com/apis/admin/emailTemplate`,
+				url: `https://qigenix.ixiono.com/apis/admin/auto-send-registered`,
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
@@ -134,16 +84,7 @@ const SendEmail = () => {
 										<small class="text-danger">* </small>
 										To Name
 									</label>
-									{/* <MySelect
-										options={userList}
-										isMulti
-										closeMenuOnSelect={false}
-										hideSelectedOptions={false}
-										components={{ Option, MultiValue, animatedComponents }}
-										onChange={handleChange}
-										allowSelectAll={true}
-										value={optionSelected}
-									/> */}
+
 									<select
 										className="custom-select"
 										onChange={(e) => {
@@ -182,9 +123,10 @@ const SendEmail = () => {
 									<input
 										type="text"
 										id="fromname"
+										disabled
 										name="fromname"
 										class="form-control"
-										value="{companyname} | CRM"
+										value="Admin"
 									/>
 								</div>
 
@@ -194,17 +136,18 @@ const SendEmail = () => {
 									<CKEditor
 										editor={ClassicEditor}
 										className="textArea"
+										disabled
 										// data="<p>Hello from CKEditor 5!</p>"
-										data={html}
+										data={query}
 										onReady={(editor) => {
 											// You can store the "editor" and use when it is needed.
 											console.log("Editor is ready to use!", editor);
 										}}
-										onChange={(event, editor) => {
-											const data = editor.getData();
-											console.log(data);
-											setHtml(data);
-										}}
+										// onChange={(event, editor) => {
+										// 	const data = editor.getData();
+										// 	console.log(data);
+										// 	setHtml(data);
+										// }}
 										onBlur={(event, editor) => {
 											console.log("Blur.", editor);
 										}}
@@ -231,4 +174,4 @@ const SendEmail = () => {
 	);
 };
 
-export default SendEmail;
+export default CustomerAdded;

@@ -86,7 +86,7 @@ const ListOfAssDevices = lazy(() =>
 	)
 );
 const EmailTemplate = lazy(() =>
-	import("../Admin Panel/Admin-Panel-Pages/Email Template/Setup")
+	import("../Admin Panel/Admin-Panel-Pages/Email Template/Templates")
 );
 const Notifications = lazy(() =>
 	import("../Admin Panel/Admin-Panel-Pages/Notification/notificationList")
@@ -121,6 +121,21 @@ const TokenDetailsById = lazy(() =>
 const TokenDetails = lazy(() =>
 	import(
 		"../Admin Panel/Admin-Panel-Pages/List-Of-Tokens/Token Details/TokenDetails"
+	)
+);
+const AutoCloseTicket = lazy(() =>
+	import(
+		"../Admin Panel/Admin-Panel-Pages/Email Template/Email Templates/AutoCloseTcket"
+	)
+);
+const InvoiceOverDue = lazy(() =>
+	import(
+		"../Admin Panel/Admin-Panel-Pages/Email Template/Email Templates/InvoiceOverDue"
+	)
+);
+const CustomerAdded = lazy(() =>
+	import(
+		"../Admin Panel/Admin-Panel-Pages/Email Template/Email Templates/CustomerAddedTemplate"
 	)
 );
 class AppRoutes extends Component {
@@ -185,7 +200,10 @@ class AppRoutes extends Component {
 					<Route path="/admin/token-by-Id" component={TokenDetailsById} />
 					<Route path="/admin/token-details" component={TokenDetails} />
 					<Route path="/admin/email-template" component={EmailTemplate} />
-					 <Route path="/admin/send-email" component={SendEmail} /> 
+					<Route path="/admin/customer-added" component={CustomerAdded} />
+					<Route path="/admin/invoice-overdue" component={InvoiceOverDue} />
+					<Route path="/admin/close-ticket" component={AutoCloseTicket} />
+					<Route path="/admin/send-email" component={SendEmail} />
 					<Route path="/admin/notifications" component={Notifications} />
 					<Route
 						path="/admin/NotificationDetails"
@@ -196,7 +214,6 @@ class AppRoutes extends Component {
 					<Route path="/admin/Support" component={Support} />
 					<Route path="/admin/query-details" component={SupportDetails} />
 					<Route path="/admin/Setup" component={Setup} />
-
 
 					<Route path="/admin/error-pages/error-404" component={Error404} />
 					<Route path="/admin/error-pages/error-500" component={Error500} />
