@@ -4,11 +4,10 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import moment from "moment";
 import "./List.css";
 
-
 const NotificationDetail = () => {
-  const location = useLocation();
-  const details = location.state.details;
-  console.log(details);
+	const location = useLocation();
+	const details = location.state.details;
+	console.log(details);
 
   return (
     <div className="col-12 grid-margin" style={{ background: "white" }}>

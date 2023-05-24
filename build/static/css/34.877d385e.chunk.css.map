@@ -1,1 +1,0 @@
-{"version":3,"sources":["TokenDetails.css"],"names":[],"mappings":"AAAA,YACI,gBAAiB,CACjB,iBACJ","file":"34.877d385e.chunk.css","sourcesContent":[".messageBox{\n    max-height: 500px;\n    overflow-y: scroll;\n}"]}
