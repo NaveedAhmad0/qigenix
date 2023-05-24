@@ -21,30 +21,24 @@ const NotificationDetail = () => {
               <i class="fa-solid fa-user me-2"></i>   {details.firstName} {details.lastName} : {details.customer_id}
               </h4>
               <div className="row mt-4">
-                <table class="table table-responsive
-                " id="table" >
-                  <thead className="bg-dark text-white">
-                    <tr>
-                      <th scope="col">Notification</th>
-                      <th scope="col"> Created Date</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {details?.notification?.map((item) => {
-                      return (
-                        <tr>
-                          <td  className="p-2">{item.message}</td>
-                          <td style={{width:"40%"}}>
-                            {moment(item.createdAt)
-                              .local()
-                              .format("DD-MM-YYYY  hh:mm:ss ")}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+              <div class="col-md-7">
+							 {details.notification.map((item) => {
+									return (
+									
+											<p className="p-3 border text-dark"style={{ fontSize: "15px" ,borderRadius:"8px",background:"#f1f5f97d",boxShadow:'0px 0px 10px #b3bbc2a1 inset'}}>
+												
+												{item.message} <br />
+												< p className="pt-2 text-primary" style={{ fontSize: "11px" }}>
+													{moment(item.createdAt)
+														.local()
+														.format("DD-MM-YYYY hh:mm:ss ")}
+												</p>
+											</p>
+									
+								
+									);
+								})} 
+							</div>
               </div>
             </div>
           </div>

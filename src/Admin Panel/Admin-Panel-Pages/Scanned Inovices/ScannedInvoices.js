@@ -105,8 +105,16 @@ function ScannedInvoice() {
 		},
 
 		{
-			name: "Customer Id",
+			name: "Patient Id",
 			selector: "customer_id",
+			sortable: true,
+			style: {
+				color: "#4E7AED",
+			},
+		},
+		{
+			name: "Patient Name",
+			selector: "patient_name",
 			sortable: true,
 			style: {
 				color: "#4E7AED",
@@ -120,26 +128,12 @@ function ScannedInvoice() {
 				color: "#4E7AED",
 			},
 		},
-		{
-			name: "Tax",
-			selector: "tax",
-			sortable: false,
-			style: {
-				color: "#4E7AED",
-			},
-		},
+	
+
+
 
 		{
-			name: "Description",
-			selector: "description",
-			sortable: false,
-			style: {
-				color: "#4E7AED",
-			},
-		},
-
-		{
-			name: "Product",
+			name: "Position Details",
 			style: {
 				fontSize: "18px",
 			},
@@ -171,7 +165,7 @@ function ScannedInvoice() {
 				<div>
 					<div className="row">
 						<h4>List Of Invoices</h4>
-						<div className={toggle ? "col-4" : "col-12"}>
+						<div className={toggle ? "col-6" : "col-12"}>
 							<div className="row">
 								<div className="col-md-12 grid-margin">
 									<div className="card">
@@ -191,7 +185,7 @@ function ScannedInvoice() {
 																fontStyle: "normal",
 																fontWeight: "500",
 																fontSize: "12px",
-																lineHeight: "14px",
+																
 															}}>
 															<input
 																type="radio"
@@ -261,7 +255,7 @@ function ScannedInvoice() {
 								</div>
 							</div>
 						</div>
-						<div className={toggle ? "col-8" : "invoiceDisplay"}>
+						<div className={toggle ? "col-6" : "invoiceDisplay"}>
 							<div className="card">
 								<div
 									className="card-body"
@@ -286,7 +280,7 @@ function ScannedInvoice() {
 												<p className="font-weight-bold">
 													Name :
 													<span className="font-weight-normal ms-1">
-														{rowData?.firstName}&nbsp; {rowData?.lastName}
+														{rowData?.patient_name}
 													</span>
 												</p>
 
@@ -304,25 +298,25 @@ function ScannedInvoice() {
 											<table class="table table-responsive">
 												<thead className="bg-dark text-white">
 													<tr>
-														{/* <th scope="col">#Product Id</th> */}
-														<th scope="col">Product Name</th>
+														<th scope="col">#</th> 
+														<th scope="col">Positon</th>
 
-														<th scope="col">QR Code</th>
-														<th scope="col">Quantity</th>
+														<th scope="col">Time of Exposure</th>
+														{/* <th scope="col">Quantity</th>
 														<th scope="col">Price</th>
-														<th>Quantity Price</th>
+														<th>Quantity Price</th> */}
 													</tr>
 												</thead>
 												<tbody>
-													{rowData?.products?.map((item) => {
+													{rowData?.products?.map((item,i) => {
 														return (
 															<tr>
-																{/* <td>{item.product_id}</td> */}
-																<td>{item.product_name}</td>
-																<td>{item.qr_code}</td>
-																<td>{item.quantity}</td>
+																<td>{i+1}</td> 
+																<td>{item.position}</td>
+																<td>{item.scan_time} min</td>
+																{/* <td>{item.quantity}</td>
 																<td>{item.price}</td>
-																<td>{item.quantityPrice}</td>
+																<td>{item.quantityPrice}</td> */}
 															</tr>
 														);
 													})}

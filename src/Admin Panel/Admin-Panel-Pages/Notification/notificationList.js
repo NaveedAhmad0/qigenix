@@ -86,7 +86,7 @@ function CustomerList() {
 
 	const headerResponsive = [
 		{
-			name: "#",
+			name: "Customer_Id",
 			selector: "customer_id",
 			sortable: true,
 			style: {
@@ -324,25 +324,7 @@ function CustomerList() {
 															Export
 														</label>
 
-														<label
-															class="btn"
-															style={{
-																borderRight: "1px solid #D9D9D9",
-																color: "#475569",
-																fontFamily: "Roboto",
-																fontStyle: "normal",
-																fontWeight: "500",
-																fontSize: "12px",
-																lineHeight: "14px",
-															}}>
-															<input
-																type="radio"
-																name="options"
-																id="option3"
-																autocomplete="off"
-															/>
-															<i class="fa-solid fa-rotate"></i>
-														</label>
+													
 													</div>
 
 													<div
@@ -375,7 +357,7 @@ function CustomerList() {
 																width: "100%",
 																textAlign: "center",
 															}}
-															placeholder="Search..."
+															placeholder="Search By Id"
 															value={search}
 															onChange={(e) => {
 																setSearch(e.target.value);
@@ -439,9 +421,7 @@ function CustomerList() {
 								</div>
 							</div>
 						</div>
-						<div className="col-md-4">
-							<div className="row"></div>
-						</div>
+					
 					</div>
 				</div>
 			)}

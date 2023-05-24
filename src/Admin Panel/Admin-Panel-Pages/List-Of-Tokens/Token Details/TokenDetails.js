@@ -100,16 +100,18 @@ const TokenDetails = () => {
 								Subject:{" "}
 								<span className="h5 text-primary">{subject.subject}</span>{" "}
 							</h5>
-							<div class="accordion" id="accordionExample">
+							<div >
 								{tableRowsData.map((item) => {
 									return (
 										<div className="row">
-											<p
+											
+										<p 
+												style={{ fontSize: "15px" ,borderRadius:"8px",background:"#f1f5f97d",boxShadow:'0px 0px 10px #b3bbc2a1 inset'}}
 												className={
 													item.sentFrom === "user"
-														? "message p-1 text-left"
+														? "message p-3 text-left"
 														: item.sentFrom === "admin" &&
-														  "message p-1 text-right"
+														  "message p-3 text-right"
 												}>
 												{/* <p
 												className={
@@ -120,12 +122,49 @@ const TokenDetails = () => {
 												style={{ fontSize: "11px" }}>
 												From: {item.sentFrom}
 											</p> */}
-												{item.message} <br />
-												<p style={{ fontSize: "9px" }}>
+
+											<div className="row">
+												<div className="col-md-2 mt-2">
+												{item.sentFrom === "user"
+														&& <span className="p-3 bg-success" style={{borderRadius:"40%"}}>
+															<i class="fa-solid fa-c " style={{fontSize:"20px"}}></i>
+															</span>
+															
+														
+												}
+
+												</div>
+												<div className="col-md-8">
+												{item.message} 
+												<br></br>
+												<p  style={{ fontSize: "9px" }}>
 													{moment(item.createdAt)
 														.local()
 														.format("DD-MM-YYYY hh:mm:ss ")}
 												</p>
+
+												</div>
+												<div className="col-md-2 ps-1 mt-2">
+												{item.sentFrom === "admin"
+														&& <span className="p-3 bg-info" style={{borderRadius:"40%"}}>
+														<i class="fa-solid fa-a " style={{fontSize:"20px"}}></i>
+														</span>
+														
+												}
+
+												</div>
+											</div>
+											
+											
+												
+												
+
+												
+
+											
+
+												
+											
 											</p>
 										</div>
 										// <div

@@ -58,7 +58,7 @@ function Setup() {
 												aria-controls="home">
 											<i class="fa-solid fa-gear me-3"></i>	General
 											</a>
-											<a
+											{/* <a
 												className="list-group-item list-group-item-action text-secondary"
 												id="list-profile-list"
 												data-toggle="list"
@@ -66,7 +66,7 @@ function Setup() {
 												role="tab"
 												aria-controls="profile">
 												<i class="fa-solid fa-bars-staggered me-2"></i> Company Information
-												<span class="badge rounded-pill bg-secondary ms-2 text-dark">1</span>
+												
 											</a>
 											<a
 												className="list-group-item list-group-item-action text-secondary"
@@ -76,8 +76,8 @@ function Setup() {
 												role="tab"
 												aria-controls="messages">
 												<i class="fa-regular fa-file-pdf me-2"></i> PDF
-												<span class="badge rounded-pill bg-secondary ms-2 text-dark">1</span>
-											</a>
+												
+											</a> */}
 										</div>
 									</div>
 								</div>
@@ -87,7 +87,7 @@ function Setup() {
 											<div
 												className="page-title-header"
 												style={{ fontWeight: "500", fontSize: "17px" }}>
-												Profile
+												Company Details
 											</div>
 
 											<div className="card" id="#list-home-list">
