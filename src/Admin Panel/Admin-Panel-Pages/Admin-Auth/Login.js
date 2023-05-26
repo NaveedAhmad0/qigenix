@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./login.css";
 import { Redirect } from "react-router-dom";
-import { Form } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 import axios from "axios";
 import logo from "../../../assets/images/logo.png";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -15,6 +15,7 @@ function AdminLogin() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [success, setSuccess] = useState(false);
+	const [toggle, setToggle] = useState(false);
 	const [errMsg, setErrMsg] = useState("");
 	// const logindetails = { email, password };
 
@@ -87,19 +88,32 @@ function AdminLogin() {
 										className="h-auto rounded-lg border-primary"
 									/>
 								</Form.Group>
-								<Form.Group className="mb-3" controlId="formBasicPassword">
-									<Form.Label className="loginFormLabel mb-3">
-										<p>Password</p>
-									</Form.Label>
+								<Form.Label className="loginFormLabel mb-3">
+									<p>Password</p>
+								</Form.Label>
+								<InputGroup className="mb-3" controlId="formBasicPassword">
 									<Form.Control
-										type="password"
+										type={toggle ? "text" : "password"}
 										placeholder="Password"
 										onChange={(event) => handleChangeone(event)}
 										value={password}
+										required
 										size="lg"
-										className="h-auto rounded-lg border-primary"
+										className="h-auto border-primary"
 									/>
-								</Form.Group>
+									<InputGroup.Text
+										className=" border-primary"
+										id="basic-addon1"
+										onClick={() => {
+											setToggle(!toggle);
+										}}>
+										{toggle ? (
+											<i class="fa-regular fa-eye"></i>
+										) : (
+											<i class="fa-regular fa-eye-slash"></i>
+										)}
+									</InputGroup.Text>
+								</InputGroup>
 
 								<div className="my-2 d-flex justify-content-between align-items-center">
 									<div className="form-check">

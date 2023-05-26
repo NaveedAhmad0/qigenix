@@ -1,30 +1,54 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import ToolkitProvider, {
-	Search,
-	CSVExport,
-} from "react-bootstrap-table2-toolkit";
 import ClipLoader from "react-spinners/ClipLoader";
 import DataTable from "react-data-table-component";
 import { useHistory } from "react-router-dom";
 import API from "../../../backend";
 import "./ListOfTokens.css";
-import moment from "moment";
-import Pdf from "react-to-pdf";
 
 function ListOfInvoice() {
 	const [tableRowsData, setTableRowsData] = useState([]);
-	const [rowData, setRowData] = useState();
-	const ref = React.createRef();
 
 	const [search, setSearch] = useState("");
 	const [Filtered, setFiltered] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [toggle2, setToggle2] = useState(true);
 	const [toggle, setToggle] = useState(false);
-	const customer_id = localStorage.getItem("customerId");
+
+	const adminId = localStorage.getItem("adminId");
 	const token = localStorage.getItem("token");
 	const history = useHistory();
+
+	const disableToken = async (token_id, status) => {
+		const obj = {
+			senderID: adminId,
+			token_id: token_id,
+			tokenStatus: status === "0" ? "1" : "0",
+		};
+
+		try {
+			var config = {
+				method: "post",
+				url: `https://qigenix.ixiono.com/apis/admin/close-reopen`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+				data: obj,
+			};
+			axios(config)
+				.then(function (response) {
+					setToggle2(!toggle2);
+					alert(response.data.message);
+				})
+				.catch(function (error) {
+					console.log(error.response.data);
+				});
+		} catch (error) {
+			console.log(error.response.data);
+		}
+	};
 
 	const fetchData = async () => {
 		try {
@@ -52,6 +76,9 @@ function ListOfInvoice() {
 	useEffect(() => {
 		fetchData();
 	}, []);
+	useEffect(() => {
+		fetchData();
+	}, [toggle2]);
 
 	useEffect(() => {}, [tableRowsData]);
 
@@ -120,6 +147,22 @@ function ListOfInvoice() {
 			},
 		},
 
+		{
+			name: "Active",
+			cell: (row) => [
+				<div class="form-check form-switch text-center">
+					<input
+						class="form-check-input"
+						type="checkbox"
+						role="switch"
+						name="status"
+						id="flexSwitchCheckChecked"
+						checked={row.tokenStatus === "1" ? true : false}
+						onClick={() => disableToken(row.token_id, row.tokenStatus)}></input>
+				</div>,
+			],
+			sortable: false,
+		},
 		{
 			name: "Ticket Status",
 			// selector: "tokenStatus",

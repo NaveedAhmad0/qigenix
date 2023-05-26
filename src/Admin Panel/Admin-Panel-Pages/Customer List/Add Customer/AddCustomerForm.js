@@ -4,7 +4,31 @@ import "./addCustomer.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import { useState } from "react";
+import { useFormik } from "formik";
+
 const AddCustomerForm = () => {
+	const { values, handleBlur, handleChange } = useFormik({
+		initialValues: {
+			firstName: "",
+			lastName: "",
+			email: "",
+			company: "",
+			vatNumber: "",
+			phone: "",
+			website: "",
+			currency: "",
+			zipCode: "",
+			address: "",
+			language: "",
+			city: "",
+			state: "",
+			country: "",
+			groups: "",
+			username: "",
+			password: "",
+		},
+	});
+
 	const history = useHistory();
 	const token = localStorage.getItem("token");
 	const [inputFields, setInputFields] = useState([
