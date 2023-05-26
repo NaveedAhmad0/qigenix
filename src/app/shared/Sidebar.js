@@ -90,17 +90,47 @@ function Sidebar() {
 	// 		});
 	// }, []);
 
+	const [inputFields, setInputFields] = useState();
+	const token = localStorage.getItem("token");
+
+	const fetchData = async () => {
+		try {
+		  var config = {
+			method: "get",
+			url: `https://qigenix.ixiono.com/apis/admin/get-companyinfo`,
+			headers: {
+			  "Content-Type": "application/json",
+			  Authorization: `${token}`,
+			},
+		  };
+		  axios(config)
+			.then(function (response) {
+			  setInputFields(response.data);
+			  console.log(response.data);
+			})
+			.catch(function (error) {
+			  console.log(error.response.data);
+			});
+		} catch (error) {
+		  console.log(error.response.data);
+		}
+	  };
+	  useEffect(() => {
+		fetchData();
+	  }, []);
+
+
+
 	return (
 		<nav className="sidebar sidebar-offcanvas" id="sidebar">
 			<div className="text-center sidebar-brand-wrapper d-flex align-items-center">
 				<a className="sidebar-brand brand-logo text-white" href="/admin/dashboard">
 					<h2 className="mt-4">
-						<img
-							className="img-sm text-white"
-							width={70}
-							src={require("../../assets/logo/Group 221.png")}
-							alt="profile"
-						/>
+					<img
+              width={150}
+              src={"data:image/;base64," + inputFields?.logo}
+              alt="icon"
+            />
 					</h2>
 				</a>
 				<a
@@ -237,7 +267,7 @@ function Sidebar() {
 					<Link className="nav-link ps-3" to="/admin/ListOfInvoices">
 						<i class="fa-solid fa-receipt"></i>
 						<span className="menu-title ms-3">
-							<Trans>Invoices</Trans>
+							<Trans>Device Invoices</Trans>
 						</span>
 					</Link>
 				</li>
@@ -326,7 +356,7 @@ function Sidebar() {
 						isPathActive("/dashboard") ? "nav-item active" : "nav-item"
 					}>
 					<Link className="nav-link ps-3" to="/admin/list-of-tokens">
-						<i class="fa-solid fa-money-bill-transfer"></i>
+						<i class="fa-solid fa-envelope-open-text"></i>
 						<span className="menu-title ms-3">
 							<Trans>Customer Support</Trans>
 						</span>

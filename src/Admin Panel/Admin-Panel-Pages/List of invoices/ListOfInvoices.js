@@ -129,7 +129,7 @@ function ListOfInvoice() {
 
 	useEffect(() => {
 		const result = tableRowsData?.filter((tables) => {
-			return tables.company.toLowerCase().match(search.toLowerCase());
+			return tables.invoice_id.toLowerCase().match(search.toLowerCase());
 		});
 		setFiltered(result);
 	}, [search]);
